@@ -1,0 +1,132 @@
+<section class="pt-[156px] pb-20 bg-gradient-to-b from-gray-50 to-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+
+      <!-- Header Card -->
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 sm:p-8 mb-8">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          <!-- Finance Status Info -->
+          <div class="flex items-center gap-5">
+            <div
+              class="w-16 h-16 flex items-center justify-center border-2 border-foundation-orange-normal rounded-full bg-gradient-to-br from-foundation-orange-normal/10 to-foundation-orange-normal/5">
+              <i class="fas fa-list text-foundation-orange-normal text-2xl"></i>
+            </div>
+            <div class="space-y-2">
+              <h4 class="font-poppins font-semibold text-black text-xl capitalize tracking-wide">{{
+                'MY_FINANCE_REQUESTS' | translate }}
+              </h4>
+              <p class="font-poppins text-gray-500 text-base">{{ 'TRACK_FINANCE_APPLICATIONS' | translate }}</p>
+              <div class="flex items-center gap-2 text-sm text-gray-400">
+                <i class="fas fa-circle text-green-400 text-xs"></i>
+                <span>{{ 'LAST_UPDATED_TODAY' | translate }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Refresh Button -->
+          <button type="button" (click)="loadFinanceRequests()" [disabled]="loading" class="font-poppins w-auto px-6 h-12 ant-btn-variant-solid rounded-xl flex items-center justify-center transition-all duration-300
+            bg-foundation-orange-normal text-white shadow-lg shadow-foundation-orange-normal/30
+            hover:bg-foundation-orange-normal/90 hover:shadow-xl hover:shadow-foundation-orange-normal/40
+            border border-transparent hover:border-foundation-orange-normal/20 disabled:bg-gray-400 disabled:text-gray-200
+            transform hover:-translate-y-0.5 active:translate-y-0">
+            <i class="fas fa-sync-alt mr-2" [class.fa-spin]="loading"></i>
+            {{ 'REFRESH' | translate }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="loading" class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 mb-8">
+        <div class="flex items-center justify-center">
+          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-foundation-orange-normal"></div>
+          <span class="ml-3 text-gray-600">{{ 'LOADING_FINANCE_REQUESTS' | translate }}</span>
+        </div>
+      </div>
+
+      <!-- Error State -->
+      <div *ngIf="error" class="bg-red-50 border border-red-200 rounded-2xl p-6 mb-8">
+        <div class="flex items-center gap-3">
+          <i class="fas fa-exclamation-triangle text-red-500"></i>
+          <span class="text-red-700">{{ error }}</span>
+        </div>
+      </div>
+
+      <!-- Requests List -->
+      <div *ngIf="!loading && !error" class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+        <div class="p-6 sm:p-8">
+
+          <!-- Can Apply Status -->
+          <div class="mb-6 p-4 rounded-xl"
+            [ngClass]="canApply ? 'bg-green-50 border border-green-200' : 'bg-yellow-50 border border-yellow-200'">
+            <div class="flex items-center gap-3">
+              <i [class]="canApply ? 'fas fa-check-circle text-green-500' : 'fas fa-info-circle text-yellow-500'"></i>
+              <span [class]="canApply ? 'text-green-700' : 'text-yellow-700'">
+                {{ canApply ? ('CAN_APPLY_NEW_FINANCE' | translate) : ('NEW_APPLICATIONS_NOT_AVAILABLE' | translate)
+                }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Requests Table -->
+          <div *ngIf="financeRequests.length > 0; else noRequests" class="overflow-x-auto">
+            <table class="w-full">
+              <thead>
+                <tr class="border-b border-gray-200">
+                  <th class="text-left py-4 px-4 font-semibold text-gray-800">{{ 'REQUEST_DETAILS' | translate }}</th>
+                  <th class="text-left py-4 px-4 font-semibold text-gray-800">{{ 'VEHICLE_INFO' | translate }}</th>
+                  <th class="text-left py-4 px-4 font-semibold text-gray-800">{{ 'PRICE' | translate }}</th>
+                  <th class="text-left py-4 px-4 font-semibold text-gray-800">{{ 'STATUS' | translate }}</th>
+                  <th class="text-left py-4 px-4 font-semibold text-gray-800">{{ 'CREATED' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let request of financeRequests" class="border-b border-gray-100 hover:bg-gray-50">
+                  <td class="py-4 px-4">
+                    <div class="space-y-1">
+                      <p class="font-semibold text-gray-900">{{ request.full_name }}</p>
+                      <p class="text-sm text-gray-600">{{ request.phone }}</p>
+                      <p class="text-xs text-gray-500">ID: {{ request.id }}</p>
+                    </div>
+                  </td>
+                  <td class="py-4 px-4">
+                    <div class="space-y-1">
+                      <p class="font-medium text-gray-900">{{ request.brand }} {{ request.model }}</p>
+                      <p class="text-sm text-gray-600">{{ 'YEAR' | translate }}: {{ request.year }}</p>
+                    </div>
+                  </td>
+                  <td class="py-4 px-4">
+                    <span class="font-bold text-foundation-orange-normal">{{ request.price |
+                      currency:'EGP':'symbol':'1.0-0' }}</span>
+                  </td>
+                  <td class="py-4 px-4">
+                    <span class="px-3 py-1 rounded-full text-sm font-medium" [ngClass]="{
+                            'bg-green-100 text-green-800': request.status === 'Approved',
+                            'bg-yellow-100 text-yellow-800': request.status === 'Pending',
+                            'bg-blue-100 text-blue-800': request.status === 'New request'||'New Request',
+                            'bg-red-100 text-red-800': request.status === 'Rejected'
+                          }">
+                      {{ request.status }}
+                    </span>
+                  </td>
+                  <td class="py-4 px-4">
+                    <span class="text-gray-600">{{ request.created_at | date:'dd/MM/yyyy' }}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- No Requests Message -->
+          <ng-template #noRequests>
+            <div class="text-center py-12">
+              <i class="fas fa-inbox text-gray-300 text-6xl mb-4"></i>
+              <h3 class="text-xl font-semibold text-gray-600 mb-2">{{ 'NO_FINANCE_REQUESTS_FOUND' | translate }}</h3>
+              <p class="text-gray-500">{{ 'NO_FINANCE_REQUESTS_SUBMITTED' | translate }}</p>
+            </div>
+          </ng-template>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

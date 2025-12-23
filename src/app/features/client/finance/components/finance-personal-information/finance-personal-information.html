@@ -1,0 +1,104 @@
+<form class="max-w-md mx-auto md:min-w-[550px]   p-8 rounded-xl shadow-xl flex flex-col gap-6">
+  <!-- Section Header -->
+  <div class="text-center">
+    <h2 class="text-2xl font-bold pb-10 text-orange-500">{{ 'PERSONAL_INFORMATION' | translate }}</h2>
+  </div>
+  <!-- Loading Indicator -->
+
+  <div *ngIf="isLoadingGovernorates" class="flex items-center justify-center py-4">
+    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
+    <span class="ml-2 text-gray-600">{{ 'LOADING_GOVERNORATES' | translate }}</span>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative">
+    <span class="block sm:inline">{{ errorMessage }}</span>
+    <button type="button" (click)="refreshGovernorates()" class="absolute top-0 bottom-0 right-0 px-4 py-3">
+
+    </button>
+  </div>
+
+  <!-- Full Name -->
+  <div class="relative z-0 w-full mb-5 group">
+
+    <input type="text" name="floating_full_name" id="floating_full_name" [(ngModel)]="fullName"
+      (ngModelChange)="onFullNameChange()"
+      class="block py-2.5 pl-4 pr-0 w-full text-sm text-black   border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer"
+      placeholder=" " required />
+    <label for="floating_full_name"
+      class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+      'FULL_NAME' | translate }}</label>
+  </div>
+
+  <!-- Phone Number -->
+  <div class="relative z-0 w-full mb-5 group">
+
+    <input type="tel" name="floating_phone" id="floating_phone" [(ngModel)]="phoneNumber"
+      (ngModelChange)="onPhoneNumberChange()"
+      class="block py-2.5 pl-4 pr-0 w-full text-sm text-black   border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer"
+      placeholder=" " required />
+    <label for="floating_phone"
+      class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+      'PHONE_NUMBER' | translate }}</label>
+  </div>
+
+  <!-- Email Address -->
+  <div class="relative z-0 w-full mb-5 group">
+
+    <input type="email" name="floating_email" id="floating_email" [(ngModel)]="email" (ngModelChange)="onEmailChange()"
+      class="block py-2.5 pl-4 pr-0 w-full text-sm text-black   border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer"
+      placeholder=" " required />
+    <label for="floating_email"
+      class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+      'EMAIL_ADDRESS' | translate }}</label>
+  </div>
+
+  <!-- Governorate -->
+  <div class="relative z-0 w-full mb-5 group">
+
+    <select name="floating_governorate" id="floating_governorate" [(ngModel)]="selectedGovernorate"
+      (change)="onGovernorateChange($event)" [disabled]="isLoadingGovernorates"
+      class="block py-2.5 pl-4 pr-0 w-full text-sm text-black   border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer disabled:bg-gray-200 disabled:text-gray-400"
+      required>
+      <option value="" disabled>{{ 'GOVERNORATE' | translate }}</option>
+      <option *ngFor="let gov of governorates" [value]="gov.name">{{ gov.name }}</option>
+    </select>
+    <label for="floating_governorate"
+      class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+      'GOVERNORATE' | translate }}</label>
+  </div>
+
+  <!-- Identity Verification Photos -->
+  <div class="relative z-0 w-full mb-5 group">
+    <label for="floating_identity_photos" class="block text-black text-sm mb-2">
+      {{ 'IDENTITY_PHOTOS' | translate }}
+    </label>
+
+    <input type="file" name="floating_identity_photos" id="floating_identity_photos" multiple accept="image/*"
+      (change)="onIdentityPhotosChange($event)"
+      class="block py-2.5 pl-4 pr-0 w-full text-sm text-black   border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer" />
+    <p class="text-sm text-gray-500 mt-1">
+      <strong>{{ 'OPTIONAL' | translate }}:</strong> {{ 'IDENTITY_PHOTOS_DESC' | translate }}
+      <br>• {{ 'PHOTO_1_DESC' | translate }}
+      <br>• {{ 'PHOTO_2_DESC' | translate }}
+      <br><span class="text-orange-600 font-medium">{{ 'MAX_FILE_SIZE' | translate }}</span>
+    </p>
+
+    <!-- Display uploaded files count -->
+    <div *ngIf="identityPhotos && identityPhotos.length > 0" class="mt-2">
+      <p class="text-sm font-medium" [ngClass]="{
+        'text-green-600': identityPhotos.length >= 1
+      }">
+        {{ 'UPLOADED_PHOTOS' | translate : {count: identityPhotos.length} }}
+      </p>
+      <div class="mt-1 text-xs text-gray-500">
+        <div *ngFor="let file of getFileList(); let i = index" class="flex items-center gap-2">
+          <i class="fa-solid fa-image text-green-500"></i>
+          <span>{{ file.name }} ({{ (file.size / 1024 / 1024).toFixed(1) }}MB)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</form>

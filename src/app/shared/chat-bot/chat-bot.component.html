@@ -1,0 +1,80 @@
+<!-- زر الشات -->
+<div *ngIf="isAuthenticated" class="fixed bottom-18 right-6 z-50">
+    <button (click)="toggleChat()"
+        class="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 flex items-center justify-center">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M17 2H7C4.24 2 2 4.23 2 6.98V12.96V13.96C2 16.71 4.24 18.94 7 18.94H8.5C8.77 18.94 9.13 19.12 9.3 19.34L10.8 21.33C11.46 22.21 12.54 22.21 13.2 21.33L14.7 19.34C14.89 19.09 15.19 18.94 15.5 18.94H17C19.76 18.94 22 16.71 22 13.96V6.98C22 4.23 19.76 2 17 2ZM13 13.75H7C6.59 13.75 6.25 13.41 6.25 13C6.25 12.59 6.59 12.25 7 12.25H13C13.41 12.25 13.75 12.59 13.75 13C13.75 13.41 13.41 13.75 13 13.75ZM17 8.75H7C6.59 8.75 6.25 8.41 6.25 8C6.25 7.59 6.59 7.25 7 7.25H17C17.41 7.25 17.75 7.59 17.75 8C17.75 8.41 17.41 8.75 17 8.75Z"
+                fill="white" />
+        </svg>
+    </button>
+    <div *ngIf="isChatOpen" @chatAnimation
+        class="absolute bottom-16 right-0 w-80 bg-white/30 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/20 flex flex-col overflow-hidden">
+        <div
+            class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 py-3 flex justify-between items-center font-semibold rounded-t-2xl shadow-md">
+            <span>{{ isQuizMode ? 'Car Finance Quiz' : 'Live Chat' }}</span>
+            <button (click)="toggleChat()" class="text-white hover:text-gray-200 transition">✕</button>
+        </div>
+        <div class="p-4 h-64 overflow-y-auto text-sm flex flex-col gap-3" *ngIf="!isQuizMode">
+            <div *ngFor="let message of messages" class="flex flex-col gap-2">
+                <div *ngIf="message.sender === 'bot'"
+                    [class]="message.isSuccess ? 'bg-green-500 text-white p-3 rounded-xl self-start w-fit max-w-[70%] shadow-lg' : 'bg-white/60 backdrop-blur-sm p-3 rounded-xl self-start w-fit max-w-[70%] shadow'">
+                    {{ message.text }}
+                </div>
+                <div *ngIf="message.sender === 'me'"
+                    class="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-3 rounded-xl self-end w-fit max-w-[70%] shadow-lg">
+                    {{ message.text }}
+                </div>
+            </div>
+        </div>
+        <div class="p-4 h-64 overflow-y-auto text-sm flex flex-col gap-3" *ngIf="isQuizMode">
+            <div class="bg-white/60 backdrop-blur-sm p-4 rounded-xl shadow-lg">
+                <div class="font-medium text-gray-800 mb-2">Question {{ currentQuestionIndex + 1 }} of {{
+                    quizQuestions.length }}</div>
+                <div class="text-gray-700 mb-3">{{ currentQuestion?.question }}</div>
+
+                <div *ngIf="currentQuestion?.type === 'select' && currentQuestion!.options" class="space-y-2">
+                    <button *ngFor="let option of currentQuestion!.options" (click)="selectOption(option)"
+                        class="w-full text-left p-2 rounded-lg border border-gray-300 hover:bg-orange-500 hover:text-white transition"
+                        [class.bg-orange-500]="currentAnswer === option" [class.text-white]="currentAnswer === option">
+                        {{ option }}
+                    </button>
+                </div>
+                <div *ngIf="currentQuestion?.type === 'text'" class="space-y-2">
+                    <input type="text" [(ngModel)]="currentAnswer" placeholder="Type your answer..."
+                        class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none">
+                </div>
+            </div>
+            <div *ngIf="isLoading" class="text-center text-gray-500 mt-2">
+                Loading...
+            </div>
+        </div>
+        <div class="p-3 border-t border-white/20 backdrop-blur-sm bg-white/20" *ngIf="!isQuizMode">
+            <div class="flex items-center gap-2">
+                <input type="text" [(ngModel)]="newMessage" placeholder="Type a message..."
+                    class="flex-1 px-3 py-2 text-sm border border-gray-300/40 rounded-xl bg-white/40 backdrop-blur-sm focus:ring-2 focus:ring-orange-500 focus:outline-none">
+                <button (click)="sendMessage()"
+                    class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 py-2 rounded-xl shadow-md hover:scale-105 transition-transform duration-200 text-sm">
+                    Send
+                </button>
+            </div>
+        </div>
+        <div class="p-3 border-t border-white/20 backdrop-blur-sm bg-white/20 flex items-center gap-2"
+            *ngIf="isQuizMode && currentQuestion">
+            <button *ngIf="currentQuestionIndex > 0" (click)="goBack()"
+                class="px-4 py-2 text-sm border border-gray-300 rounded-xl hover:bg-gray-50 transition">
+                Back
+            </button>
+            <div class="flex-1"></div>
+            <button *ngIf="currentQuestion.type === 'text'" (click)="nextQuestion()" [disabled]="!currentAnswer.trim()"
+                class="px-4 py-2 text-sm bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition disabled:opacity-50 disabled:cursor-not-allowed">
+                Next
+            </button>
+            <button *ngIf="currentQuestionIndex === quizQuestions.length - 1" (click)="submitQuiz()"
+                [disabled]="!currentAnswer.trim() || isLoading"
+                class="px-4 py-2 text-sm bg-green-500 text-white rounded-xl hover:bg-green-600 transition disabled:opacity-50 disabled:cursor-not-allowed">
+                {{ isLoading ? 'Submitting...' : 'Send' }}
+            </button>
+        </div>
+    </div>
+</div>

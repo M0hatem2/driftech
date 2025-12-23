@@ -1,0 +1,8 @@
+<app-finance-header></app-finance-header>
+<div class=" mx-auto flex  px-4 py-6 sm:px-6 lg:px-8 justify-center items-center h-full" (animateOnScroll)="onAnimate()"
+  [@scrollFadeUp]="animationState">
+  <app-finance-content></app-finance-content>
+</div>
+
+<!-- Login Required Popup - Shows when user is not authenticated -->
+<app-login-required-popup *ngIf="showLoginPopup" (close)="showLoginPopup = false"></app-login-required-popup>

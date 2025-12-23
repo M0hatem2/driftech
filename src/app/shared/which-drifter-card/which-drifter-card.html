@@ -1,0 +1,24 @@
+<div
+  class="shadow-lg mx-auto hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full rounded-2xl p-6"
+  (click)="onCardClick()">
+
+  <!-- Car Image -->
+  <div *ngIf="cardData.cardImage" class="mb-4">
+    <img [src]="cardData.cardImage" [alt]="cardData.badgeTitle" class="w-full object-cover rounded-lg">
+  </div>
+
+  <!-- Badge -->
+  <div class="bg-[#e73201] text-white px-3 py-1 rounded-full text-sm font-semibold mb-4 w-fit">
+    {{ cardData.badgeTitle }}
+  </div>
+
+  <!-- محتوى الكارد -->
+  <div class="space-y-3 flex-grow ">
+    <h3 class="font-poppins text-[#6B4B3A] text-lg leading-snug font-semibold">
+      {{ cardData.headline }}
+    </h3>
+
+
+
+  </div>
+</div>

@@ -1,0 +1,375 @@
+<!-- Hero Section -->
+<section class="relative h-svh">
+      <!-- Background -->
+      <div class="absolute inset-0 h-full overflow-hidden">
+            <img class="h-full w-full object-cover object-top opacity-[0.71]" src="/assets/img/Contact-Us-header.webp"
+                  alt="Privacy Policy Background">
+      </div>
+
+      <!-- Red overlay -->
+      <div class="about-hero-overlay absolute inset-0 bg-red-700/50"></div>
+
+      <!-- Content -->
+      <div
+            class="font-poppins relative z-10 mx-auto flex h-full flex-col items-center justify-center gap-4 px-5 lg:max-w-[844px] lg:px-0 text-center">
+            <h1 class="text-white font-semibold
+                text-[clamp(2rem,1.4vw+1.8rem,3.75rem)]
+                leading-[clamp(2.5rem,1.4vw+2.2rem,4.3rem)]">
+                  {{ 'PRIVACY_POLICY' | translate }}
+            </h1>
+
+            <h3 class="text-white lg:text-xl
+                text-[clamp(1.1rem,0.8vw+1rem,1.75rem)]
+                leading-[clamp(1.6rem,0.8vw+1.4rem,2.4rem)]">
+                  {{ 'PRIVACY_POLICY_SUBTITLE' | translate }}
+            </h3>
+      </div>
+</section>
+
+<!-- Main Content -->
+<div class="min-h-screen bg-gray-50 py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+
+                  <!-- Header -->
+                  <div class="bg-gradient-to-r from-red-600 to-red-700 px-8 py-6">
+                        <h1 class="text-2xl md:text-3xl font-bold text-white font-poppins">
+                              {{ 'PRIVACY_POLICY_TITLE' | translate }}
+                        </h1>
+                        <p class="text-red-100 mt-2 text-sm md:text-base">
+                              {{ 'LAST_UPDATED' | translate : {currentDate: currentDate | date:'MMMM yyyy'} }}
+                        </p>
+                  </div>
+
+                  <!-- Content -->
+                  <div class="px-8 py-8 md:px-12 md:py-10 space-y-8">
+
+                        <!-- Introduction -->
+                        <div class="prose prose-lg max-w-none">
+                              <p class="text-gray-700 leading-relaxed mb-6">
+                                    {{ 'POLICY_INTRO_DESC' | translate }}
+                              </p>
+
+                              <ul class="list-disc list-inside text-gray-700 space-y-2 mb-6 ml-4">
+                                    <li>{{ 'POLICY_SERVICES_LIST_1' | translate }}</li>
+                                    <li [innerHTML]="'POLICY_SERVICES_LIST_2' | translate : {website: 'https://driftech.tech'}"></li>
+                                    <li>{{ 'POLICY_SERVICES_LIST_3' | translate }}</li>
+                              </ul>
+
+                              <p class="text-gray-700 leading-relaxed">
+                                    {{ 'POLICY_AGREEMENT_DESC' | translate }}
+                              </p>
+                        </div>
+
+                        <!-- Sections -->
+                        <div class="space-y-10">
+
+                              <!-- Section 1 -->
+                              <section>
+                                    <h2
+                                          class="text-2xl font-bold text-gray-900 font-poppins mb-4 border-b-2 border-red-100 pb-2">
+                                          {{ 'POLICY_SECTION_1_TITLE' | translate }}
+                                    </h2>
+                                    <p class="text-gray-700 leading-relaxed mb-4">
+                                          {{ 'POLICY_SECTION_1_DESC' | translate }}
+                                    </p>
+                                    <div class="bg-gray-50 rounded-lg p-4">
+                                          <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                                <div><strong class="text-gray-900">{{ 'POLICY_LEGAL_ENTITY' | translate }}</strong> {{ 'POLICY_COMPANY_NAME' | translate }}
+                                                </div>
+                                                <div><strong class="text-gray-900">{{ 'POLICY_REGISTERED_ADDRESS' | translate }}</strong> [Maadi,
+                                                      Cairo, Egypt]</div>
+                                                <div><strong class="text-gray-900">{{ 'POLICY_EMAIL' | translate }}</strong> <a
+                                                            href="mailto:support@driftech.tech"
+                                                            class="text-red-600 hover:text-red-700">[support@driftech.tech]</a>
+                                                </div>
+                                                <div><strong class="text-gray-900">{{ 'POLICY_PHONE' | translate }}</strong> [+201068381265]</div>
+                                          </div>
+                                    </div>
+                              </section>
+
+                              <!-- Section 2 -->
+                              <section>
+                                    <h2
+                                          class="text-2xl font-bold text-gray-900 font-poppins mb-4 border-b-2 border-red-100 pb-2">
+                                          {{ 'POLICY_SECTION_2_TITLE' | translate }}
+                                    </h2>
+                                    <p class="text-gray-700 leading-relaxed mb-6">
+                                          {{ 'POLICY_SECTION_2_DESC' | translate }}
+                                    </p>
+
+                                    <div class="space-y-6">
+                                          <div>
+                                                <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ 'POLICY_SECTION_2_1_TITLE' | translate }}</h3>
+                                                <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+                                                      <li>{{ 'POLICY_SECTION_2_1_ITEM_1' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_2_1_ITEM_2' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_2_1_ITEM_3' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_2_1_ITEM_4' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_2_1_ITEM_5' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_2_1_ITEM_6' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_2_1_ITEM_7' | translate }}</li>
+                                                </ul>
+                                          </div>
+
+                                          <div>
+                                                <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ 'POLICY_SECTION_2_2_TITLE' | translate }}</h3>
+                                                <p class="text-gray-700 mb-3">{{ 'POLICY_SECTION_2_2_DESC' | translate }}</p>
+                                                <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+                                                      <li>{{ 'POLICY_SECTION_2_2_ITEM_1' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_2_2_ITEM_2' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_2_2_ITEM_3' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_2_2_ITEM_4' | translate }}</li>
+                                                </ul>
+                                          </div>
+
+                                          <div>
+                                                <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ 'POLICY_SECTION_2_3_TITLE' | translate }}</h3>
+                                                <p class="text-gray-700 mb-3">{{ 'POLICY_SECTION_2_3_DESC' | translate }}</p>
+                                                <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+                                                      <li>{{ 'POLICY_SECTION_2_3_ITEM_1' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_2_3_ITEM_2' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_2_3_ITEM_3' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_2_3_ITEM_4' | translate }}</li>
+                                                </ul>
+                                          </div>
+                                    </div>
+                              </section>
+
+                              <!-- Section 3 -->
+                              <section>
+                                    <h2
+                                          class="text-2xl font-bold text-gray-900 font-poppins mb-4 border-b-2 border-red-100 pb-2">
+                                          {{ 'POLICY_SECTION_3_TITLE' | translate }}
+                                    </h2>
+                                    <p class="text-gray-700 leading-relaxed mb-6">{{ 'POLICY_SECTION_3_DESC' | translate }}</p>
+
+                                    <div class="grid md:grid-cols-1 gap-6">
+                                          <div>
+                                                <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ 'POLICY_SECTION_3_1_TITLE' | translate }}</h3>
+                                                <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+                                                      <li>{{ 'POLICY_SECTION_3_1_ITEM_1' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_3_1_ITEM_2' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_3_1_ITEM_3' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_3_1_ITEM_4' | translate }}</li>
+                                                </ul>
+                                          </div>
+
+                                          <div>
+                                                <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ 'POLICY_SECTION_3_2_TITLE' | translate }}</h3>
+                                                <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+                                                      <li>{{ 'POLICY_SECTION_3_2_ITEM_1' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_3_2_ITEM_2' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_3_2_ITEM_3' | translate }}</li>
+                                                </ul>
+                                          </div>
+
+                                          <div>
+                                                <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ 'POLICY_SECTION_3_3_TITLE' | translate }}</h3>
+                                                <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+                                                      <li>{{ 'POLICY_SECTION_3_3_ITEM_1' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_3_3_ITEM_2' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_3_3_ITEM_3' | translate }}</li>
+                                                </ul>
+                                          </div>
+
+                                          <div>
+                                                <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ 'POLICY_SECTION_3_4_TITLE' | translate }}</h3>
+                                                <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+                                                      <li>{{ 'POLICY_SECTION_3_4_ITEM_1' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_3_4_ITEM_2' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_3_4_ITEM_3' | translate }}</li>
+                                                </ul>
+                                          </div>
+                                    </div>
+                              </section>
+
+                              <!-- Section 4 -->
+                              <section>
+                                    <h2
+                                          class="text-2xl font-bold text-gray-900 font-poppins mb-4 border-b-2 border-red-100 pb-2">
+                                          {{ 'POLICY_SECTION_4_TITLE' | translate }}
+                                    </h2>
+                                    <p class="text-gray-700 leading-relaxed mb-4">{{ 'POLICY_SECTION_4_DESC' | translate }}</p>
+                                    <ul class="list-disc list-inside text-gray-700 space-y-2 ml-4">
+                                          <li><strong>{{ 'POLICY_SECTION_4_ITEM_1_TITLE' | translate }}</strong> – {{ 'POLICY_SECTION_4_ITEM_1_DESC' | translate }}</li>
+                                          <li><strong>{{ 'POLICY_SECTION_4_ITEM_2_TITLE' | translate }}</strong> – {{ 'POLICY_SECTION_4_ITEM_2_DESC' | translate }}</li>
+                                          <li><strong>{{ 'POLICY_SECTION_4_ITEM_3_TITLE' | translate }}</strong> – {{ 'POLICY_SECTION_4_ITEM_3_DESC' | translate }}</li>
+                                          <li><strong>{{ 'POLICY_SECTION_4_ITEM_4_TITLE' | translate }}</strong> – {{ 'POLICY_SECTION_4_ITEM_4_DESC' | translate }}</li>
+                                    </ul>
+                              </section>
+
+                              <!-- Section 5 -->
+                              <section>
+                                    <h2
+                                          class="text-2xl font-bold text-gray-900 font-poppins mb-4 border-b-2 border-red-100 pb-2">
+                                          {{ 'POLICY_SECTION_5_TITLE' | translate }}
+                                    </h2>
+                                    <p class="text-gray-700 leading-relaxed mb-6">{{ 'POLICY_SECTION_5_DESC' | translate }}</p>
+
+                                    <div class="space-y-4">
+                                          <div>
+                                                <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ 'POLICY_SECTION_5_1_TITLE' | translate }}</h3>
+                                                <p class="text-gray-700 ml-4">{{ 'POLICY_SECTION_5_1_DESC' | translate }}</p>
+                                          </div>
+
+                                          <div>
+                                                <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ 'POLICY_SECTION_5_2_TITLE' | translate }}</h3>
+                                                <ul class="list-disc list-inside text-gray-700 space-y-1 ml-8">
+                                                      <li>{{ 'POLICY_SECTION_5_2_ITEM_1' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_5_2_ITEM_2' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_5_2_ITEM_3' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_5_2_ITEM_4' | translate }}</li>
+                                                </ul>
+                                          </div>
+
+                                          <div>
+                                                <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ 'POLICY_SECTION_5_3_TITLE' | translate }}</h3>
+                                                <ul class="list-disc list-inside text-gray-700 space-y-1 ml-8">
+                                                      <li>{{ 'POLICY_SECTION_5_3_ITEM_1' | translate }}</li>
+                                                      <li>{{ 'POLICY_SECTION_5_3_ITEM_2' | translate }}</li>
+                                                </ul>
+                                          </div>
+
+                                          <div>
+                                                <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ 'POLICY_SECTION_5_4_TITLE' | translate }}</h3>
+                                                <p class="text-gray-700 ml-4">{{ 'POLICY_SECTION_5_4_DESC' | translate }}</p>
+                                          </div>
+                                    </div>
+
+                                    <div class="bg-red-50 border-l-4 border-red-400 p-4 mt-6">
+                                          <p class="text-red-800 font-medium">{{ 'POLICY_NO_SELL_DATA' | translate }}</p>
+                                    </div>
+                              </section>
+
+                              <!-- Section 6 -->
+                              <section>
+                                    <h2
+                                          class="text-2xl font-bold text-gray-900 font-poppins mb-4 border-b-2 border-red-100 pb-2">
+                                          {{ 'POLICY_SECTION_6_TITLE' | translate }}
+                                    </h2>
+                                    <p class="text-gray-700 leading-relaxed">
+                                          {{ 'POLICY_SECTION_6_DESC' | translate }}
+                                    </p>
+                              </section>
+
+                              <!-- Section 7 -->
+                              <section>
+                                    <h2
+                                          class="text-2xl font-bold text-gray-900 font-poppins mb-4 border-b-2 border-red-100 pb-2">
+                                          {{ 'POLICY_SECTION_7_TITLE' | translate }}
+                                    </h2>
+                                    <p class="text-gray-700 leading-relaxed mb-4">{{ 'POLICY_SECTION_7_DESC' | translate }}</p>
+                                    <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+                                          <li>{{ 'POLICY_SECTION_7_ITEM_1' | translate }}</li>
+                                          <li>{{ 'POLICY_SECTION_7_ITEM_2' | translate }}</li>
+                                          <li>{{ 'POLICY_SECTION_7_ITEM_3' | translate }}</li>
+                                    </ul>
+                                    <p class="text-gray-700 leading-relaxed mt-4">
+                                          {{ 'POLICY_SECTION_7_RETENTION_DESC' | translate }}
+                                    </p>
+                              </section>
+
+                              <!-- Section 8 -->
+                              <section>
+                                    <h2
+                                          class="text-2xl font-bold text-gray-900 font-poppins mb-4 border-b-2 border-red-100 pb-2">
+                                          {{ 'POLICY_SECTION_8_TITLE' | translate }}
+                                    </h2>
+                                    <p class="text-gray-700 leading-relaxed mb-4">
+                                          {{ 'POLICY_SECTION_8_DESC' | translate }}
+                                    </p>
+                                    <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4 mb-4">
+                                          <li>{{ 'POLICY_SECTION_8_ITEM_1' | translate }}</li>
+                                          <li>{{ 'POLICY_SECTION_8_ITEM_2' | translate }}</li>
+                                          <li>{{ 'POLICY_SECTION_8_ITEM_3' | translate }}</li>
+                                    </ul>
+                                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                                          <p class="text-yellow-800">
+                                                <strong>{{ 'POLICY_SECURITY_WARNING' | translate }}:</strong> {{ 'POLICY_SECURITY_WARNING_DESC' | translate }}
+                                          </p>
+                                    </div>
+                              </section>
+
+                              <!-- Section 9 -->
+                              <section>
+                                    <h2
+                                          class="text-2xl font-bold text-gray-900 font-poppins mb-4 border-b-2 border-red-100 pb-2">
+                                          {{ 'POLICY_SECTION_9_TITLE' | translate }}
+                                    </h2>
+                                    <p class="text-gray-700 leading-relaxed mb-4">
+                                          {{ 'POLICY_SECTION_9_DESC' | translate }}
+                                    </p>
+                                    <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4 mb-6">
+                                          <li>{{ 'POLICY_SECTION_9_ITEM_1' | translate }}</li>
+                                          <li>{{ 'POLICY_SECTION_9_ITEM_2' | translate }}</li>
+                                          <li>{{ 'POLICY_SECTION_9_ITEM_3' | translate }}</li>
+                                          <li>{{ 'POLICY_SECTION_9_ITEM_4' | translate }}</li>
+                                          <li>{{ 'POLICY_SECTION_9_ITEM_5' | translate }}</li>
+                                          <li>{{ 'POLICY_SECTION_9_ITEM_6' | translate }}</li>
+                                    </ul>
+                                    <p class="text-gray-700 leading-relaxed"
+                                          [innerHTML]="'POLICY_RIGHTS_CONTACT_DESC' | translate : {email: 'support@driftech.tech'}">
+                                    </p>
+                              </section>
+
+                              <!-- Section 10 -->
+                              <section>
+                                    <h2
+                                          class="text-2xl font-bold text-gray-900 font-poppins mb-4 border-b-2 border-red-100 pb-2">
+                                          {{ 'POLICY_SECTION_10_TITLE' | translate }}
+                                    </h2>
+                                    <p class="text-gray-700 leading-relaxed">
+                                          {{ 'POLICY_SECTION_10_DESC' | translate }}
+                                    </p>
+                              </section>
+
+                              <!-- Section 11 -->
+                              <section>
+                                    <h2
+                                          class="text-2xl font-bold text-gray-900 font-poppins mb-4 border-b-2 border-red-100 pb-2">
+                                          {{ 'POLICY_SECTION_11_TITLE' | translate }}
+                                    </h2>
+                                    <p class="text-gray-700 leading-relaxed">
+                                          {{ 'POLICY_SECTION_11_DESC' | translate }}
+                                    </p>
+                              </section>
+
+                              <!-- Section 12 -->
+                              <section>
+                                    <h2
+                                          class="text-2xl font-bold text-gray-900 font-poppins mb-4 border-b-2 border-red-100 pb-2">
+                                          {{ 'POLICY_SECTION_12_TITLE' | translate }}
+                                    </h2>
+                                    <p class="text-gray-700 leading-relaxed">
+                                          {{ 'POLICY_SECTION_12_DESC' | translate }}
+                                    </p>
+                              </section>
+
+                              <!-- Section 13 -->
+                              <section>
+                                    <h2
+                                          class="text-2xl font-bold text-gray-900 font-poppins mb-4 border-b-2 border-red-100 pb-2">
+                                          {{ 'POLICY_SECTION_13_TITLE' | translate }}
+                                    </h2>
+                                    <p class="text-gray-700 leading-relaxed mb-6">
+                                          {{ 'POLICY_SECTION_13_DESC' | translate }}
+                                    </p>
+                                    <div class="bg-gray-50 rounded-lg p-6">
+                                          <div class="space-y-2">
+                                                <p class="font-semibold text-gray-900">{{ 'POLICY_COMPANY_NAME' | translate }}</p>
+                                                <p class="text-gray-700"><strong>{{ 'POLICY_EMAIL' | translate }}</strong> <a
+                                                            href="mailto:support@driftech.tech"
+                                                            class="text-red-600 hover:text-red-700">[support@driftech.tech]</a>
+                                                </p>
+                                                <p class="text-gray-700"><strong>{{ 'POLICY_ADDRESS_LABEL' | translate }}</strong> [Maadi, Cairo, Egypt]
+                                                </p>
+                                          </div>
+                                    </div>
+                              </section>
+
+                        </div>
+                  </div>
+            </div>
+      </div>
+</div>

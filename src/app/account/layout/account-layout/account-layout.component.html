@@ -1,0 +1,60 @@
+<!-- Account Layout Template -->
+<app-header></app-header>
+<div class="min-h-screen bg-gray-50 flex ">
+  <!-- Sidebar -->
+  <div class="hidden md:flex md:w-64 md:flex-col pt-30">
+    <div class="flex flex-col flex-grow pt-5 bg-white border-l border-gray-200 overflow-y-auto">
+      <!-- Header -->
+      <div class="flex items-center flex-shrink-0 px-4 mb-8">
+        <div class="w-full flex justify-center">
+          <h1 class="text-2xl font-bold text-gray-800 text-center">{{ 'ACCOUNT_MANAGEMENT' | translate }}</h1>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="flex-1 px-2 pb-4 space-y-1">
+        <a *ngFor="let item of navigationItems" [routerLink]="item.path"
+          routerLinkActive="bg-blue-100 text-blue-700 border-r-2 border-blue-700"
+          class="group flex items-center px-4 py-3 text-sm font-medium text-gray-700 rounded-l-lg hover:bg-gray-100 hover:text-gray-900 transition-all duration-200">
+          <i [class]="item.icon + ' text-lg ml-3 w-6'"></i>
+          <span class="text-right flex-1">{{item.title | translate}}</span>
+        </a> <!-- Logout Button -->
+        <div class="px-2 pb-4">
+          <button (click)="logout()"
+            class="group flex items-center w-full px-4 py-3 text-sm font-medium text-red-700 rounded-l-lg hover:bg-red-50 hover:text-red-900 transition-all duration-200">
+            <i class="fas fa-sign-out-alt text-lg ml-3 w-6"></i>
+            <span class="text-right flex-1">{{ 'LOGOUT' | translate }}</span>
+          </button>
+        </div>
+      </nav>
+
+
+    </div>
+  </div>
+
+  <!-- Mobile Navigation (Tabs) -->
+  <div class="md:hidden w-full fixed bottom-0 z-10 bg-white shadow">
+    <div class="flex border-b border-gray-200 bg-white">
+      <a *ngFor="let item of navigationItems; let last = last" [routerLink]="item.isLogout ? null : item.path"
+        (click)="item.isLogout ? logout() : null" routerLinkActive="text-blue-700 border-b-2 border-blue-700"
+        class="flex-1 flex flex-col items-center px-3 py-3 text-xs font-medium text-gray-600 hover:text-gray-900">
+        <i [class]="item.icon + ' text-lg mb-1'"></i>
+        <span class="text-center leading-tight">{{item.title | translate}}</span>
+        <div *ngIf="last" class="hidden"></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-1 flex flex-col overflow-hidden">
+    <!-- Content Area -->
+    <main class="flex-1 relative overflow-y-auto focus:outline-none">
+      <div class="py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          <!-- Page Content -->
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

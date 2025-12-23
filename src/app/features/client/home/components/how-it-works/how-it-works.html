@@ -1,0 +1,57 @@
+<section class=" max-w-[1200px] mx-auto px-4 md:px-6  flex flex-col justify-center items-center mt-20"
+      (animateOnScroll)="onAnimate()" [@scrollFadeUp]="animationState">
+      <div class="container flex flex-col justify-center gap-[18px] xl:flex-row">
+            <div class="font-inter flex w-full flex-col items-start justify-center gap-3">
+                  <div class="flex items-center gap-[6px]">
+                        <i class="fa-solid fa-dolly"></i>
+                        <h4 class="text-foundation-orange-normal text-[20px] leading-[24px] font-medium">{{
+                              'HOW_IT_WORKS' | translate }}</h4>
+                  </div>
+                  <h2 class="text-foundation-brown-darker text-[30px] leading-[36px] font-semibold">{{
+                        'PURCHASE_CAR_3_STEPS' | translate }}
+                  </h2>
+                  <p class="text-foundation-gray-normal-hover text-[18px] leading-[30px] font-normal text-balance">{{
+                        'PURCHASE_CAR_3_STEPS_DESC' | translate }}</p>
+            </div>
+            <div class="flex w-full flex-col gap-[28px]">
+                  <div
+                        class="justify-between font-poppins hover:bg-foundation-gray-light text-shadow-light-gray flex flex-col-reverse items-center gap-5 rounded-[16.09px] px-[22.11px] py-[14.74px] transition-colors duration-300 ease-out lg:flex-row lg:gap-[54.36px]">
+                        <div>
+                              <h4
+                                    class="text-black-medium border-foundation-orange-normal rounded-[1.84px] border-s-[4px] ps-[10.73px] text-xl leading-[30px]">
+                                    {{ 'PICK_CAR_ANYWHERE' | translate }}</h4>
+                              <p
+                                    class="text-gray-medium-800 mt-[9.21px] text-[12px] leading-[18px] font-normal text-pretty">
+                                    {{ 'PICK_CAR_ANYWHERE_DESC' | translate }}
+                              </p>
+                        </div><img alt="Pick Your Car .. From Anywhere" class="w-fit"
+                              src="assets/img/How it works1.webp">
+                  </div>
+                  <div
+                        class="justify-between font-poppins hover:bg-foundation-gray-light text-shadow-light-gray flex flex-col-reverse items-center gap-5 rounded-[16.09px] px-[22.11px] py-[14.74px] transition-colors duration-300 ease-out lg:flex-row lg:gap-[54.36px]">
+                        <div>
+                              <h4
+                                    class="text-black-medium border-foundation-orange-normal rounded-[1.84px] border-s-[4px] ps-[10.73px] text-xl leading-[30px]">
+                                    {{ 'GET_FINANCING_PLAN' | translate }}</h4>
+                              <p [innerHTML]="('GET_FINANCING_PLAN_DESC' | translate)?.split('\n').join('<br>')"
+                                    class="text-gray-medium-800 mt-[9.21px] text-[12px] leading-[18px] font-normal text-pretty">
+
+                              </p>
+                        </div>
+                        <img alt="Get Your Financing Plan" class="w-fit" src="assets/img/How it works2.webp">
+                  </div>
+                  <div
+                        class="justify-between font-poppins hover:bg-foundation-gray-light text-shadow-light-gray flex flex-col-reverse items-center gap-5 rounded-[16.09px] px-[22.11px] py-[14.74px] transition-colors duration-300 ease-out lg:flex-row lg:gap-[54.36px]">
+                        <div>
+                              <h4
+                                    class="text-black-medium border-foundation-orange-normal rounded-[1.84px] border-s-[4px] ps-[10.73px] text-xl leading-[30px]">
+                                    {{ 'DRIVE_AWAY_HASSLE_FREE' | translate }}</h4>
+                              <p [innerHTML]="('DRIVE_AWAY_HASSLE_FREE_DESC' | translate)?.split('\n').join('<br>')"
+                                    class="text-gray-medium-800 mt-[9.21px] text-[12px] leading-[18px] font-normal text-pretty">
+
+                              </p>
+                        </div><img alt="Drive Away Hassle-Free" class="w-fit" src="assets/img/How it works3.webp">
+                  </div>
+            </div>
+      </div>
+</section>

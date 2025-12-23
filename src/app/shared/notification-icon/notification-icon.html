@@ -1,0 +1,77 @@
+<div class="relative" *ngIf="isAuthenticated">
+  <!-- Notification Button -->
+  <button (click)="toggleDropdown()" class="relative p-2 transition hover:text-orange-500 focus:outline-none"
+    [class.text-orange-500]="isDropdownOpen">
+    <i class="fa-solid fa-bell text-[24px]"></i>
+    <span *ngIf="unreadCount > 0"
+      class="absolute -top-1 -right-1 rtl:-left-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
+      {{ unreadCount > 99 ? '99+' : unreadCount }}
+    </span>
+  </button>
+
+  <!-- Dropdown -->
+  <div *ngIf="isDropdownOpen"
+    class="notification-dropdown absolute rtl:left-0 ltr:right-0   mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 z-50 max-h-96 overflow-hidden">
+
+    <!-- Header -->
+    <div class="flex items-start justify-between p-4 border-b border-gray-200 rtl:flex-row-reverse">
+      <h3 class="text-lg font-semibold text-gray-800">{{ 'NOTIFICATIONS' | translate }}</h3>
+      <button *ngIf="unreadCount > 0" (click)="markAllAsRead()"
+        class="text-sm text-orange-500 hover:text-orange-600 font-medium">
+        {{ 'MARK_ALL_READ' | translate }}
+      </button>
+    </div>
+
+    <!-- Notifications List -->
+    <div class="max-h-80 overflow-y-auto scrollbar-thin">
+
+      <!-- Unread Notifications -->
+      <div *ngIf="getUnreadNotifications().length > 0" class="border-b border-gray-100">
+        <div class="px-4 py-2 bg-orange-50 rtl:text-right">
+          <span class="text-sm font-medium text-orange-700">{{ 'UNREAD' | translate }}</span>
+        </div>
+        <div *ngFor="let notification of getUnreadNotifications()"
+          class="p-4 border-b border-gray-50 hover:bg-gray-50 transition-colors cursor-pointer rtl:flex-row-reverse flex items-start space-x-3 rtl:space-x-reverse"
+          (click)="markAsRead(notification)">
+          <div class="flex-shrink-0">
+            <div class="w-2 h-2 bg-orange-500 rounded-full mt-2"></div>
+          </div>
+          <div class="flex-1 min-w-0 rtl:text-right">
+            <p class="text-sm font-medium text-gray-900 truncate">{{ notification.title }}</p>
+            <p class="text-sm text-gray-600 mt-1">{{ notification.body }}</p>
+            <p class="text-xs text-gray-400 mt-2">{{ notification.sent_at | date:'short' }}</p>
+          </div>
+          <button (click)="markAsRead(notification); $event.stopPropagation()"
+            class="flex-shrink-0 text-xs text-orange-500 hover:text-orange-600 font-medium">
+            {{ 'MARK_READ' | translate }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Read Notifications -->
+      <div *ngIf="getReadNotifications().length > 0">
+        <div class="px-4 py-2 bg-gray-50 rtl:text-right">
+          <span class="text-sm font-medium text-gray-600">{{ 'READ' | translate }}</span>
+        </div>
+        <div *ngFor="let notification of getReadNotifications()"
+          class="p-4 border-b border-gray-50 hover:bg-gray-50 rtl:flex-row-reverse flex items-start space-x-3 rtl:space-x-reverse">
+          <div class="flex-shrink-0">
+            <div class="w-2 h-2 bg-gray-300 rounded-full mt-2"></div>
+          </div>
+          <div class="flex-1 min-w-0 rtl:text-right">
+            <p class="text-sm font-medium text-gray-700 truncate">{{ notification.title }}</p>
+            <p class="text-sm text-gray-500 mt-1">{{ notification.body }}</p>
+            <p class="text-xs text-gray-400 mt-2">{{ notification.sent_at | date:'short' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="notifications.length === 0" class="p-8 text-center rtl:text-right">
+        <i class="fa-solid fa-bell-slash text-4xl text-gray-300 mb-4"></i>
+        <p class="text-gray-500">{{ 'NO_NOTIFICATIONS_YET' | translate }}</p>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<app-admin-navbar (toggleSidebar)="toggleSidebar()"></app-admin-navbar>
+
+<div class="layout-wrapper">
+
+  <!-- Sidebar هنا -->
+  <app-admin-sidebar [open]="sidebarOpen"></app-admin-sidebar>
+  <div class="p-4 mt-14" [class.sm:ml-64]="shouldApplyMargin()">
+  
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

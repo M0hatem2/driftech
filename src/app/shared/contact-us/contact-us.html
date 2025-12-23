@@ -1,0 +1,29 @@
+<section class="max-w-[1200px] mx-auto px-4 md:px-6 my-16">
+  <div class="container grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
+
+    <!-- Left Text -->
+    <div class="font-inter">
+      <h2
+        class="contact-us-title-left text-[30px] md:text-[36px] text-foundation-orange-normal leading-[44px] font-semibold flex items-center gap-2">
+        <i class="fa-solid fa-headset text-foundation-orange-normal text-[32px]"></i>
+        {{ 'GET_IN_TOUCH' | translate }}
+      </h2>
+
+      <div class="mt-6">
+        <p class="text-foundation-gray-dark font-medium text-[20px] leading-[32px] mb-3">
+          <i class="fa-solid fa-circle-question text-foundation-orange-normal mr-2"></i>
+          {{ 'HAVE_A_QUESTION_OR_NEED_GUIDANCE' | translate }}
+        </p>
+
+        <p class="text-foundation-gray-normal text-[16px] leading-[28px] mt-4">
+          <i class="fa-solid fa-handshake-angle text-foundation-orange-normal mr-2"></i>
+          {{ 'OUR_TEAM_IS_HERE_TO_SUPPORT' | translate }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Contact Cards Component -->
+    <app-contact-us-cards></app-contact-us-cards>
+
+  </div>
+</section>

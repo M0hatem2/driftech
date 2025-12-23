@@ -1,0 +1,65 @@
+<section class="font-inter max-w-[1200px] mx-auto px-4 md:px-6 lg:px-0 py-20 " (animateOnScroll)="onAnimate()"
+      [@scrollFadeUp]="animationState">
+      <div class="grid grid-cols-1 lg:grid-cols-2 items-center gap-16 lg:gap-24">
+
+            <!-- Left IMAGE -->
+            <div class="relative group w-full">
+                  <img src="assets/img/DriveHome1.webp" alt="Drive Home Image"
+                        class="w-full rounded-xl shadow-lg transition-all duration-500 group-hover:scale-[1.03] group-hover:shadow-xl object-cover" />
+
+                  <!-- Floating ICON -->
+                  <img src="assets/icons/discount-icon.svg" alt="Discount Badge" class="absolute -top-4 -right-4 w-[70px] h-[70px] md:w-[90px] md:h-[90px]
+               animate-bounce drop-shadow-xl transition-all duration-300" />
+            </div>
+
+            <!-- Right CONTENT -->
+            <div class="flex flex-col gap-8">
+
+                  <header>
+                        <h2 class="text-[28px] md:text-[34px] leading-snug font-semibold">
+                              <span class="text-foundation-brown-darker block">
+                                    {{ 'DRIVE_HOME_DREAM_CAR' | translate }}
+                              </span>
+
+                        </h2>
+
+                        <p [innerHTML]="('DRIVE_HOME_DREAM_CAR_DESC' | translate | newlineToBr)"
+                              class="mt-4 text-[18px] leading-[30px] text-foundation-gray-normal-hover">
+                        </p>
+
+                  </header>
+
+                  <!-- Bullet Points -->
+                  <ul class="flex flex-col gap-4">
+                        <li class="flex items-start gap-3">
+                              <i class="fa-regular fa-circle-check text-foundation-orange-normal text-[22px]"></i>
+                              <span class="text-[18px] leading-[26px] text-foundation-gray-normal-hover">
+                                    {{ 'INSTANT_PRE_APPROVAL' | translate }}
+                              </span>
+                        </li>
+
+                        <li class="flex items-start gap-3">
+                              <i class="fa-regular fa-clock text-foundation-orange-normal text-[22px]"></i>
+                              <span class="text-[18px] leading-[26px] text-foundation-gray-normal-hover">
+                                    {{ 'FLEXIBLE_PAYMENT_TERMS' | translate }}
+                              </span>
+                        </li>
+
+                        <li class="flex items-start gap-3">
+                              <i class="fa-solid fa-shield-halved text-foundation-orange-normal text-[22px]"></i>
+                              <span class="text-[18px] leading-[26px] text-foundation-gray-normal-hover">
+                                    {{ 'COMPETITIVE_RATES' | translate }}
+                              </span>
+                        </li>
+                  </ul>
+
+                  <!-- CTA Button -->
+                  <a routerLink="/finance" class="w-full bg-[red] sm:w-[230px] h-[53px] rounded-lg flex items-center justify-center font-medium
+               bg-foundation-orange-normal text-white shadow-md hover:bg-foundation-orange-normal-hover
+               transition-all duration-200 active:scale-[0.98]">
+                        {{ 'GET_MATCHED_NOW' | translate }}
+                  </a>
+
+            </div>
+      </div>
+</section>

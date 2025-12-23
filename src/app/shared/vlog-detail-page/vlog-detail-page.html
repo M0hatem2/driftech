@@ -1,0 +1,129 @@
+<!-- Vlog Detail Page -->
+<div class="min-h-screen bg-gray-50 py-8 pt-30">
+  <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Back Button -->
+    <div class="mb-8">
+      <button (click)="goBack()"
+        class="inline-flex items-center px-6 py-3 bg-foundation-orange-normal hover:bg-foundation-orange-dark text-white font-poppins font-semibold rounded-xl transition-all duration-200 shadow-md shadow-foundation-orange-normal/20">
+        <i class="fas fa-arrow-right mr-3"></i>
+        Back to Vlogs
+      </button>
+    </div>
+
+    <div *ngIf="vlog" class="font-poppins bg-white rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-300 overflow-hidden border border-gray-100">
+
+      <!-- Video Container -->
+      <div class="relative w-full h-64 sm:h-80 lg:h-96 bg-gray-900">
+        <!-- Video Player -->
+        <video class="w-full h-full object-cover" controls #videoPlayer (loadedmetadata)="generateThumbnail(videoPlayer)" (loadeddata)="generateThumbnail(videoPlayer)" (play)="hideThumbnail()" [poster]="thumbnailUrl || 'assets/img/noImg.webp'">
+          <source [src]="vlog.video_url || vlog.videoUrl" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+        <!-- Auto-generated Thumbnail -->
+        <div *ngIf="showThumbnail" class="absolute inset-0 w-full h-full flex items-center justify-center bg-black cursor-pointer transition-opacity duration-300 hover:bg-opacity-75" (click)="playVideo(videoPlayer)">
+          <img *ngIf="thumbnailUrl" [src]="thumbnailUrl" alt="Video thumbnail" class="w-full h-full object-cover">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="bg-black bg-opacity-50 rounded-full p-6 hover:bg-opacity-70 transition-all duration-300 transform hover:scale-110">
+              <i class="fas fa-play text-white text-3xl ml-1"></i>
+            </div>
+          </div>
+          <div class="absolute bottom-4 left-4 bg-black bg-opacity-70 text-white px-3 py-1 rounded-lg text-sm">
+            Click to play
+          </div>
+        </div>
+
+        <!-- Loading State -->
+        <div *ngIf="!vlog"
+          class="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600">
+          <i class="fas fa-spinner fa-spin fa-3x text-white"></i>
+        </div>
+      </div>
+
+      <!-- Vlog Details -->
+      <div class="p-6 lg:p-8">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 sm:mb-0 font-poppins">
+            {{ vlog.title | titlecase }}
+          </h1>
+
+          <!-- Duration Badge -->
+          <div *ngIf="vlog.duration" class="bg-gray-50 text-gray-600 px-4 py-2 rounded-xl text-sm font-semibold border border-gray-100">
+            {{ vlog.duration }}
+          </div>
+        </div>
+
+        <!-- Video Info Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+
+          <!-- Video Information Card -->
+          <div class="bg-gray-50 p-5 rounded-xl border border-gray-100">
+            <h2 class="text-lg font-bold text-gray-900 mb-4 font-poppins">Video Information</h2>
+            <div class="space-y-3">
+              <div *ngIf="vlog.duration" class="flex justify-between items-center">
+                <span class="text-gray-600 text-sm font-medium">Duration:</span>
+                <span class="text-gray-900 text-sm font-semibold">{{ vlog.duration }}</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-gray-600 text-sm font-medium">Video ID:</span>
+                <span class="text-gray-900 text-sm font-semibold">#{{ vlog.id }}</span>
+              </div>
+
+              <div *ngIf="vlog.created_at" class="flex justify-between items-center">
+                <span class="text-gray-600 text-sm font-medium">Published:</span>
+                <span class="text-gray-900 text-sm font-semibold">{{ vlog.created_at | date:'medium' }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Actions Card -->
+          <div class="bg-gray-50 p-5 rounded-xl border border-gray-100">
+            <h2 class="text-lg font-bold text-gray-900 mb-4 font-poppins">Actions</h2>
+            <div class="space-y-3">
+              <a *ngIf="vlog.link" [href]="vlog.link" target="_blank"
+                class="flex-1 h-11 bg-foundation-orange-normal hover:bg-foundation-orange-dark text-white text-sm font-semibold rounded-xl flex items-center justify-center gap-2 transition-all duration-200 shadow-md shadow-foundation-orange-normal/20">
+                <i class="fas fa-external-link-alt text-xs"></i>
+                <span>View Original Source</span>
+              </a>
+
+              <button (click)="shareVideo()"
+                class="w-full h-11 border border-gray-200 rounded-xl flex items-center justify-center text-gray-600 hover:text-foundation-orange-normal hover:border-foundation-orange-normal hover:bg-orange-50 transition-all duration-200 text-sm font-semibold">
+                <i class="fas fa-share-alt mr-2"></i>
+                Share Video
+              </button>
+
+              <button (click)="addToFavorites()"
+                class="w-full h-11 border border-gray-200 rounded-xl flex items-center justify-center text-gray-600 hover:text-foundation-red-medium hover:border-foundation-red-medium hover:bg-red-50 transition-all duration-200 text-sm font-semibold">
+                <i class="fas fa-heart mr-2"></i>
+                Add to Favorites
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Description Section -->
+        <div class="bg-gray-50 p-5 rounded-xl border border-gray-100">
+          <h2 class="text-lg font-bold text-gray-900 mb-4 font-poppins">About this video</h2>
+          <p *ngIf="vlog.description" class="text-gray-700 leading-relaxed text-sm font-medium">
+            {{ vlog.description }}
+          </p>
+          <p *ngIf="!vlog.description" class="text-gray-500 italic text-sm">
+            No description available for this video.
+          </p>
+        </div>
+
+
+
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="!vlog" class="bg-white rounded-xl shadow-lg p-8">
+      <div class="flex items-center justify-center py-12">
+        <i class="fas fa-spinner fa-spin fa-2x text-gray-400"></i>
+      </div>
+    </div>
+
+  </div>
+</div>

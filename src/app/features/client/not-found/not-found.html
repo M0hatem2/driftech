@@ -1,0 +1,30 @@
+<section class="relative h-svh bg-foundation-orange-normal text-white font-inter">
+  <!-- Darker Gradient Overlay for better contrast -->
+  <div class="absolute inset-0 bg-gradient-to-b from-black/20 to-black/40"></div>
+
+  <!-- Content -->
+  <div class="not-found-container relative z-10 mx-auto flex h-full flex-col items-center justify-center gap-8 px-6 lg:max-w-[820px] text-center">
+
+    <!-- 404 Number -->
+    <h1 class="not-found-number font-semibold text-[clamp(80px,12vw,150px)] leading-[1.1] text-white">
+      404
+    </h1>
+
+    <!-- Title -->
+    <h2 class="font-semibold text-[clamp(32px,4vw,48px)] leading-[1.2] text-white">
+      Page Not Found
+    </h2>
+
+    <!-- Subtitle -->
+    <p class="font-medium text-[clamp(18px,2vw,24px)] leading-[1.5] text-white/90 max-w-[600px]">
+      The page you're looking for doesn't exist or has been moved.
+    </p>
+
+    <!-- Button -->
+    <a routerLink="/" class="not-found-button inline-flex items-center justify-center px-8 py-4 bg-white text-foundation-orange-normal font-semibold rounded-lg hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+      <i class="fas fa-home mr-2"></i>
+      Go Home
+    </a>
+
+  </div>
+</section>

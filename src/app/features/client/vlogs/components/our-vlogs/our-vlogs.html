@@ -1,0 +1,141 @@
+<section class="font-poppins max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 my-16">
+  <div class="space-y-12">
+
+    <!-- Title -->
+    <div class="flex flex-col items-center text-center space-y-4">
+      <h1
+        class="text-black-medium font-semibold
+        text-[clamp(2rem,1.7vw+1.8rem,3rem)]
+        leading-[clamp(2.5rem,2vw+2rem,3.5rem)]
+        relative pb-3">
+
+        Our Vlogs
+
+        <!-- underline -->
+        <span class="absolute left-1/2 bottom-0 -translate-x-1/2 w-20 h-[3px] rounded-full
+              bg-gradient-to-r from-red-700 via-red-500 to-red-700"></span>
+      </h1>
+
+      <p
+        class="text-foundation-gray-normal
+        text-[clamp(1rem,0.7vw+0.9rem,1.25rem)]
+        max-w-[650px] leading-relaxed">
+        Real stories and moments to inspire you.
+      </p>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="flex justify-center items-center h-64">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error" class="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+      <p class="text-red-600 mb-4">{{ error }}</p>
+      <button (click)="loadVideos()" class="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium">
+        Try Again
+      </button>
+    </div>
+
+    <!-- Vlogs Content -->
+    <div *ngIf="!loading && !error" class="space-y-8">
+      <!-- Vlogs Grid -->
+      <app-driftech-vlogs-cards [vlogs]="vlogs"></app-driftech-vlogs-cards>
+
+      <!-- No Videos State -->
+      <div *ngIf="allVlogs.length === 0" class="text-center py-12">
+        <p class="text-gray-500 text-lg">No videos available at the moment.</p>
+      </div>
+
+      <!-- Pagination -->
+      <div *ngIf="allVlogs.length > itemsPerPage" class="flex flex-col items-center space-y-4">
+        <!-- Pagination Info -->
+        <div class="text-sm text-gray-600">
+          Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to {{ getEndIndex() }} of {{ allVlogs.length }} videos
+        </div>
+
+        <!-- Pagination Controls -->
+        <div class="flex items-center space-x-2">
+          <!-- Previous Button -->
+          <button
+            (click)="previousPage()"
+            [disabled]="isPreviousDisabled"
+            class="px-4 py-2 text-sm font-medium rounded-lg border transition-colors
+                   disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed
+                   enabled:bg-white enabled:text-gray-700 enabled:border-gray-300 enabled:hover:bg-gray-50">
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+            Previous
+          </button>
+
+          <!-- Page Numbers -->
+          <div class="flex items-center space-x-1">
+            <!-- First Page -->
+            <button
+              *ngIf="totalPages > 5 && currentPage > 3"
+              (click)="goToPage(1)"
+              class="px-3 py-2 text-sm font-medium rounded-lg border bg-white text-gray-700 border-gray-300 hover:bg-gray-50 transition-colors">
+              1
+            </button>
+
+            <!-- Ellipsis -->
+            <span *ngIf="totalPages > 5 && currentPage > 3" class="px-2 py-2 text-gray-500">...</span>
+
+            <!-- Page Numbers Around Current -->
+            <button
+              *ngFor="let page of visiblePageNumbers"
+              (click)="goToPage(page)"
+              [class]="page === currentPage ?
+                       'px-3 py-2 text-sm font-medium rounded-lg border bg-red-600 text-white border-red-600' :
+                       'px-3 py-2 text-sm font-medium rounded-lg border bg-white text-gray-700 border-gray-300 hover:bg-gray-50 transition-colors'">
+              {{ page }}
+            </button>
+
+            <!-- Ellipsis -->
+            <span *ngIf="totalPages > 5 && currentPage < totalPages - 2" class="px-2 py-2 text-gray-500">...</span>
+
+            <!-- Last Page -->
+            <button
+              *ngIf="totalPages > 5 && currentPage < totalPages - 2"
+              (click)="goToPage(totalPages)"
+              class="px-3 py-2 text-sm font-medium rounded-lg border bg-white text-gray-700 border-gray-300 hover:bg-gray-50 transition-colors">
+              {{ totalPages }}
+            </button>
+          </div>
+
+          <!-- Next Button -->
+          <button
+            (click)="nextPage()"
+            [disabled]="isNextDisabled"
+            class="px-4 py-2 text-sm font-medium rounded-lg border transition-colors
+                   disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed
+                   enabled:bg-white enabled:text-gray-700 enabled:border-gray-300 enabled:hover:bg-gray-50">
+            Next
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Page Jump (Optional) -->
+        <div class="flex items-center space-x-2 text-sm">
+          <span class="text-gray-600">Go to page:</span>
+          <input
+            #pageInput
+            type="number"
+            [min]="1"
+            [max]="totalPages"
+            (keyup.enter)="goToPage(+pageInput.value); pageInput.value = ''"
+            class="w-16 px-2 py-1 text-center border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent">
+          <button
+            (click)="goToPage(+pageInput.value); pageInput.value = ''"
+            class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition-colors">
+            Go
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

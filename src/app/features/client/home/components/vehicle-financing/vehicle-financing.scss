@@ -1,0 +1,47 @@
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari and Opera */
+}
+
+.cursor-grab {
+  cursor: grab;
+}
+
+.cursor-grabbing {
+  cursor: grabbing;
+}
+
+.select-none {
+  user-select: none;
+}
+
+/* تحسين تجربة السحب */
+.cursor-grab:hover {
+  cursor: grab;
+}
+
+.cursor-grab.active {
+  cursor: grabbing;
+}
+
+/* تحسين الانتقال والتفاعل */
+.card-item {
+  transition: transform 0.3s ease;
+}
+
+.card-item:hover {
+  transform: scale(1.05);
+}
+
+/* تحسين حدود التمرير */
+.overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
+  /* تحسين التمرير على iOS */
+}

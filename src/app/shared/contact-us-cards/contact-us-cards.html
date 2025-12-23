@@ -1,0 +1,104 @@
+<div class="font-poppins shadow-dark-gray flex flex-col gap-6 rounded-xl px-6 py-8 xl:w-[569px] bg-white"
+      *ngIf="!loading && !error && contactInfo; else loadingOrError">
+
+      <!-- Title -->
+      <h2 class="text-[30px] leading-[45px] font-semibold flex items-center gap-2">
+            <i class="fa-solid fa-envelope-open-text text-foundation-orange-normal text-[32px]"></i>
+            <span class="text-gray-medium-900 font-semibold">
+                  {{ 'CONTACT_US_WORKSHOP_TITLE' | translate }}
+
+            </span>
+      </h2>
+
+      <!-- Description -->
+      <p class="text-gray-medium-900 text-[18px] leading-[27px] break-words">
+            {{ 'CONTACT_US_WORKSHOP_DESC' | translate }}
+      </p>
+
+      <!-- Contact List -->
+      <ul class="space-y-4">
+
+            <!-- Phone Numbers -->
+            <li class="flex items-center gap-3" *ngIf="contactInfo?.hotline_number || contactInfo?.branch_number">
+                  <i class="fa-solid fa-phone text-[22px] text-foundation-orange-normal"></i>
+                  <h4 class="text-gray-medium-900 font-montserrat text-base font-medium break-words">
+                        <a *ngIf="contactInfo?.hotline_number" [href]="'tel:' + contactInfo.hotline_number"
+                              target="_blank">{{ contactInfo.hotline_number }}</a>
+                        <span *ngIf="contactInfo?.hotline_number && contactInfo?.branch_number" class="mx-1">|</span>
+                        <a *ngIf="contactInfo?.branch_number" [href]="'tel:' + contactInfo.branch_number"
+                              target="_blank">{{ contactInfo.branch_number }}</a>
+                  </h4>
+            </li>
+
+            <!-- WhatsApp -->
+            <li *ngIf="contactInfo?.whatsapp_number">
+                  <a [href]="displayWhatsAppLink" target="_blank" class="flex items-center gap-3">
+                        <i class="fa-brands fa-whatsapp text-[22px] text-green-600"></i>
+                        <h4 class="text-gray-medium-900 font-montserrat text-base font-medium break-words">
+                              {{ displayWhatsAppNumber }}
+                        </h4>
+                  </a>
+            </li>
+
+            <!-- Facebook -->
+            <li *ngIf="contactInfo?.facebook_link">
+                  <a [href]="contactInfo.facebook_link" target="_blank" class="flex items-center gap-3">
+                        <i class="fa-brands fa-facebook text-[22px] text-blue-600"></i>
+                        <h4 class="text-gray-medium-900 font-montserrat text-base font-medium break-words">
+                              Facebook
+                        </h4>
+                  </a>
+            </li>
+
+            <!-- Instagram -->
+            <li *ngIf="contactInfo?.instagram_link">
+                  <a [href]="contactInfo.instagram_link" target="_blank" class="flex items-center gap-3">
+                        <i class="fa-brands fa-instagram text-[22px] text-pink-500"></i>
+                        <h4 class="text-gray-medium-900 font-montserrat text-base font-medium break-words">
+                              Instagram
+                        </h4>
+                  </a>
+            </li>
+
+            <!-- X -->
+            <li *ngIf="contactInfo?.x_link">
+                  <a [href]="contactInfo.x_link" target="_blank" class="flex items-center gap-3">
+                        <i class="fa-brands fa-x-twitter text-[22px] text-black"></i>
+                        <h4 class="text-gray-medium-900 font-montserrat text-base font-medium break-words">
+                              {{ contactInfo.x_link }}
+                        </h4>
+                  </a>
+            </li>
+
+      </ul>
+
+      <!-- CTA Button -->
+      <a href="/contact-us" class="w-full h-[53px] mt-4 flex items-center justify-center rounded-lg text-white
+            ant-btn-variant-solid  text-neutral-0 font-poppins font-medium
+            shadow-sm shadow-foundation-orange-dark/50
+            transition-all duration-150 hover:ant-btn-variant-solid -hover-2">
+            {{ 'CONTACT_US_BUTTON' | translate }}
+      </a>
+
+</div>
+
+<!-- Loading Template -->
+<ng-template #loadingOrError>
+      <div class="font-poppins shadow-dark-gray flex flex-col gap-6 rounded-xl px-6 py-8 xl:w-[569px] bg-white">
+            <div class="flex items-center justify-center py-8" *ngIf="loading">
+                  <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-foundation-orange-normal"></div>
+                  <span class="ml-3 text-gray-medium-600">{{ 'LOADING_CONTACT_INFO' | translate }}</span>
+            </div>
+
+            <div class="flex flex-col items-center justify-center py-8 text-center" *ngIf="error">
+                  <i class="fa-solid fa-exclamation-triangle text-red-500 text-[32px] mb-3"></i>
+                  <h3 class="text-gray-medium-900 font-semibold text-lg mb-2">{{ 'ERROR_LOADING_CONTACT_INFO' |
+                        translate }}</h3>
+                  <p class="text-gray-medium-600 text-sm mb-4">{{ error }}</p>
+                  <button (click)="fetchContactInfo()"
+                        class="px-4 py-2 bg-foundation-orange-normal text-white rounded-lg hover:bg-foundation-orange-dark transition-colors">
+                        {{ 'TRY_AGAIN' | translate }}
+                  </button>
+            </div>
+      </div>
+</ng-template>

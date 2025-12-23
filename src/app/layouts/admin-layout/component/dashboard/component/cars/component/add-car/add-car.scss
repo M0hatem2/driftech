@@ -1,0 +1,234 @@
+/* Professional Accordion Styles */
+.accordion-loading {
+  position: relative;
+  pointer-events: none;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid #e5e7eb;
+    border-top: 2px solid #3b82f6;
+    border-radius: 50%;
+    animation: accordion-spin 0.8s linear infinite;
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes accordion-spin {
+  0% {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+/* Smooth accordion transitions */
+[id^="accordion-collapse-body-"] {
+  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Professional button hover effects */
+[data-accordion-target] {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    background-color: #f8fafc;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  &:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+/* Icon animation improvements */
+[data-accordion-icon] {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced focus styles for accessibility */
+button:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: -2px;
+}
+
+/* Professional loading animation for the entire accordion */
+.accordion-container {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced form section animations */
+.form-section {
+  animation: slideInLeft 0.5s ease-out;
+  animation-fill-mode: both;
+}
+
+.form-section:nth-child(1) { animation-delay: 0.1s; }
+.form-section:nth-child(2) { animation-delay: 0.2s; }
+.form-section:nth-child(3) { animation-delay: 0.3s; }
+.form-section:nth-child(4) { animation-delay: 0.4s; }
+.form-section:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Professional submit button enhancement */
+[type="submit"] {
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  &:hover::before {
+    left: 100%;
+  }
+}
+
+/* Enhanced responsive design */
+@media (max-width: 768px) {
+  .accordion-loading::after {
+    right: 0.5rem;
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+  
+  [data-accordion-target] {
+    padding: 1rem;
+    
+    &:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+}
+
+/* Professional color scheme */
+:root {
+  --accordion-primary: #3b82f6;
+  --accordion-primary-hover: #2563eb;
+  --accordion-success: #10b981;
+  --accordion-warning: #f59e0b;
+  --accordion-danger: #ef4444;
+  --accordion-gray-50: #f9fafb;
+  --accordion-gray-100: #f3f4f6;
+  --accordion-gray-500: #6b7280;
+  --accordion-gray-700: #374151;
+  --accordion-gray-900: #111827;
+}
+
+/* Advanced animations for accordion states */
+.accordion-enter {
+  animation: accordionEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.accordion-exit {
+  animation: accordionExit 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes accordionEnter {
+  from {
+    opacity: 0;
+    height: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  to {
+    opacity: 1;
+    height: auto;
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+}
+
+@keyframes accordionExit {
+  from {
+    opacity: 1;
+    height: auto;
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  to {
+    opacity: 0;
+    height: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .accordion-loading::after {
+    animation: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  [data-accordion-target] {
+    border: 2px solid;
+    
+    &:focus {
+      outline: 3px solid;
+    }
+  }
+}
+
+/* Print styles */
+@media print {
+  .accordion-loading::after,
+  [data-accordion-icon] {
+    display: none;
+  }
+  
+  [id^="accordion-collapse-body-"] {
+    height: auto !important;
+    opacity: 1 !important;
+    display: block !important;
+  }
+}

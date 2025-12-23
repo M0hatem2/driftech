@@ -1,0 +1,62 @@
+/* Account Popup Component Styles */
+:host {
+  display: block;
+}
+
+/* Modal backdrop with blur effect */
+.fixed.inset-0 {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Modal content */
+.bg-white {
+  animation: modalSlideIn 0.3s ease-out;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Button hover effects */
+button {
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Close button */
+.text-gray-400:hover {
+  color: #6b7280;
+}
+
+/* Additional visual enhancements */
+.rounded-xl {
+  backdrop-filter: blur(10px);
+}
+
+/* User icon animation */
+.fa-user {
+  animation: iconPulse 2s infinite;
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}

@@ -1,0 +1,70 @@
+<main class="bg-neutral-25 min-h-screen w-full lg:grid lg:grid-cols-10 lg:gap-5" dir="ltr">
+  <!-- Form Section -->
+  <div
+    class="mx-5 flex flex-col gap-6 lg:col-span-4 lg:col-start-2 lg:mx-0 lg:max-w-[450px] xl:col-span-5 xl:col-start-2 xl:max-w-[564px]">
+    <!-- Logo & Heading -->
+    <div class="text-start">
+      <a href="/" data-discover="true">
+        <img src="/assets/icons/logo.svg" alt="Logo" class="w-[140px]   mb-6">
+      </a>
+      <h1 class="font-poppins text-foundation-brown-normal text-4xl lg:text-5xl font-medium mb-2">
+        {{ 'REGISTER' | translate }}
+      </h1>
+      <h3 class="font-poppins text-foundation-gray-normal text-xl lg:text-2xl font-medium">
+        {{ 'ENTER_EMAIL_VERIFICATION' | translate }}
+      </h3>
+    </div>
+
+    <!-- Registration Form -->
+    <form class="space-y-6" (ngSubmit)="onSubmit(email.value)">
+      <!-- Email -->
+      <div class="flex flex-col gap-2">
+        <label for="userEmail" class="text-foundation-brown-normal text-2xl font-medium">{{ 'EMAIL' | translate
+          }}</label>
+        <div class="relative">
+          <input type="email" #email id="userEmail" placeholder="{{ 'ENTER_YOUR_EMAIL' | translate }}"
+            class="w-full border border-gray-300 rounded-lg p-4 text-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-foundation-orange-normal"
+            required maxlength="255">
+          <i
+            class="fa-solid fa-envelope absolute right-4 top-1/2 -translate-y-1/2 text-foundation-brown-normal text-2xl"></i>
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="text-red-500 text-lg">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Success Message -->
+      <div *ngIf="successMessage" class="text-green-500 text-lg">
+        {{ successMessage }}
+      </div>
+
+      <!-- Submit -->
+      <button type="submit"
+        class="w-full bg-foundation-orange-normal hover:bg-foundation-orange-normal-hover text-white text-2xl font-medium py-4 rounded-lg transition duration-200"
+        [disabled]="isLoading">
+        {{ isLoading ? ('SENDING_OTP' | translate) : ('SEND_OTP' | translate) }}
+      </button>
+    </form>
+
+    <!-- Login Link -->
+    <p class="text-foundation-gray-normal text-center text-xl mt-6">
+      {{ 'HAVE_ACCOUNT' | translate }}
+      <a href="/auth/login"
+        class="text-foundation-orange-normal ml-1.5 underline hover:text-foundation-orange-normal-hover">{{ 'LOGIN' |
+        translate }}</a>
+    </p>
+  </div>
+
+  <!-- OTP Popup -->
+  <app-verification-otp *ngIf="showOtpPopup" [email]="emailAddress" (closePopupEvent)="closeOtpPopup()">
+  </app-verification-otp>
+
+  <!-- Image Section -->
+  <div class="hidden lg:col-span-full lg:col-start-6 lg:flex lg:justify-end xl:col-start-7">
+    <div class="flex items-center justify-center">
+      <img src="/assets/img/register.webp" alt="Red Car Background" class="w-full h-auto object-cover">
+    </div>
+  </div>
+</main>

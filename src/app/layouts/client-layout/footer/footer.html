@@ -1,0 +1,108 @@
+<footer class="bg-[#5A1400] pt-20 pb-12 text-neutral-50 font-poppins">
+  <div class="max-w-[1300px] mx-auto px-4">
+
+    <!-- TOP SECTION -->
+    <section class="flex flex-col lg:flex-row lg:items-start lg:gap-20">
+
+      <!-- LOGO + TEXT -->
+      <div class="max-w-[320px] flex-shrink-0">
+        <img src="logo.svg" alt="drifttech logo" class="mb-5 w-[130px]">
+
+        <p class="text-[15px] leading-7 opacity-90">
+          {{ 'FOOTER_DESC' | translate }}
+        </p>
+
+        <!-- SOCIAL ICONS -->
+        <div class="flex items-center gap-4 mt-6">
+          <a *ngIf="contactInfo?.facebook_link" [href]="contactInfo?.facebook_link!" target="_blank"
+            class="hover:text-orange-300 text-[20px]"><i class="fa-brands fa-facebook"></i></a>
+          <a *ngIf="contactInfo?.instagram_link" [href]="contactInfo?.instagram_link!" target="_blank"
+            class="hover:text-orange-300 text-[20px]"><i class="fa-brands fa-instagram"></i></a>
+          <a *ngIf="contactInfo?.x_link" [href]="contactInfo?.x_link!" target="_blank"
+            class="hover:text-orange-300 text-[20px]"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="hover:text-orange-300 text-[20px] opacity-50 cursor-not-allowed" title="Coming Soon"><i
+              class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <!-- MIDDLE SECTION -->
+      <div class="mt-10 lg:mt-0 flex-1 flex flex-col lg:flex-row justify-between gap-12">
+
+        <!-- QUICK LINKS -->
+        <div class="flex-1">
+          <h5 class="text-white mb-5 font-semibold text-sm tracking-wider uppercase">{{ 'QUICK_LINKS' | translate }}
+          </h5>
+          <ul class="space-y-3">
+
+            <li><a class="hover:text-orange-300 transition flex items-center gap-2" href="/finance"><i
+                  class="fa-solid fa-coins"></i>{{ 'FINANCE' | translate }}</a></li>
+            <li><a class="hover:text-orange-300 transition flex items-center gap-2" href="/about"><i
+                  class="fa-solid fa-user-group"></i>{{ 'ABOUT_US' | translate }}</a></li>
+            <li><a class="hover:text-orange-300 transition flex items-center gap-2" href="/contact-us"><i
+                  class="fa-solid fa-envelope"></i>{{ 'CONTACT_US' | translate }}</a></li>
+
+          </ul>
+        </div>
+
+        <!-- COMPANY -->
+        <div class="flex-1">
+          <h5 class="text-white mb-5 font-semibold text-sm tracking-wider uppercase">{{ 'COMPANY' | translate }}</h5>
+          <ul class="space-y-3">
+            <li><a class="hover:text-orange-300 transition flex items-center gap-2" routerLink="/contact-us"><i
+                  class="fa-solid fa-circle-question"></i>{{ 'NEED_HELP' | translate }}</a></li>
+            <li><a class="hover:text-orange-300 transition flex items-center gap-2" routerLink="/support"><i
+                  class="fa-solid fa-headset"></i>{{ 'SUPPORT' | translate }}</a></li>
+            <li><a class="hover:text-orange-300 transition flex items-center gap-2" routerLink="/policy"><i
+                  class="fa-solid fa-shield-halved"></i>{{ 'POLICY' | translate }}</a></li>
+          </ul>
+        </div>
+
+        <!-- NEWSLETTER + MOBILE APP -->
+        <div class="lg:w-[310px] flex-shrink-0">
+          <h5 class="text-white mb-5 font-semibold text-sm tracking-wider uppercase">{{ 'NEWSLETTER' | translate }}</h5>
+          <!-- Newsletter input/button can be uncommented if needed -->
+
+          <!-- MOBILE APP -->
+          <div class="mt-10">
+            <h5 class="text-white mb-5 font-semibold text-sm tracking-wider uppercase">{{ 'OUR_MOBILE_APP' | translate
+              }}</h5>
+            <div class="flex flex-col gap-3">
+
+              <!-- APP STORE -->
+              <a href="https://apps.apple.com/app/driftech-eg/id6755965883"
+                class="bg-[#6C210F] hover:bg-[#7d2a16] transition flex items-center justify-center sm:justify-start px-4 py-3 h-[58px] w-full sm:w-[185px] rounded-lg gap-3">
+                <i class="fa-brands fa-apple text-[26px]"></i>
+                <div class="text-start">
+                  <p class="text-white text-[10px]">{{ 'DOWNLOAD_ON_THE' | translate }}</p>
+                  <p class="text-white font-bold text-[14px]">{{ 'APP_STORE' | translate }}</p>
+                </div>
+              </a>
+
+              <!-- GOOGLE PLAY -->
+              <a href="https://play.google.com/store/apps/details?id=com.rif.tech"
+                class="bg-[#6C210F] hover:bg-[#7d2a16] transition flex items-center justify-center sm:justify-start px-4 py-3 h-[58px] w-full sm:w-[185px] rounded-lg gap-3">
+                <i class="fa-brands fa-google-play text-[26px]"></i>
+                <div class="text-start">
+                  <p class="text-white text-[10px]">{{ 'GET_IT_ON' | translate }}</p>
+                  <p class="text-white font-bold text-[15px]">{{ 'GOOGLE_PLAY' | translate }}</p>
+                </div>
+              </a>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- LINE -->
+    <hr class="border-neutral-600 my-10">
+
+    <!-- COPYRIGHT -->
+    <p class="text-center text-neutral-200 text-[14px] tracking-wide">
+      {{ 'COPYRIGHT' | translate }}
+    </p>
+
+  </div>
+</footer>

@@ -1,0 +1,41 @@
+import { Component } from '@angular/core';
+import { HomeHeaderComponent } from './components/home-header/home-header';
+import { DriveHome } from './components/drive-home/drive-home';
+import { HomeWhichDrifter } from './components/home-which-drifter/home-which-drifter';
+import { TrustedPartners } from './components/trusted-partners/trusted-partners';
+import { HomeAutoFinance } from './components/home-auto-finance/home-auto-finance';
+import { HomeSecondDriveHome } from './components/home-second-drive-home/home-second-drive-home';
+import { HowItWorks } from './components/how-it-works/how-it-works';
+import { VehicleFinancingComponent } from './components/vehicle-financing/vehicle-financing';
+import { DriftechVlogs } from "../../../shared/driftech-vlogs/driftech-vlogs";
+import { ContactUs } from "../../../shared/contact-us/contact-us";
+import { CarsByDownPayments } from './components/cars-by-down-payments/cars-by-down-payments';
+import { RpmGaugeComponent } from '../../../shared/rpm/rpm';
+import { LoginRequiredPopup } from '../../../shared/login-required-popup/login-required-popup';
+ import { of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+
+@Component({
+  selector: 'app-home',
+  imports: [
+    HomeHeaderComponent,
+    DriveHome,
+    RpmGaugeComponent,
+    HomeWhichDrifter,
+    CarsByDownPayments,
+    TrustedPartners,
+    HomeAutoFinance,
+    HomeSecondDriveHome,
+    HowItWorks,
+    VehicleFinancingComponent,
+    DriftechVlogs,
+    ContactUs,
+    LoginRequiredPopup
+],
+  templateUrl: './home.html',
+  styles: [],
+})
+export class Home {
+  rpmValue$ = new BehaviorSubject<number>(3);
+
+}

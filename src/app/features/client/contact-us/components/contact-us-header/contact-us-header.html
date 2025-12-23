@@ -1,0 +1,27 @@
+<section class="relative h-svh" (animateOnScroll)="onAnimate()" [@scrollFadeUp]="animationState">
+      <!-- Background -->
+      <div class="absolute inset-0 h-full overflow-hidden">
+            <img class="h-full w-full object-cover object-top opacity-[0.71]" src="/assets/img/Contact-Us-header.webp">
+      </div>
+
+      <!-- Red overlay -->
+      <div class="about-hero-overlay absolute inset-0"></div>
+
+      <!-- Content -->
+      <div
+            class="font-poppins relative z-10 mx-auto flex h-full flex-col items-center justify-center gap-4 px-5 lg:max-w-[844px] lg:px-0">
+
+            <h1 class="text-white text-center font-semibold
+                  text-[clamp(2rem,1.4vw+1.8rem,3.75rem)]
+                  leading-[clamp(2.5rem,1.4vw+2.2rem,4.3rem)]">
+                  {{ 'CONTACT_US' | translate }}
+            </h1>
+
+            <h3 class="text-white text-center lg:text-xl
+                  text-[clamp(1.1rem,0.8vw+1rem,1.75rem)]
+                  leading-[clamp(1.6rem,0.8vw+1.4rem,2.4rem)]">
+                  {{ 'CONTACT_US_DESC' | translate }}
+            </h3>
+
+      </div>
+</section>

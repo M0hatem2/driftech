@@ -1,0 +1,197 @@
+<div class="min-h-screen ">
+  <!-- Main Container -->
+  <div class="w-full h-full max-w-5xl bg-white   flex flex-col">
+
+    <!-- Title -->
+    <h1 class="text-[#e73201] font-poppins text-[clamp(1.5rem,1.2rem+2vw,3rem)] font-semibold text-center mb-10">
+      {{ 'PAYMENT_CALCULATOR' | translate }}
+    </h1>
+
+    <!-- Steps Progress Bar -->
+    <div class="mb-10">
+      <div class="flex justify-between items-center w-full gap-4">
+        <div *ngFor="let step of steps; let i = index" class="relative flex-1">
+          <!-- Step Line -->
+          <div [ngClass]="{
+            'bg-[#e73201]': currentStep > i,
+            'bg-[#e73201]/30': currentStep === i,
+            'bg-gray-200': currentStep < i
+          }" class="h-3 rounded-full transition-all duration-300"></div>
+
+          <!-- Step Number -->
+          <div class="absolute -top-10 w-full text-center">
+            <span [ngClass]="{
+              'text-[#e73201] font-semibold': currentStep >= i,
+              'text-gray-400': currentStep < i
+            }" class="text-sm md:text-base">
+              {{ 'STEP' | translate }} {{ i + 1 }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step Content -->
+    <div class="flex-1 overflow-y-auto transition-all duration-300">
+
+      <!-- Step 1 -->
+
+      <div *ngIf="currentStep === 0" class="flex flex-col items-center justify-center h-full">
+        <app-finance-personal-information></app-finance-personal-information>
+      </div>
+
+      <div *ngIf="currentStep === 1" class="flex flex-col items-center justify-center h-full">
+        <app-finance-work-details></app-finance-work-details>
+      </div>
+      <div *ngIf="currentStep === 2" class="flex flex-col items-center justify-center h-full">
+        <app-finance-reference-person></app-finance-reference-person>
+      </div>
+
+
+
+
+
+    </div>
+
+    <!-- Success Message Display -->
+    <div *ngIf="submitSuccess" class="mt-4 p-4 rounded-lg bg-green-100 text-green-800 border border-green-200">
+      <div class="flex items-center">
+        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+            clip-rule="evenodd"></path>
+        </svg>
+        {{ submitMessage | translate }}
+      </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="mt-12 flex flex-col sm:flex-row justify-between gap-4">
+      <button *ngIf="currentStep > 0" (click)="previousStep()"
+        class="w-full sm:w-auto px-8 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all">
+        {{ 'PREVIOUS' | translate }}
+      </button>
+
+      <button *ngIf="currentStep < steps.length - 1" (click)="nextStep()"
+        class="w-full sm:w-auto px-8 py-3 bg-[#e73201] text-white rounded-lg hover:bg-[#c62d01] focus:outline-none focus:ring-2 focus:ring-[#e73201]/50 transition-all">
+        {{ 'NEXT' | translate }}
+      </button>
+
+      <button *ngIf="currentStep === steps.length - 1" (click)="submit()" [disabled]="isSubmitting" class="w-full sm:w-auto px-8 py-3 rounded-lg focus:outline-none focus:ring-2 transition-all
+        disabled:opacity-50 disabled:cursor-not-allowed
+        bg-green-600 text-white hover:bg-green-700 focus:ring-green-500
+        disabled:bg-gray-400">
+        <span *ngIf="!isSubmitting">{{ 'SUBMIT' | translate }}</span>
+        <span *ngIf="isSubmitting" class="flex items-center">
+          <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+          {{ 'SUBMITTING' | translate }}
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Authentication Required Popup -->
+  <div *ngIf="showAuthPopup"
+    class="fixed inset-0 bg-[url('/assets/water-bg.jpg')] bg-cover bg-center backdrop-blur-[4px] bg-opacity-70 flex items-center justify-center z-50"
+    (click)="hideAuthPopup()">
+    <div class="bg-white rounded-lg p-8 max-w-md mx-4 relative" (click)="$event.stopPropagation()">
+      <!-- Close button -->
+      <button (click)="hideAuthPopup()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <!-- Popup content -->
+      <div class="text-center">
+        <!-- Icon -->
+        <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-orange-100 mb-4">
+          <svg class="h-6 w-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+            </path>
+          </svg>
+        </div>
+
+        <!-- Title -->
+        <h3 class="text-lg font-medium text-gray-900 mb-2">
+          {{ 'LOGIN_REQUIRED' | translate }}
+        </h3>
+
+        <!-- Message -->
+        <p class="text-sm text-gray-500 mb-6">
+          {{ 'LOGIN_REQUIRED_MESSAGE' | translate }}
+        </p>
+
+        <!-- Action buttons -->
+        <div class="flex flex-col sm:flex-row gap-3">
+          <button (click)="navigateToLogin()"
+            class="flex-1 px-4 py-2 bg-[#e73201] text-white text-sm font-medium rounded-lg hover:bg-[#c62d01] focus:outline-none focus:ring-2 focus:ring-[#e73201]/50 transition-all">
+            {{ 'LOGIN' | translate }}
+          </button>
+          <button (click)="navigateToRegister()"
+            class="flex-1 px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400 transition-all">
+            {{ 'CREATE_NEW_ACCOUNT' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Popup -->
+  <div *ngIf="showErrorPopup"
+    class="fixed inset-0 bg-[url('/assets/water-bg.jpg')] bg-cover bg-center backdrop-blur-[4px] bg-opacity-70 flex items-center justify-center z-50"
+    (click)="hideErrorPopup()">
+    <div class="bg-white rounded-lg p-8 max-w-md mx-4 relative" (click)="$event.stopPropagation()">
+      <!-- Close button -->
+      <button (click)="hideErrorPopup()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <!-- Popup content -->
+      <div class="text-center">
+        <!-- Icon -->
+        <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
+          <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z">
+            </path>
+          </svg>
+        </div>
+
+        <!-- Title -->
+        <h3 class="text-lg font-medium text-gray-900 mb-2">
+          {{ errorDetails.titleKey | translate }}
+        </h3>
+
+        <!-- Message -->
+        <p class="text-sm text-gray-500 mb-4">
+          {{ errorDetails.messageKey ? (errorDetails.messageKey | translate) : errorDetails.message }}
+        </p>
+
+        <!-- Missing Fields List -->
+        <div *ngIf="errorDetails.missingFields.length > 0" class="text-start mb-6">
+          <p class="text-sm font-medium text-gray-700 mb-2">{{ 'MISSING_FIELDS' | translate }}</p>
+          <ul class="text-sm text-gray-600 space-y-1">
+            <li *ngFor="let field of errorDetails.missingFields" class="flex items-center">
+              <svg class="w-4 h-4 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                  clip-rule="evenodd"></path>
+              </svg>
+              {{ field | translate }}
+            </li>
+          </ul>
+        </div>
+
+        <!-- Action button -->
+        <button (click)="hideErrorPopup()"
+          class="w-full px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all">
+          {{ 'OK' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

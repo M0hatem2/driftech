@@ -1,0 +1,88 @@
+<main class="bg-neutral-25 min-h-screen w-full lg:grid lg:grid-cols-10 lg:gap-5" [dir]="'ltr'">
+  <!-- Form Section -->
+  <div
+    class="mx-5 flex flex-col gap-6 lg:col-span-4 lg:col-start-2 lg:mx-0 lg:max-w-[450px] xl:col-span-5 xl:col-start-2 xl:max-w-[564px]">
+    <!-- Logo & Heading -->
+    <div class="text-start">
+      <a href="/" data-discover="true">
+        <img src="/assets/icons/logo.svg" alt="Logo" class="w-[140px]  mb-6">
+      </a>
+      <h1 class="font-poppins text-foundation-brown-normal text-4xl lg:text-5xl font-medium mb-2">
+        {{ 'WELCOME_BACK' | translate }}
+      </h1>
+      <h3 class="font-poppins text-foundation-gray-normal text-xl lg:text-2xl font-medium">
+        {{ 'ENTER_CREDENTIALS' | translate }}
+      </h3>
+    </div>
+
+    <!-- Login Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
+
+      <!-- Phone Number -->
+      <div class="flex flex-col gap-2">
+        <label for="userEmail" class="text-foundation-brown-normal text-2xl font-medium">{{ 'EMAIL_ADDRESS' | translate
+          }}</label>
+        <div class="relative">
+          <input type="email" id="userEmail" formControlName="email"
+            placeholder="{{ 'ENTER_EMAIL_ADDRESS' | translate }}" class="w-full border border-gray-300 rounded-lg p-4 text-xl placeholder-gray-400
+        focus:outline-none focus:ring-2 focus:ring-foundation-orange-normal pr-12" />
+
+
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="flex flex-col gap-2">
+        <label for="userPassword" class="text-foundation-brown-normal text-2xl font-medium">{{ 'PASSWORD' | translate
+          }}</label>
+        <div class="relative">
+          <input type="password" id="userPassword" formControlName="password"
+            placeholder="{{ 'ENTER_PASSWORD' | translate }}" class="w-full border border-gray-300 rounded-lg p-4 text-xl placeholder-gray-400
+         focus:outline-none focus:ring-2 focus:ring-foundation-orange-normal pr-12" />
+
+
+          <!-- Eye Button -->
+          <button type="button" class="absolute left-12 top-1/2 -translate-y-1/2 text-gray-400
+         hover:text-foundation-orange-normal transition-colors">
+
+          </button>
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="text-red-500 text-lg">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Forgot Password -->
+      <div class="text-left">
+        <!-- <a href="/forget-password" class="text-foundation-red-normal text-lg hover:underline">
+          {{ 'FORGOT_PASSWORD' | translate }}
+        </a> -->
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" [disabled]="isLoading || loginForm.invalid" class="w-full bg-foundation-orange-normal hover:bg-foundation-orange-normal-hover disabled:bg-gray-400
+    text-white text-2xl font-medium py-4 rounded-lg transition duration-200">
+        <span *ngIf="!isLoading">{{ 'SIGN_IN' | translate }}</span>
+        <span *ngIf="isLoading">{{ 'SIGNING_IN' | translate }}</span>
+      </button>
+    </form>
+
+
+    <!-- Sign Up Link -->
+    <p class="text-foundation-gray-normal text-center text-xl mt-6">
+      {{ 'DONT_HAVE_ACCOUNT' | translate }}
+      <a href="/auth/register"
+        class="text-foundation-orange-normal ml-1.5 underline hover:text-foundation-orange-normal-hover">{{ 'SIGN_UP' |
+        translate }}</a>
+    </p>
+  </div>
+
+  <!-- Image Section -->
+  <div class="hidden lg:col-span-full lg:col-start-6 lg:flex lg:justify-end xl:col-start-7">
+    <div class="flex items-center justify-center">
+      <img src="/assets/img/login.webp" alt="Red Car Background" class="w-full h-auto object-cover">
+    </div>
+  </div>
+</main>

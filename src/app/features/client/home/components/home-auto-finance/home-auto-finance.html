@@ -1,0 +1,89 @@
+<section
+      class="bg-gray-medium-300 py-[75px] flex flex-col items-center justify-center text-center  max-w-[1200px] mx-auto px-4 md:px-6 lg:px-0"
+      (animateOnScroll)="onAnimate()" [@scrollFadeUp]="animationState">
+      <div
+            class="container   md:flex md:flex-col lg:items-start lg:justify-start  items-start justify-start    gap-12 lg:flex-row relative">
+
+            <!-- Calculator Box -->
+            <app-finance-calculator></app-finance-calculator>
+            <!-- Text Section -->
+            <div class="font-inter lg:basis-1/2 order-1 lg:order-0 pt-7 md:pt-0">
+
+                  <h2 class="text-foundation-brown-darker text-[32px] leading-[40px] font-bold">
+                        {{ 'AUTO_FINANCE_CALCULATOR' | translate }}
+                  </h2>
+
+                  <p class="text-foundation-gray-normal-active mt-[24px] max-w-[65ch] text-[20px] leading-[32px]">
+                        {{ 'AUTO_FINANCE_CALCULATOR_DESC' | translate }}
+                  </p>
+
+                  <!-- Updated List with Font Awesome -->
+                  <ul class="mt-[28px] flex flex-col gap-y-6  text-start">
+
+                        <!-- Item 1 -->
+                        <li class="flex items-start gap-4">
+                              <div
+                                    class="h-[48px] w-[48px] rounded-lg bg-[#e732012e] text-foundation-orange-normal shadow-md flex items-center justify-center">
+                                    <i class="fa-solid fa-chart-line text-foundation-brown-darker text-2xl"></i>
+                              </div>
+                              <span class="flex flex-col gap-1">
+                                    <span
+                                          class="heading-list-title font-semibold text-[18px] text-foundation-brown-darker ">
+                                          {{ 'SMART_MATCHING_RATES' | translate }}
+                                    </span>
+                                    <span
+                                          class="heading-list-description text-[16px] text-foundation-gray-normal-active leading-[26px]">
+                                          {{ 'SMART_MATCHING_RATES_DESC' | translate }}
+                                    </span>
+                              </span>
+                        </li>
+
+                        <!-- Item 2 -->
+                        <li class="flex items-start gap-4">
+                              <div
+                                    class="h-[48px] w-[48px] rounded-lg bg-[#e732012e] text-foundation-orange-normal shadow-md flex items-center justify-center">
+                                    <i class="fa-solid fa-circle-check text-foundation-brown-darker text-2xl"></i>
+                              </div>
+                              <span class="flex flex-col gap-1">
+                                    <span
+                                          class="heading-list-title font-semibold text-[18px] text-foundation-brown-darker">
+
+                                          {{ 'FAST_APPROVALS' | translate }}
+                                    </span>
+                                    <span
+                                          class="heading-list-description text-[16px] text-foundation-gray-normal-active leading-[26px]">
+                                          {{ 'FAST_APPROVALS_DESC' | translate }}
+
+                                    </span>
+                              </span>
+                        </li>
+
+                        <!-- Item 3 -->
+                        <li class="flex items-start gap-4">
+                              <div
+                                    class="h-[48px] w-[48px] rounded-lg bg-[#e732012e] text-foundation-orange-normal shadow-md flex items-center justify-center">
+                                    <i class="fa-solid fa-calendar-days text-foundation-brown-darker text-2xl"></i>
+                              </div>
+                              <span class="flex flex-col gap-1">
+                                    <span
+                                          class="heading-list-title font-semibold text-[18px] text-foundation-brown-darker">
+                                          {{ 'FLEXIBLE_PLANS' | translate }}
+                                    </span>
+                                    <span
+                                          class="heading-list-description text-[16px] text-foundation-gray-normal-active leading-[26px]">
+                                          {{ 'FLEXIBLE_PLANS_DESC' | translate }}
+                                    </span>
+                                    <ul class="mt-2">
+                                          <li> - {{ 'LOW_DOWN_PAYMENTS' | translate }}</li>
+                                          <li> - {{ 'CUSTOM_INSTALLMENTS' | translate }}</li>
+                                          <li> - {{ 'NO_HIDDEN_FEES' | translate }}</li>
+                                    </ul>
+                              </span>
+                        </li>
+
+                  </ul>
+            </div>
+
+
+      </div>
+</section>

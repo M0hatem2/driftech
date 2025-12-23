@@ -1,0 +1,23 @@
+<div class="min-h-svh bg-cover bg-center pt-[229px] pb-20" [style.background-image]="backgroundImage">
+
+      <section class="max-w-[1200px] h-full mx-auto p-6">
+            <div   (animateOnScroll)="onAnimate()" [@scrollFadeUp]="animationState"
+                  class="text-white font-inter flex flex-col items-start gap-12 text-sitems-start md:items-start md:text-start lg:max-w-[649px]">
+                  <h1 class="font-semibold text-4xl md:text-5xl">{{ 'FINANCE_ANY_USED_CAR' | translate }}</h1>
+                  <h3 class="leading-[35.88px] font-normal text-2xl md:text-3xl">{{ 'FINANCE_ANY_USED_CAR_DESC' |
+                        translate }}</h3>
+                  <div class="flex md:gap-12 gap-6 w-full px-2">
+                        <a class="w-[210px] h-[53px] duration-100 ease-linear transition-all mx-auto md:mx-0 flex items-center justify-center ant-btn-variant-solid   shadow-sm shadow-foundation-orange-dark/50  text-neutral-0 bg-foundation-orange-normal hover:bg-foundation-orange-normal-hover active:bg-foundation-orange-normal disabled:text-neutral-0 disabled:foundation-orange-dark disabled:border-foundation-orange-light mt-10 rounded-lg md:mt-0"
+                              (click)="scrollToAutoFinance()">{{ 'APPLY_NOW' | translate }}
+                        </a>
+                        <button
+                              class="w-[210px] h-[53px] duration-100 ease-linear transition-all mx-auto md:mx-0 flex items-center justify-center ant-btn-variant-solid   shadow-sm shadow-foundation-orange-dark/50  text-neutral-0 bg-foundation-orange-normal hover:bg-foundation-orange-normal-hover active:bg-foundation-orange-normal disabled:text-neutral-0 disabled:foundation-orange-dark disabled:border-foundation-orange-light mt-10 rounded-lg md:mt-0"
+                              (click)="openMatchNow()">{{ 'MATCH_NOW' | translate }}
+                        </button>
+                  </div>
+            </div>
+      </section>
+</div>
+
+<!-- Login Required Popup -->
+<app-login-required-popup *ngIf="showLoginPopup" (close)="closeLoginPopup()"></app-login-required-popup>

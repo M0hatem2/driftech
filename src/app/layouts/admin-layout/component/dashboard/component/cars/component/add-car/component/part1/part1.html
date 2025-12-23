@@ -1,0 +1,335 @@
+<div class="p-8 bg-white">
+      <!-- Form Header -->
+      <div class="mb-8 text-center">
+            <h3 class="text-3xl font-bold text-gray-900 mb-3">Add New Car</h3>
+            <p class="text-gray-600 text-lg">Please fill in the car details below</p>
+            <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mt-4 rounded-full"></div>
+      </div>
+
+      <form class="space-y-8">
+            <!-- Basic Information Section -->
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100">
+                  <h4 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center mr-3">
+                              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                              </svg>
+                        </div>
+                        Basic Information
+                  </h4>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Brand -->
+                        <div class="space-y-2">
+                              <label for="inputBrand" class="block text-sm font-semibold text-gray-700">Brand</label>
+                              <select
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-all duration-200 hover:border-gray-400"
+                                    id="inputBrand" name="brand">
+                                    <option value="">Choose Brand...</option>
+                                    <option value="1">Toyota</option>
+                                    <option value="2">Honda</option>
+                                    <option value="3">Ford</option>
+                                    <option value="4">Chevrolet</option>
+                                    <option value="5">Hyundai</option>
+                                    <option value="6">Tesla</option>
+                                    <option value="7">Mazda</option>
+                                    <option value="8">Nissan</option>
+                                    <option value="9">BMW</option>
+                                    <option value="10">Audi</option>
+                                    <option value="11">Jeep</option>
+                                    <option value="12">Volkswagen</option>
+                                    <option value="13">Fiat</option>
+                                    <option value="14">Renault</option>
+                                    <option value="15">Mitsubishi</option>
+                                    <option value="16">Skoda</option>
+                                    <option value="17">Seat</option>
+                                    <option value="18">Peugeot</option>
+                                    <option value="19">MG</option>
+                                    <option value="20">Kia</option>
+                                    <option value="21">Citroen</option>
+                                    <option value="22">Mercedes</option>
+                                    <option value="23">Range Rover</option>
+                              </select>
+                        </div>
+
+                        <!-- Model -->
+                        <div class="space-y-2">
+                              <label for="inputModel" class="block text-sm font-semibold text-gray-700">Model</label>
+                              <select
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white transition-all duration-200 hover:border-gray-400"
+                                    id="inputModel" name="model">
+                                    <option value="">Choose Model...</option>
+                                    <option value="1">Corolla</option>
+                                    <option value="2">Civic</option>
+                                    <option value="4">Camaro</option>
+                                    <option value="5">Tucson</option>
+                                    <option value="6">Model 3</option>
+                                    <option value="7">CX-5</option>
+                                    <option value="8">Altima</option>
+                                    <option value="9">X5</option>
+                                    <option value="10">A4</option>
+                                    <option value="11">Wrangler</option>
+                                    <option value="12">Golf</option>
+                                    <option value="13">500</option>
+                                    <option value="14">Clio</option>
+                                    <option value="15">Mitsubishi Outlander</option>
+                                    <option value="16">Skoda</option>
+                                    <option value="17">Seat</option>
+                                    <option value="18">Peugeot</option>
+                                    <option value="19">MG</option>
+                                    <option value="20">Kia</option>
+                                    <option value="21">Citroen</option>
+                              </select>
+                        </div>
+
+                        <!-- Model Year -->
+                        <div class="space-y-2">
+                              <label for="inputDate" class="block text-sm font-semibold text-gray-700">Model
+                                    Year</label>
+                              <input type="number"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 hover:border-gray-400"
+                                    id="inputDate" name="model_year" placeholder="Enter year">
+                        </div>
+                  </div>
+            </div>
+
+            <!-- Specifications Section -->
+            <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100">
+                  <h4 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div class="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center mr-3">
+                              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                                    </path>
+                              </svg>
+                        </div>
+                        Specifications
+                  </h4>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- License Expiry Date -->
+                        <div class="space-y-2">
+                              <label for="inputLicenseDate" class="block text-sm font-semibold text-gray-700">License
+                                    Expiry
+                                    Date</label>
+                              <input type="date"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-200 hover:border-gray-400"
+                                    id="inputLicenseDate" name="license_expire_date">
+                        </div>
+
+                        <!-- Body Style -->
+                        <div class="space-y-2">
+                              <label for="inputBodyStyle" class="block text-sm font-semibold text-gray-700">Body
+                                    Style</label>
+                              <select
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-white transition-all duration-200 hover:border-gray-400"
+                                    id="inputBodyStyle" name="body_style">
+                                    <option value="">Choose Body Style...</option>
+                                    <option value="1">Sedan</option>
+                                    <option value="2">SUV</option>
+                                    <option value="3">Truck</option>
+                                    <option value="4">Van</option>
+                                    <option value="5">Coupe</option>
+                                    <option value="7">Convertible</option>
+                                    <option value="8">Wagon</option>
+                                    <option value="9">Minivan</option>
+                              </select>
+                        </div>
+
+                        <!-- Type -->
+                        <div class="space-y-2">
+                              <label for="inputType" class="block text-sm font-semibold text-gray-700">Type</label>
+                              <select
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-white transition-all duration-200 hover:border-gray-400"
+                                    id="inputType" name="type">
+                                    <option value="">Choose Type...</option>
+                                    <option value="1">Sedan</option>
+                                    <option value="2">SUV</option>
+                                    <option value="3">Truck</option>
+                                    <option value="4">Coupe</option>
+                                    <option value="5">Convertible</option>
+                                    <option value="6">Hatchback</option>
+                                    <option value="7">Minivan</option>
+                                    <option value="8">Van</option>
+                                    <option value="9">Crossover</option>
+                                    <option value="10">Wagon</option>
+                                    <option value="11">Pickup</option>
+                                    <option value="12">Electric</option>
+                                    <option value="13">Hybrid</option>
+                              </select>
+                        </div>
+                  </div>
+            </div>
+
+            <!-- Performance Section -->
+            <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-100">
+                  <h4 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div class="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center mr-3">
+                              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M13 10V3L4 14h7v7l9-11h-7z">
+                                    </path>
+                              </svg>
+                        </div>
+                        Performance & Economy
+                  </h4>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Min Fuel Economy -->
+                        <div class="space-y-2">
+                              <label for="minRange" class="block text-sm font-semibold text-gray-700">Min Fuel
+                                    Economy</label>
+                              <input type="number"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 hover:border-gray-400"
+                                    id="minRange" name="min_fuel_economy" placeholder="Enter minimum fuel economy">
+                        </div>
+
+                        <!-- Max Fuel Economy -->
+                        <div class="space-y-2">
+                              <label for="maxRange" class="block text-sm font-semibold text-gray-700">Max Fuel
+                                    Economy</label>
+                              <input type="number"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 hover:border-gray-400"
+                                    id="maxRange" name="max_fuel_economy" placeholder="Enter maximum fuel economy">
+                        </div>
+                  </div>
+            </div>
+
+            <!-- Bilingual Fields Section -->
+            <div class="bg-gradient-to-r from-orange-50 to-red-50 rounded-2xl p-6 border border-orange-100">
+                  <h4 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center mr-3">
+                              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129">
+                                    </path>
+                              </svg>
+                        </div>
+                        Bilingual Information
+                  </h4>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Colors -->
+                        <div class="space-y-2">
+                              <label for="inputColorAR" class="block text-sm font-semibold text-gray-700">Color
+                                    (Arabic)</label>
+                              <input type="text"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 hover:border-gray-400"
+                                    id="exampleColorInputAR" name="color_ar" placeholder="Enter color in Arabic">
+                        </div>
+                        <div class="space-y-2">
+                              <label for="inputColorEN" class="block text-sm font-semibold text-gray-700">Color
+                                    (English)</label>
+                              <input type="text"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 hover:border-gray-400"
+                                    id="exampleColorInputEN" name="color_en" placeholder="Enter color in English">
+                        </div>
+
+                        <!-- Locations -->
+                        <div class="space-y-2">
+                              <label for="inputLocationAR" class="block text-sm font-semibold text-gray-700">Location
+                                    (Arabic)</label>
+                              <input type="text"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 hover:border-gray-400"
+                                    id="inputLocationAR" name="location_ar" placeholder="Enter location in Arabic">
+                        </div>
+                        <div class="space-y-2">
+                              <label for="inputLocationEN" class="block text-sm font-semibold text-gray-700">Location
+                                    (English)</label>
+                              <input type="text"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 hover:border-gray-400"
+                                    id="inputLocationEN" name="location_en" placeholder="Enter location in English">
+                        </div>
+
+                        <!-- Descriptions -->
+                        <div class="space-y-2">
+                              <label for="inputDescriptionEN"
+                                    class="block text-sm font-semibold text-gray-700">Description
+                                    (English)</label>
+                              <input type="text"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 hover:border-gray-400"
+                                    id="inputDescriptionEN" name="description_en"
+                                    placeholder="Enter description in English">
+                        </div>
+                        <div class="space-y-2">
+                              <label for="inputDescriptionAR"
+                                    class="block text-sm font-semibold text-gray-700">Description
+                                    (Arabic)</label>
+                              <input type="text"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 hover:border-gray-400"
+                                    id="inputDescriptionAR" name="description_ar"
+                                    placeholder="Enter description in Arabic">
+                        </div>
+
+                        <!-- Vehicle Categories -->
+                        <div class="space-y-2">
+                              <label for="inputVehicleCategoryEN"
+                                    class="block text-sm font-semibold text-gray-700">Vehicle Category
+                                    (English)</label>
+                              <input type="text"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 hover:border-gray-400"
+                                    id="inputVehicleCategoryEN" name="vehicle_category_en"
+                                    placeholder="Enter vehicle category in English">
+                        </div>
+                        <div class="space-y-2">
+                              <label for="inputVehicleCategoryAR"
+                                    class="block text-sm font-semibold text-gray-700">Vehicle Category
+                                    (Arabic)</label>
+                              <input type="text"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 hover:border-gray-400"
+                                    id="inputVehicleCategoryAR" name="vehicle_category_ar"
+                                    placeholder="Enter vehicle category in Arabic">
+                        </div>
+                  </div>
+            </div>
+
+            <!-- Dimensions Section -->
+            <div class="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-2xl p-6 border border-teal-100">
+                  <h4 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
+                        <div class="w-8 h-8 bg-teal-500 rounded-lg flex items-center justify-center mr-3">
+                              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4">
+                                    </path>
+                              </svg>
+                        </div>
+                        Dimensions
+                  </h4>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Length -->
+                        <div class="space-y-2">
+                              <label for="inputLength" class="block text-sm font-semibold text-gray-700">Length</label>
+                              <input type="number"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-200 hover:border-gray-400"
+                                    id="inputLength" name="length" placeholder="Enter length">
+                        </div>
+
+                        <!-- Width -->
+                        <div class="space-y-2">
+                              <label for="inputWidth" class="block text-sm font-semibold text-gray-700">Width</label>
+                              <input type="number"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-200 hover:border-gray-400"
+                                    id="inputWidth" name="width" placeholder="Enter width">
+                        </div>
+
+                        <!-- Height -->
+                        <div class="space-y-2">
+                              <label for="inputHeight" class="block text-sm font-semibold text-gray-700">Height</label>
+                              <input type="number"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all duration-200 hover:border-gray-400"
+                                    id="inputHeight" name="height" placeholder="Enter height">
+                        </div>
+                  </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center pt-6">
+                  <button type="submit"
+                        class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-2xl hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-105 shadow-lg">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6">
+                              </path>
+                        </svg>
+                        Add Car
+                  </button>
+            </div>
+      </form>
+</div>

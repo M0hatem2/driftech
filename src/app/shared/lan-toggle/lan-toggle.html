@@ -1,0 +1,11 @@
+<div class="toggle-button-cover flex justify-center items-center">
+  <div id="button-3" class="button r relative">
+    <input class="checkbox absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" type="checkbox"
+      [checked]="!isEnglish" (change)="toggleLanguage()">
+    <div class="layer absolute inset-0 rounded-full transition-colors duration-300 bg-blue-100"></div>
+    <div
+      class="knobs absolute top-1 left-1 h-8 flex items-center justify-center rounded-full bg-[#f44336] text-white font-bold text-sm transition-all duration-300">
+      {{ isEnglish ? 'EN' : 'AR' }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,425 @@
+<div class="accordion-body bg-gradient-to-br from-blue-50 to-indigo-50 p-6">
+      <!-- Enhanced Loading State -->
+      <div *ngIf="isFieldFocused && focusedField" class="mb-4 p-3 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg">
+            <div class="flex items-center">
+                  <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 mr-3"></div>
+                  <p class="text-blue-800 text-sm font-medium">
+                        جاري تحديث الاقتراحات للحقل المحدد...
+                  </p>
+            </div>
+      </div>
+
+      <div class="space-y-8">
+            <!-- Enhanced Progress Indicator -->
+            <div class="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+                  <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium text-gray-600">تقدم إكمال البيانات</span>
+                        <span class="text-sm text-gray-500">{{ getCompletionPercentage() }}%</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full transition-all duration-300"
+                              [style.width.%]="getCompletionPercentage()"
+                              [attr.aria-valuenow]="getCompletionPercentage()" [attr.aria-valuemin]="0"
+                              [attr.aria-valuemax]="100">
+                        </div>
+                  </div>
+                  <p class="text-xs text-gray-500 mt-1">تم ملء {{ getFilledFieldsCount() }} من {{ getTotalFieldsCount()
+                        }} حقول</p>
+            </div>
+
+            <!-- Smart Suggestions Panel -->
+            <div *ngIf="smartSuggestions.validationHints.length > 0 || smartSuggestions.suggestedConditions.length > 0"
+                  class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-lg p-4">
+                  <h4 class="font-semibold text-amber-800 mb-3 flex items-center">
+                        <i class="fas fa-lightbulb mr-2"></i>
+                        <span data-translate="smart_suggestions">اقتراحات ذكية</span>
+                  </h4>
+
+                  <!-- Validation Hints -->
+                  <ul class="space-y-2 mb-4" *ngIf="smartSuggestions.validationHints.length > 0">
+                        <li *ngFor="let hint of smartSuggestions.validationHints"
+                              class="flex items-start text-sm text-amber-700">
+                              <i class="fas fa-check-circle text-amber-500 mr-2 mt-0.5 flex-shrink-0"></i>
+                              <span>{{ hint }}</span>
+                        </li>
+                  </ul>
+
+                  <!-- Suggested Conditions -->
+                  <div *ngIf="smartSuggestions.suggestedConditions.length > 0" class="mt-4">
+                        <p class="text-sm font-medium text-amber-800 mb-2">شروط مقترحة:</p>
+                        <div class="flex flex-wrap gap-2">
+                              <button type="button" *ngFor="let suggested of smartSuggestions.suggestedConditions"
+                                    class="px-3 py-1 bg-amber-200 text-amber-800 rounded-full text-xs hover:bg-amber-300 transition-colors"
+                                    (click)="onConditionNameChange(suggested.name, carData.conditions.length); addConditionBlock()">
+                                    <i [class]="getConditionTypeIcon(suggested.name)" class="mr-1"></i>
+                                    {{ getConditionTypeDescription(suggested.name) }}
+                              </button>
+                        </div>
+                  </div>
+            </div>
+
+            <!-- Enhanced Condition Blocks -->
+            <div class="space-y-6">
+                  <div *ngFor="let condition of carData.conditions; let i = index"
+                        class="condition-block bg-white rounded-lg shadow-sm border border-gray-200 p-6 relative">
+
+                        <!-- Condition Header -->
+                        <div class="flex items-center justify-between mb-4">
+                              <div class="flex items-center">
+                                    <div
+                                          class="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-full text-blue-600 font-semibold text-sm mr-3">
+                                          {{ i + 1 }}
+                                    </div>
+                                    <h4 class="text-lg font-semibold text-gray-800">
+                                          حالة رقم {{ i + 1 }}
+                                    </h4>
+                                    <div class="ml-3 px-2 py-1 rounded-full text-xs font-medium" [ngClass]="{
+                   'bg-red-100 text-red-600': getConditionSeverity(condition.name) === 'high',
+                   'bg-yellow-100 text-yellow-600': getConditionSeverity(condition.name) === 'medium',
+                   'bg-green-100 text-green-600': getConditionSeverity(condition.name) === 'low'
+                 }">
+                                          <i [class]="getSeverityIcon(getConditionSeverity(condition.name))"
+                                                class="mr-1"></i>
+                                          {{ getSeverityText(getConditionSeverity(condition.name)) }}
+                                    </div>
+                              </div>
+
+                              <!-- Remove Button -->
+                              <button type="button"
+                                    class="text-red-500 hover:text-red-700 hover:bg-red-50 p-2 rounded-full transition-colors"
+                                    (click)="removeConditionBlock(i)" [disabled]="carData.conditions.length <= 1"
+                                    title="حذف هذه الحالة">
+                                    <i class="fas fa-trash-alt"></i>
+                              </button>
+                        </div>
+
+                        <!-- Condition Type and Part Row -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                              <!-- Enhanced Condition Type -->
+                              <div class="space-y-2">
+                                    <label [for]="'condition-name-' + condition.id"
+                                          class="form-label font-semibold text-gray-700 flex items-center">
+                                          <i [class]="getConditionTypeIcon(condition.name)" class="mr-2"></i>
+                                          <span data-translate="condition_type">نوع الحالة</span>
+                                          <span class="text-red-500 mr-1">*</span>
+                                    </label>
+                                    <select
+                                          class="form-select transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 part4-field"
+                                          [id]="'condition-name-' + condition.id" [name]="'conditions[' + i + '][name]'"
+                                          [ngModel]="condition.name" (ngModelChange)="onConditionNameChange($event, i)"
+                                          (focus)="onFieldFocus('condition_name_' + i)" (blur)="onFieldBlur()"
+                                          [attr.aria-describedby]="condition.name ? 'condition-description-' + condition.id : null">
+                                          <option value="" data-translate="choose_option">اختر...</option>
+                                          <option *ngFor="let type of conditionTypes" [value]="type.value"
+                                                [title]="type.description">
+                                                {{ type.label }}
+                                          </option>
+                                    </select>
+
+                                    <!-- Condition Description -->
+                                    <div *ngIf="condition.name"
+                                          class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded text-sm">
+                                          <p class="text-blue-700 font-medium mb-2">
+                                                <i [class]="getConditionTypeIcon(condition.name)" class="mr-1"></i>
+                                                {{ getConditionTypeDescription(condition.name) }}
+                                          </p>
+                                          <p class="text-blue-600 text-xs">مشاكل شائعة:</p>
+                                          <ul class="text-blue-600 text-xs mt-1 space-y-1">
+                                                <li *ngFor="let issue of getCommonIssues(condition.name)"
+                                                      class="flex items-center">
+                                                      <i class="fas fa-circle text-blue-400 mr-2"
+                                                            style="font-size: 4px;"></i>
+                                                      {{ issue }}
+                                                </li>
+                                          </ul>
+                                    </div>
+
+                                    <div class="text-red-500 text-sm mt-1"
+                                          *ngIf="getFieldError('conditions[' + i + '].name')">
+                                          <i class="fas fa-exclamation-circle mr-1"></i>
+                                          {{ getFieldError('conditions[' + i + '].name') }}
+                                    </div>
+                              </div>
+
+                              <!-- Enhanced Condition Part -->
+                              <div class="space-y-2">
+                                    <label [for]="'condition-part-' + condition.id"
+                                          class="form-label font-semibold text-gray-700 flex items-center">
+                                          <i class="fas fa-cog mr-2 text-gray-500"></i>
+                                          <span data-translate="condition_part">اسم القطعة</span>
+                                          <span class="text-red-500 mr-1">*</span>
+                                    </label>
+                                    <input type="text"
+                                          class="form-control transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 part4-field"
+                                          [id]="'condition-part-' + condition.id" [name]="'conditions[' + i + '][part]'"
+                                          [ngModel]="condition.part" (ngModelChange)="onConditionPartChange($event, i)"
+                                          (focus)="onFieldFocus('condition_part_' + i)" (blur)="onFieldBlur()"
+                                          placeholder="مثال: المحرك، الفرامل، المقاعد...">
+
+                                    <div class="text-red-500 text-sm mt-1"
+                                          *ngIf="getFieldError('conditions[' + i + '].part')">
+                                          <i class="fas fa-exclamation-circle mr-1"></i>
+                                          {{ getFieldError('conditions[' + i + '].part') }}
+                                    </div>
+                              </div>
+                        </div>
+
+                        <!-- Enhanced Description -->
+                        <div class="mb-6">
+                              <label [for]="'condition-description-' + condition.id"
+                                    class="form-label font-semibold text-gray-700 flex items-center">
+                                    <i class="fas fa-align-left mr-2 text-blue-500"></i>
+                                    <span data-translate="condition_description">الوصف التفصيلي</span>
+                                    <span class="text-xs text-gray-500 mr-2">({{ condition.description?.length || 0 }}
+                                          حرف)</span>
+                              </label>
+                              <textarea
+                                    class="form-control transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 part4-field resize-none"
+                                    [id]="'condition-description-' + condition.id"
+                                    [name]="'conditions[' + i + '][description]'" [ngModel]="condition.description"
+                                    (ngModelChange)="onConditionDescriptionChange($event, i)"
+                                    (focus)="onFieldFocus('condition_description_' + i)" (blur)="onFieldBlur()" rows="4"
+                                    placeholder="اكتب وصفاً تفصيلياً للحالة، المشاكل المكتشفة، والتوصيات..."></textarea>
+
+                              <!-- Character counter and validation hint -->
+                              <div class="flex items-center justify-between mt-1">
+                                    <div class="text-xs text-gray-500">
+                                          <span
+                                                [class.text-red-500]="condition.description && condition.description.length < 10">
+                                                الحد الأدنى: 10 أحرف
+                                          </span>
+                                    </div>
+                                    <div class="text-xs text-gray-500">
+                                          {{ condition.description?.length || 0 }}/500
+                                    </div>
+                              </div>
+
+                              <div class="text-red-500 text-sm mt-1"
+                                    *ngIf="getFieldError('conditions[' + i + '].description')">
+                                    <i class="fas fa-exclamation-circle mr-1"></i>
+                                    {{ getFieldError('conditions[' + i + '].description') }}
+                              </div>
+                        </div>
+
+                        <!-- Enhanced Image Upload Section -->
+                        <div class="mb-4">
+                              <label [for]="'condition-image-' + condition.id"
+                                    class="form-label font-semibold text-gray-700 flex items-center">
+                                    <i class="fas fa-camera mr-2 text-green-500"></i>
+                                    <span data-translate="condition_image">صورة الحالة</span>
+                                    <span *ngIf="getConditionSeverity(condition.name) === 'high'"
+                                          class="text-red-500 mr-1">*</span>
+                                    <span class="text-xs text-gray-500 mr-2">(اختياري)</span>
+                              </label>
+
+                              <!-- Image Preview and Upload Area -->
+                              <div class="space-y-4">
+                                    <!-- Image Preview -->
+                                    <div *ngIf="condition.imagePreview" class="relative inline-block">
+                                          <img [src]="condition.imagePreview" alt="معاينة صورة الحالة"
+                                                class="w-32 h-32 object-cover rounded-lg border border-gray-300 shadow-sm">
+                                          <button type="button"
+                                                class="absolute top-2 left-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600 transition-colors"
+                                                (click)="removeImage(i)" title="حذف الصورة">
+                                                <i class="fas fa-times text-xs"></i>
+                                          </button>
+                                    </div>
+
+                                    <!-- Upload Button -->
+                                    <div class="flex items-center space-x-4">
+                                          <label [for]="'condition-image-' + condition.id"
+                                                class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 cursor-pointer shadow-sm">
+                                                <div *ngIf="imageUploadStates[i]?.isUploading"
+                                                      class="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2">
+                                                </div>
+                                                <i *ngIf="!imageUploadStates[i]?.isUploading"
+                                                      class="fas fa-upload mr-2"></i>
+                                                <span>{{ imageUploadStates[i]?.isUploading ? 'جاري الرفع...' : 'اختر
+                                                      صورة' }}</span>
+                                          </label>
+
+                                          <input type="file" [id]="'condition-image-' + condition.id" class="hidden"
+                                                accept="image/*" (change)="onImageSelected($event, i)">
+
+                                          <div class="text-xs text-gray-500">
+                                                <i class="fas fa-info-circle mr-1"></i>
+                                                JPG, PNG, GIF (الحد الأقصى 5 ميجابايت)
+                                          </div>
+                                    </div>
+                              </div>
+
+                              <div class="text-red-500 text-sm mt-1"
+                                    *ngIf="getFieldError('conditions[' + i + '].image')">
+                                    <i class="fas fa-exclamation-circle mr-1"></i>
+                                    {{ getFieldError('conditions[' + i + '].image') }}
+                              </div>
+                        </div>
+
+                        <!-- High severity condition warning -->
+                        <div *ngIf="getConditionSeverity(condition.name) === 'high'"
+                              class="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                              <div class="flex items-start">
+                                    <i class="fas fa-exclamation-triangle text-red-500 mr-2 mt-0.5"></i>
+                                    <div>
+                                          <h5 class="text-red-800 font-semibold text-sm">تنبيه: حالة عالية الخطورة</h5>
+                                          <p class="text-red-700 text-xs mt-1">هذه الحالة تتطلب عناية خاصة وفحص شامل.
+                                                يُنصح بإضافة صورة توضيحية.</p>
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+
+            <!-- Add More Conditions Button -->
+            <div class="flex justify-center">
+                  <button type="button"
+                        class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white rounded-lg hover:from-green-600 hover:to-teal-700 transition-all duration-200 font-medium shadow-sm"
+                        (click)="addConditionBlock()">
+                        <i class="fas fa-plus-circle mr-2"></i>
+                        إضافة حالة جديدة
+                  </button>
+            </div>
+
+            <!-- Smart Condition Type Suggestions -->
+            <div *ngIf="getSmartConditionTypeSuggestions().length > 0"
+                  class="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-lg p-4">
+                  <h4 class="font-semibold text-purple-800 mb-3 flex items-center">
+                        <i class="fas fa-magic mr-2"></i>
+                        <span>اقتراحات ذكية لنوع الحالة</span>
+                  </h4>
+                  <p class="text-sm text-purple-700 mb-3">أنواع حالات لم يتم إضافتها بعد:</p>
+                  <div class="flex flex-wrap gap-2">
+                        <button type="button" *ngFor="let suggestion of getSmartConditionTypeSuggestions()"
+                              class="px-3 py-2 bg-purple-200 text-purple-800 rounded-lg text-sm hover:bg-purple-300 transition-colors"
+                              (click)="onConditionNameChange(suggestion.value, carData.conditions.length); addConditionBlock()">
+                              <i [class]="suggestion.icon" class="mr-2"></i>
+                              {{ suggestion.label }}
+                        </button>
+                  </div>
+            </div>
+
+            <!-- Common Issues Panel -->
+            <div *ngIf="smartSuggestions.commonIssues.length > 0"
+                  class="bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200 rounded-lg p-4">
+                  <h4 class="font-semibold text-blue-800 mb-3 flex items-center">
+                        <i class="fas fa-tools mr-2"></i>
+                        <span>نصائح للفحص</span>
+                  </h4>
+                  <ul class="space-y-2">
+                        <li *ngFor="let issue of smartSuggestions.commonIssues"
+                              class="flex items-start text-sm text-blue-700">
+                              <i class="fas fa-check-circle text-blue-500 mr-2 mt-0.5 flex-shrink-0"></i>
+                              <span>{{ issue }}</span>
+                        </li>
+                  </ul>
+            </div>
+
+            <!-- Severity Distribution Overview -->
+            <div *ngIf="getTotalFieldsCount() > 0" class="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+                  <h4 class="font-semibold text-gray-800 mb-3 flex items-center">
+                        <i class="fas fa-chart-pie mr-2"></i>
+                        <span>توزيع مستويات الخطورة</span>
+                  </h4>
+                  <div class="grid grid-cols-3 gap-4">
+                        <div class="text-center">
+                              <div class="text-2xl font-bold text-green-600">{{
+                                    smartSuggestions.severityDistribution.low }}</div>
+                              <div class="text-sm text-gray-600">منخفضة</div>
+                        </div>
+                        <div class="text-center">
+                              <div class="text-2xl font-bold text-yellow-600">{{
+                                    smartSuggestions.severityDistribution.medium }}</div>
+                              <div class="text-sm text-gray-600">متوسطة</div>
+                        </div>
+                        <div class="text-center">
+                              <div class="text-2xl font-bold text-red-600">{{ smartSuggestions.severityDistribution.high
+                                    }}</div>
+                              <div class="text-sm text-gray-600">عالية</div>
+                        </div>
+                  </div>
+            </div>
+
+            <!-- Enhanced Real-time Validation Summary -->
+            <div class="mt-6 p-4 bg-gradient-to-r from-red-50 to-orange-50 rounded-lg border border-red-200"
+                  *ngIf="hasValidationErrors()" role="alert" aria-live="polite">
+                  <h4 class="font-semibold text-red-800 mb-3 flex items-center">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>
+                        <span data-translate="validation_summary">ملخص التحقق</span>
+                        <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full ml-2">
+                              {{ getValidationErrors().length }} خطأ
+                        </span>
+                  </h4>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div *ngFor="let error of getValidationErrors(); let i = index"
+                              class="flex items-start p-3 bg-white rounded border border-red-100 shadow-sm">
+                              <i class="fas fa-times-circle text-red-500 mr-2 mt-0.5 flex-shrink-0"></i>
+                              <span class="text-red-700 text-sm">{{ error }}</span>
+                        </div>
+                  </div>
+            </div>
+
+            <!-- Auto-save indicator -->
+            <div class="flex items-center justify-center p-3 bg-green-50 border border-green-200 rounded-lg"
+                  *ngIf="!hasValidationErrors() && isFormValid()">
+                  <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                  <span class="text-green-700 text-sm">تم حفظ البيانات تلقائياً</span>
+            </div>
+
+            <!-- Enhanced Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200">
+                  <button type="button"
+                        class="flex-1 px-6 py-3 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 rounded-lg hover:from-gray-200 hover:to-gray-300 transition-all duration-200 font-medium disabled:opacity-50"
+                        (click)="resetForm()" [disabled]="isFieldFocused">
+                        <i class="fas fa-undo mr-2"></i>
+                        <span data-translate="reset_form">إعادة تعيين</span>
+                  </button>
+
+                  <button type="button"
+                        class="flex-1 px-6 py-3 bg-gradient-to-r from-green-500 to-blue-600 text-white rounded-lg hover:from-green-600 hover:to-blue-700 transition-all duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden"
+                        (click)="saveAndContinue()" [disabled]="!isFormValid()">
+                        <div class="flex items-center justify-center">
+                              <i class="fas fa-save mr-2"></i>
+                              <span data-translate="save_continue">
+                                    {{ !isFormValid() ? 'أكمل البيانات' : 'حفظ والمتابعة' }}
+                              </span>
+                        </div>
+                        <!-- Progress indicator when form is valid -->
+                        <div *ngIf="isFormValid()"
+                              class="absolute bottom-0 left-0 h-1 bg-white bg-opacity-30 transition-all duration-1000"
+                              [style.width.%]="getCompletionPercentage()">
+                        </div>
+                  </button>
+            </div>
+
+            <!-- Keyboard shortcuts help -->
+            <div class="mt-6 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                  <h5 class="text-sm font-medium text-gray-700 mb-3">
+                        <i class="fas fa-keyboard mr-2"></i>
+                        اختصارات لوحة المفاتيح
+                  </h5>
+                  <div class="grid grid-cols-2 gap-3 text-xs text-gray-600">
+                        <div class="flex items-center">
+                              <kbd class="px-2 py-1 bg-white rounded border shadow-sm mr-2">Tab</kbd>
+                              للانتقال للحقل التالي
+                        </div>
+                        <div class="flex items-center">
+                              <kbd class="px-2 py-1 bg-white rounded border shadow-sm mr-2">Enter</kbd>
+                              للحقل التالي
+                        </div>
+                        <div class="flex items-center">
+                              <kbd class="px-2 py-1 bg-white rounded border shadow-sm mr-2">Ctrl+Enter</kbd>
+                              إضافة حالة جديدة
+                        </div>
+                        <div class="flex items-center">
+                              <kbd class="px-2 py-1 bg-white rounded border shadow-sm mr-2">Delete</kbd>
+                              حذف الحالة المحددة
+                        </div>
+                  </div>
+            </div>
+      </div>
+</div>
+
+<!-- Accessibility announcements -->
+<div aria-live="polite" aria-atomic="true" class="sr-only">
+      {{ getAccessibilityAnnouncement() }}
+</div>

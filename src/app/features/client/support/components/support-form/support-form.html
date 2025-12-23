@@ -1,0 +1,139 @@
+<form [formGroup]="supportForm" (ngSubmit)="onSubmit()" class="max-w-md mx-auto md:min-w-[550px] p-8 rounded-xl shadow-xl flex flex-col gap-6">
+
+  <!-- Section Header -->
+  <div class="text-center">
+    <h2 class="text-2xl font-bold pb-10 text-orange-500">{{ 'SUPPORT_FORM_TITLE' | translate }}</h2>
+  </div>
+
+  <!-- Email Field -->
+  <div class="relative z-0 w-full mb-5 group">
+    <input
+      type="email"
+      name="floating_email"
+      id="floating_email"
+      formControlName="email"
+      class="block py-2.5 pl-4 pr-0 w-full text-sm text-black border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer"
+      placeholder=" "
+      required
+    />
+    <label for="floating_email"
+      class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+      'EMAIL_ADDRESS' | translate }} *</label>
+    <div *ngIf="isFieldInvalid('email')" class="text-red-500 text-xs mt-1">
+      {{ getFieldError('email') }}
+    </div>
+  </div>
+
+  <!-- Mobile Number Field -->
+  <div class="relative z-0 w-full mb-5 group">
+    <input
+      type="tel"
+      name="floating_mobile"
+      id="floating_mobile"
+      formControlName="mobile_number"
+      class="block py-2.5 pl-4 pr-0 w-full text-sm text-black border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer"
+      placeholder=" "
+      required
+    />
+    <label for="floating_mobile"
+      class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+      'PHONE_NUMBER' | translate }} *</label>
+    <div *ngIf="isFieldInvalid('mobile_number')" class="text-red-500 text-xs mt-1">
+      {{ getFieldError('mobile_number') }}
+    </div>
+  </div>
+
+  <!-- Subject Field -->
+  <div class="relative z-0 w-full mb-5 group">
+    <input
+      type="text"
+      name="floating_subject"
+      id="floating_subject"
+      formControlName="subject"
+      class="block py-2.5 pl-4 pr-0 w-full text-sm text-black border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer"
+      placeholder=" "
+      required
+    />
+    <label for="floating_subject"
+      class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+      'SUBJECT' | translate }} *</label>
+    <div *ngIf="isFieldInvalid('subject')" class="text-red-500 text-xs mt-1">
+      {{ getFieldError('subject') }}
+    </div>
+  </div>
+
+  <!-- Sub Type Field -->
+  <div class="relative z-0 w-full mb-5 group">
+    <select
+      name="floating_sub_type"
+      id="floating_sub_type"
+      formControlName="sub_type"
+      class="block py-2.5 pl-4 pr-0 w-full text-sm text-black border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer"
+      required
+    >
+      <option value="" disabled>{{ 'SELECT_SUB_TYPE' | translate }}</option>
+      <option value="technical">{{ 'TECHNICAL_SUPPORT' | translate }}</option>
+      <option value="billing">{{ 'BILLING' | translate }}</option>
+      <option value="general">{{ 'GENERAL_INQUIRY' | translate }}</option>
+      <option value="feedback">{{ 'FEEDBACK' | translate }}</option>
+    </select>
+    <label for="floating_sub_type"
+      class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+      'SUB_TYPE' | translate }} *</label>
+    <div *ngIf="isFieldInvalid('sub_type')" class="text-red-500 text-xs mt-1">
+      {{ getFieldError('sub_type') }}
+    </div>
+  </div>
+
+  <!-- Description Field -->
+  <div class="relative z-0 w-full mb-5 group">
+    <textarea
+      name="floating_description"
+      id="floating_description"
+      formControlName="description"
+      class="block py-2.5 pl-4 pr-0 w-full text-sm text-black border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer resize-none"
+      placeholder=" "
+      rows="4"
+      required
+    ></textarea>
+    <label for="floating_description"
+      class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+      'DESCRIPTION' | translate }} *</label>
+    <div *ngIf="isFieldInvalid('description')" class="text-red-500 text-xs mt-1">
+      {{ getFieldError('description') }}
+    </div>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="text-center pt-4">
+    <button
+      type="submit"
+      class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+      [disabled]="isSubmitting"
+    >
+      <span *ngIf="isSubmitting" class="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></span>
+      {{ isSubmitting ? ('SUBMITTING' | translate) : ('SUBMIT' | translate) }}
+    </button>
+  </div>
+
+  <!-- Submit Error -->
+  <div *ngIf="submitError" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative text-center">
+    <span class="block">{{ submitError }}</span>
+  </div>
+
+</form>
+
+<!-- Login Required Popup -->
+<app-login-required-popup *ngIf="showLoginPopup" (close)="closeLoginPopup()"></app-login-required-popup>
+
+<!-- Success Popup -->
+<div *ngIf="showSuccessPopup" class="success-popup-overlay" (click)="closeSuccessPopup()">
+  <div class="success-popup" (click)="$event.stopPropagation()">
+    <div class="success-icon">✓</div>
+    <h3 class="success-title">{{ 'REQUEST_SUBMITTED_SUCCESSFULLY' | translate }}</h3>
+    <p class="success-message">{{ 'REQUEST_SUBMITTED_MESSAGE' | translate }}</p>
+    <button class="success-close-btn" (click)="closeSuccessPopup()">
+      {{ 'OK' | translate }}
+    </button>
+  </div>
+</div>

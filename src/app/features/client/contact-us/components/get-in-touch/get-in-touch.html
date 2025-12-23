@@ -1,0 +1,131 @@
+<section class="bg-neutral-0 py-20" (animateOnScroll)="onAnimate()" [@scrollFadeUp]="animationState">
+  <div class="container flex flex-col items-center">
+
+    <!-- Title -->
+    <div class="w-full max-w-[629px] space-y-10 text-center">
+      <h2 class="font-inter font-semibold mx-auto w-fit
+        text-[clamp(1.75rem,1.5rem+1vw,2.25rem)]
+        leading-[clamp(2.2rem,2rem+1vw,2.8rem)]">
+        {{ 'GET_IN_TOUCH' | translate }}
+      </h2>
+
+      <p class="text-foundation-gray-normal-hover
+        text-[clamp(1rem,0.9rem+0.5vw,1.375rem)]
+        leading-[1.8]">
+        {{ 'GET_IN_TOUCH_DESC' | translate }}
+      </p>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="mt-14 text-center">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-foundation-brown-normal mx-auto"></div>
+      <p class="mt-4 text-foundation-gray-normal-hover">{{ 'LOADING_CONTACT_INFO' | translate }}</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error && !loading" class="mt-14 text-center">
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+        <p class="font-semibold">{{ 'ERROR' | translate }}</p>
+        <p>{{ error }}</p>
+        <button (click)="loadContactInfo()"
+          class="mt-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+          {{ 'TRY_AGAIN' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Contact Items -->
+    <div *ngIf="contactInfo && !loading && !error" class="mt-14 space-y-4 sm:space-y-3 w-full max-w-[629px]">
+
+      <!-- Hotline Number 
+      <a [href]="'tel:' + formatPhoneForTel(contactInfo.hotline_number)"
+        class="contact-card shadow-black-light flex flex-col items-center gap-5 rounded-xl px-8 py-4 text-center sm:flex-row sm:text-start">
+        <div
+          class="contact-icon shadow-black-light flex h-[87px] w-[87px] items-center justify-center rounded-full bg-neutral-200">
+          <i class="fa-solid fa-phone fa-2x text-foundation-brown-normal"></i>
+        </div>
+        <div>
+          <h3 class="contact-title">{{ 'HOTLINE_NUMBER' | translate }}</h3>
+          <h4 class="contact-value">
+            {{ contactInfo.hotline_number }}
+          </h4>
+        </div>
+      </a>-->
+
+      <!-- Branch Number -->
+      <a [href]="'tel:' + formatPhoneForTel(contactInfo.branch_number)"
+        class="contact-card shadow-black-light flex flex-col items-center gap-5 rounded-xl px-8 py-4 text-center sm:flex-row sm:text-start">
+        <div
+          class="contact-icon shadow-black-light flex h-[87px] w-[87px] items-center justify-center rounded-full bg-neutral-200">
+          <i class="fa-solid fa-building fa-2x text-foundation-brown-normal"></i>
+        </div>
+        <div>
+          <h3 class="contact-title">{{ 'BRANCH_NUMBER' | translate }}</h3>
+          <h4 class="contact-value">
+            {{ contactInfo.branch_number }}
+          </h4>
+        </div>
+      </a>
+
+      <!-- WhatsApp (only show if not null) -->
+      <a *ngIf="contactInfo.whatsapp_number"
+        [href]="'https://wa.me/' + formatPhoneForWhatsApp(contactInfo.whatsapp_number!)" target="_blank"
+        class="contact-card shadow-black-light flex flex-col items-center gap-5 rounded-xl px-8 py-4 text-center sm:flex-row sm:text-start">
+        <div
+          class="contact-icon shadow-black-light flex h-[87px] w-[87px] items-center justify-center rounded-full bg-neutral-200">
+          <i class="fa-brands fa-whatsapp fa-2x text-green-600"></i>
+        </div>
+        <div>
+          <h3 class="contact-title">{{ 'WHATSAPP' | translate }}</h3>
+          <h4 class="contact-value">
+            {{ contactInfo.whatsapp_number }}
+          </h4>
+        </div>
+      </a>
+
+      <!-- Facebook -->
+      <a [href]="contactInfo.facebook_link" target="_blank"
+        class="contact-card shadow-black-light flex flex-col items-center gap-5 rounded-xl px-8 py-4 text-center sm:flex-row sm:text-start">
+        <div
+          class="contact-icon shadow-black-light flex h-[87px] w-[87px] items-center justify-center rounded-full bg-neutral-200">
+          <i class="fa-brands fa-facebook fa-2x text-blue-600"></i>
+        </div>
+        <div>
+          <h3 class="contact-title">{{ 'FACEBOOK' | translate }}</h3>
+          <h4 class="contact-value">
+          </h4>
+        </div>
+      </a>
+
+      <!-- Instagram -->
+      <a [href]="contactInfo.instagram_link" target="_blank"
+        class="contact-card shadow-black-light flex flex-col items-center gap-5 rounded-xl px-8 py-4 text-center sm:flex-row sm:text-start">
+        <div
+          class="contact-icon shadow-black-light flex h-[87px] w-[87px] items-center justify-center rounded-full bg-neutral-200">
+          <i class="fa-brands fa-instagram fa-2x text-pink-500"></i>
+        </div>
+        <div>
+          <h3 class="contact-title">{{ 'INSTAGRAM' | translate }}</h3>
+          <h4 class="contact-value">
+          </h4>
+        </div>
+      </a>
+
+      <!-- X (only show if not null) 
+      <a *ngIf="contactInfo.x_link" [href]="contactInfo.x_link!" target="_blank"
+        class="contact-card shadow-black-light flex flex-col items-center gap-5 rounded-xl px-8 py-4 text-center sm:flex-row sm:text-start">
+        <div
+          class="contact-icon shadow-black-light flex h-[87px] w-[87px] items-center justify-center rounded-full bg-neutral-200">
+          <i class="fa-brands fa-x-twitter fa-2x text-black"></i>
+        </div>
+        <div>
+          <h3 class="contact-title">{{ 'X' | translate }}</h3>
+          <h4 class="contact-value">
+           </h4>
+        </div>
+      </a>-->
+
+    </div>
+
+  </div>
+</section>

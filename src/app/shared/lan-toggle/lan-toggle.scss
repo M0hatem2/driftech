@@ -1,0 +1,64 @@
+/* Container */
+.toggle-button-cover {
+  width: 120px;
+  height: 40px;
+  position: relative;
+}
+
+/* Button */
+.button.r {
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+/* Layer (Background) */
+#button-3 .layer {
+  transition: background-color 0.3s ease;
+}
+
+/* Knob */
+#button-3 .knobs {
+  transition: all 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+  position: absolute;
+  width: 50%;
+  text-align: center;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* LTR Checked State */
+#button-3 .checkbox:checked~.knobs {
+  transform: translate(calc(-50% + 45px), -50%);
+  background-color: #f44336;
+}
+
+/* RTL Checked State */
+body.rtl #button-3 .checkbox:checked~.knobs {
+  transform: translate(calc(-50% - 45px), -50%);
+  background-color: #f44336;
+}
+
+/* Checked Layer */
+#button-3 .checkbox:checked~.layer {
+  background-color: #fcebeb;
+}
+
+/* Hover Effect */
+#button-3:hover .knobs {
+  scale: 1.05;
+}
+
+/* RTL Support */
+body.rtl {
+  font-family: 'Cairo', 'Inter', sans-serif;
+}
+
+/* Arabic font import */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap');

@@ -1,0 +1,197 @@
+<section class="pt-[156px] pb-20 bg-gradient-to-b from-gray-50 to-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+
+      <!-- Profile Header Card -->
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 sm:p-8 mb-8">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          <!-- User Info -->
+          <div class="flex items-center gap-5">
+            <div
+              class="w-16 h-16 flex items-center justify-center border-2 border-foundation-orange-normal rounded-full bg-gradient-to-br from-foundation-orange-normal/10 to-foundation-orange-normal/5">
+              <i class="fas fa-user text-foundation-orange-normal text-2xl"></i>
+            </div>
+            <div class="space-y-2">
+              <h4 class="font-poppins font-semibold text-black text-xl capitalize tracking-wide">{{ user?.name ||
+                ('LOADING' | translate) }}</h4>
+              <p class="font-poppins text-gray-500 text-base">{{ user?.email || ('LOADING' | translate) }}</p>
+              <div class="flex items-center gap-2 text-sm text-gray-400">
+                <i class="fas fa-circle text-green-400 text-xs"></i>
+                <span>{{ 'ACTIVE' | translate }}</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- Form Card -->
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+
+        <!-- Form Sections Container -->
+        <div class="p-6 sm:p-8 space-y-12">
+
+          <!-- Personal Information Section -->
+          <div class="space-y-6">
+            <div class="border-b border-gray-100 pb-4">
+              <h5 class="font-poppins text-gray-800 text-lg font-semibold flex items-center gap-3">
+                <div class="w-8 h-8 bg-foundation-orange-normal/10 rounded-lg flex items-center justify-center">
+                  <i class="fas fa-user text-foundation-orange-normal text-sm"></i>
+                </div>
+                {{ 'PERSONAL_INFORMATION' | translate }}
+              </h5>
+              <p class="text-gray-500 text-sm mt-2 ml-11">{{ 'UPDATE_PERSONAL_DETAILS' | translate }}</p>
+            </div>
+
+            <form [formGroup]="profileForm">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Name -->
+                <div class="space-y-2">
+                  <label for="name" class="block text-sm font-medium text-gray-700">{{ 'FULL_NAME' | translate }} <span
+                      class="text-red-500">*</span></label>
+                  <div class="relative">
+                    <input id="name" type="text" formControlName="name" [disabled]="true" class="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-700 bg-gray-50
+                             transition-all duration-200 placeholder-gray-400">
+                  </div>
+                </div>
+
+                <!-- Date of Birth -->
+                <div class="space-y-2">
+                  <label for="date_of_birth" class="block text-sm font-medium text-gray-700">{{ 'DATE_OF_BIRTH' |
+                    translate }} <span class="text-red-500">*</span></label>
+                  <div class="relative">
+                    <input id="date_of_birth" type="date" formControlName="date_of_birth"
+                      value="{{user?.date_of_birth}}" [disabled]="true" class="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-700 bg-gray-50
+                             transition-all duration-200 placeholder-gray-400">
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+                <!-- Gender -->
+                <div class="space-y-2">
+                  <label for="gender" class="block text-sm font-medium text-gray-700">{{ 'GENDER' | translate }} <span
+                      class="text-red-500">*</span></label>
+                  <div class="relative">
+                    <select id="gender" formControlName="gender" [disabled]="true" class="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-700 bg-gray-50
+                             transition-all duration-200 placeholder-gray-400">
+                      <option value="">{{ 'SELECT_GENDER' | translate }}</option>
+                      <option value="male">{{ 'MALE' | translate }}</option>
+                      <option value="female">{{ 'FEMALE' | translate }}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Contact Information Section -->
+              <div class="space-y-6 mt-12">
+                <div class="border-b border-gray-100 pb-4">
+                  <h5 class="font-poppins text-gray-800 text-lg font-semibold flex items-center gap-3">
+                    <div class="w-8 h-8 bg-foundation-orange-normal/10 rounded-lg flex items-center justify-center">
+                      <i class="fas fa-phone text-foundation-orange-normal text-sm"></i>
+                    </div>
+                    {{ 'CONTACT_INFORMATION' | translate }}
+                  </h5>
+                  <p class="text-gray-500 text-sm mt-2 ml-11">{{ 'HOW_WE_CAN_REACH_YOU' | translate }}</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  <!-- Email -->
+                  <div class="space-y-2">
+                    <label for="email" class="block text-sm font-medium text-gray-700">{{ 'EMAIL_ADDRESS' | translate }}
+                      <span class="text-red-500">*</span></label>
+                    <div class="relative">
+                      <input id="email" type="email" formControlName="email" value="{{user?.email}}" [disabled]="true"
+                        class="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-700 bg-gray-50
+                               transition-all duration-200 placeholder-gray-400">
+                    </div>
+                  </div>
+
+                  <!-- Phone Number -->
+                  <div class="space-y-2">
+                    <div class="flex items-center justify-between">
+                      <label for="phone" class="block text-sm font-medium text-gray-700">{{ 'PHONE_NUMBER' | translate
+                        }}
+                        <span class="text-red-500">*</span></label>
+                      <button type="button" (click)="openEditPhoneModal()"
+                        class="text-sm text-foundation-orange-normal hover:text-foundation-orange-dark transition-colors duration-200 flex items-center gap-1">
+                        <i class="fas fa-edit text-xs"></i>
+                        {{ 'EDIT' | translate }}
+                      </button>
+                    </div>
+                    <div class="relative">
+                      <input id="phone" type="tel" formControlName="phone" value="{{user?.phone}}" [disabled]="true"
+                        class="w-full px-4 py-3 border border-gray-200 rounded-xl text-gray-700 bg-gray-50
+                               transition-all duration-200 placeholder-gray-400">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Phone Modal -->
+  <div *ngIf="showEditPhoneModal"
+    class="fixed inset-0 bg-white/10 backdrop-blur-md flex items-center justify-center z-50">
+    <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8 max-w-md w-full mx-4">
+      <div class="text-center mb-6">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ 'EDIT_PHONE_NUMBER' | translate }}</h3>
+        <p class="text-gray-500 text-sm">{{ 'UPDATE_YOUR_PHONE_NUMBER' | translate }}</p>
+      </div>
+
+      <form [formGroup]="phoneEditForm" (ngSubmit)="updatePhone()" class="space-y-4">
+        <div>
+          <label for="new_phone" class="block text-sm font-medium text-gray-700 mb-2">
+            {{ 'PHONE_NUMBER' | translate }} <span class="text-red-500">*</span>
+          </label>
+          <input id="new_phone" type="tel" formControlName="new_phone"
+            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-foundation-orange-normal focus:border-foundation-orange-normal transition-all duration-200"
+            placeholder="{{ 'ENTER_PHONE_NUMBER' | translate }}">
+          <div *ngIf="phoneEditForm.get('new_phone')?.invalid && phoneEditForm.get('new_phone')?.touched"
+            class="text-red-500 text-sm mt-1">
+            {{ 'PHONE_NUMBER' | translate }} is required and must be valid
+          </div>
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+            {{ 'PASSWORD' | translate }} <span class="text-red-500">*</span>
+          </label>
+          <input id="password" type="password" formControlName="password"
+            class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-foundation-orange-normal focus:border-foundation-orange-normal transition-all duration-200"
+            placeholder="{{ 'ENTER_YOUR_PASSWORD' | translate }}">
+          <div *ngIf="phoneEditForm.get('password')?.invalid && phoneEditForm.get('password')?.touched"
+            class="text-red-500 text-sm mt-1">
+            {{ 'PASSWORD' | translate }} is required
+          </div>
+        </div>
+
+        <!-- Error Display -->
+        <div *ngIf="phoneUpdateError"
+          class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg flex items-center gap-3">
+          <i class="fas fa-exclamation-triangle text-red-500"></i>
+          <span class="text-sm">{{ phoneUpdateError }}</span>
+        </div>
+
+        <div class="flex gap-4 pt-4">
+          <button type="button" (click)="closeEditPhoneModal()"
+            class="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors duration-200">
+            {{ 'CANCEL' | translate }}
+          </button>
+          <button type="submit" [disabled]="isUpdatingPhone || phoneEditForm.invalid"
+            class="flex-1 px-4 py-3 bg-foundation-orange-normal text-white rounded-xl hover:bg-foundation-orange-dark transition-colors duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed">
+            {{ isUpdatingPhone ? ('UPDATING' | translate) : ('UPDATE' | translate) }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,163 @@
+<form class="max-w-[850px] mx-auto bg-white p-8 rounded-xl shadow-xl flex flex-col gap-10">
+
+  <!-- Header -->
+  <div class="text-center">
+    <div class="relative">
+      <i class="fas fa-car absolute left-4 top-1/2 -translate-y-1/2 text-foundation-gray-normal text-lg"></i>
+      <input type="text" placeholder="{{ 'CHOOSE_YOUR_CAR' | translate }}" disabled class="w-full pl-12 pr-4 py-3 bg-neutral-secondary-medium border border-default-medium text-heading text-[18px] rounded-base
+        placeholder:text-foundation-gray-normal transition-all duration-200
+        focus:border-foundation-orange-normal focus:ring-1 focus:ring-foundation-orange-normal" />
+    </div>
+  </div>
+
+  <!-- Car Details Section -->
+  <div class="space-y-6">
+    <!-- Main Question -->
+    <div class="space-y-4">
+      <div class="relative">
+        <i
+          class="fas fa-question-circle absolute left-4 top-1/2 -translate-y-1/2 text-foundation-gray-normal text-lg"></i>
+        <input type="text" placeholder="{{ 'SPECIFIC_CAR_QUESTION' | translate }}" disabled class="w-full pl-12 pr-4 py-3 bg-neutral-secondary-medium border border-default-medium text-heading text-[18px] rounded-base
+          placeholder:text-foundation-gray-normal transition-all duration-200" />
+      </div>
+
+      <div class="flex gap-6">
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input type="radio" name="hasSpecificCar" [(ngModel)]="hasSpecificCar" value="yes"
+            class="w-4 h-4 text-foundation-orange-normal" />
+          <span class="text-heading">{{ 'YES' | translate }}</span>
+        </label>
+
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input type="radio" name="hasSpecificCar" [(ngModel)]="hasSpecificCar" value="no"
+            class="w-4 h-4 text-foundation-orange-normal" />
+          <span class="text-heading">{{ 'NO' | translate }}</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- If YES - Specific Car Details -->
+    <div *ngIf="hasSpecificCar === 'yes'" class="space-y-6">
+      <div class="relative">
+        <i class="fas fa-car absolute left-4 top-1/2 -translate-y-1/2 text-foundation-gray-normal text-lg"></i>
+        <input type="text" placeholder="{{ 'SPECIFIC_CAR_DETAILS' | translate }}" disabled class="w-full pl-12 pr-4 py-3 bg-neutral-secondary-medium border border-default-medium text-heading text-[18px] rounded-base
+          placeholder:text-foundation-gray-normal transition-all duration-200" />
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <div class="relative">
+            <i class="fas fa-tag absolute left-4 top-1/2 -translate-y-1/2 text-foundation-gray-normal text-lg"></i>
+            <input type="text" placeholder="{{ 'CAR_BRAND' | translate }}" class="w-full pl-12 pr-4 py-3 bg-neutral-secondary-medium border border-default-medium text-heading text-[18px] rounded-base
+              placeholder:text-foundation-gray-normal transition-all duration-200
+              focus:border-foundation-orange-normal focus:ring-1 focus:ring-foundation-orange-normal" />
+          </div>
+        </div>
+
+        <div>
+          <div class="relative">
+            <i class="fas fa-list absolute left-4 top-1/2 -translate-y-1/2 text-foundation-gray-normal text-lg"></i>
+            <input type="text" placeholder="{{ 'CAR_MODEL' | translate }}" class="w-full pl-12 pr-4 py-3 bg-neutral-secondary-medium border border-default-medium text-heading text-[18px] rounded-base
+              placeholder:text-foundation-gray-normal transition-all duration-200
+              focus:border-foundation-orange-normal focus:ring-1 focus:ring-foundation-orange-normal" />
+          </div>
+        </div>
+
+        <div>
+          <div class="relative">
+            <i class="fas fa-calendar absolute left-4 top-1/2 -translate-y-1/2 text-foundation-gray-normal text-lg"></i>
+            <input type="text" placeholder="{{ 'CAR_MODEL_YEAR' | translate }}" class="w-full pl-12 pr-4 py-3 bg-neutral-secondary-medium border border-default-medium text-heading text-[18px] rounded-base
+              placeholder:text-foundation-gray-normal transition-all duration-200
+              focus:border-foundation-orange-normal focus:ring-1 focus:ring-foundation-orange-normal" />
+          </div>
+        </div>
+
+        <div>
+          <div class="relative">
+            <i
+              class="fas fa-money-bill-wave absolute left-4 top-1/2 -translate-y-1/2 text-foundation-gray-normal text-lg"></i>
+            <input type="text" placeholder="{{ 'CAR_PRICE' | translate }}" class="w-full pl-12 pr-4 py-3 bg-neutral-secondary-medium border border-default-medium text-heading text-[18px] rounded-base
+              placeholder:text-foundation-gray-normal transition-all duration-200
+              focus:border-foundation-orange-normal focus:ring-1 focus:ring-foundation-orange-normal" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- If NO - Car Search Details -->
+    <div *ngIf="hasSpecificCar === 'no'" class="space-y-6">
+      <div class="relative">
+        <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-foundation-gray-normal text-lg"></i>
+        <input type="text" placeholder="{{ 'TELL_US_CAR_TYPE' | translate }}" disabled class="w-full pl-12 pr-4 py-3 bg-neutral-secondary-medium border border-default-medium text-heading text-[18px] rounded-base
+          placeholder:text-foundation-gray-normal transition-all duration-200" />
+      </div>
+
+      <div class="space-y-6">
+        <!-- Car Type Selection -->
+        <div>
+          <div class="relative">
+            <i class="fas fa-car-side absolute left-4 top-1/2 -translate-y-1/2 text-foundation-gray-normal text-lg"></i>
+            <input type="text" placeholder="{{ 'CAR_TYPES_MULTIPLE' | translate }}" disabled class="w-full pl-12 pr-4 py-3 bg-neutral-secondary-medium border border-default-medium text-heading text-[18px] rounded-base
+              placeholder:text-foundation-gray-normal transition-all duration-200" />
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mt-4">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" value="sedan" class="w-4 h-4 text-foundation-orange-normal" />
+              <span class="text-heading text-sm">{{ 'SEDAN' | translate }}</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" value="suv" class="w-4 h-4 text-foundation-orange-normal" />
+              <span class="text-heading text-sm">{{ 'SUV' | translate }}</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" value="hatchback" class="w-4 h-4 text-foundation-orange-normal" />
+              <span class="text-heading text-sm">{{ 'HATCHBACK' | translate }}</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" value="pickup" class="w-4 h-4 text-foundation-orange-normal" />
+              <span class="text-heading text-sm">{{ 'PICKUP' | translate }}</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" value="coupe" class="w-4 h-4 text-foundation-orange-normal" />
+              <span class="text-heading text-sm">{{ 'COUPE' | translate }}</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" value="convertible" class="w-4 h-4 text-foundation-orange-normal" />
+              <span class="text-heading text-sm">{{ 'CONVERTIBLE' | translate }}</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Brand and Model Selection -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <div class="relative">
+              <i class="fas fa-tag absolute left-4 top-1/2 -translate-y-1/2 text-foundation-gray-normal text-lg"></i>
+              <select class="w-full pl-12 pr-4 py-3 bg-neutral-secondary-medium border border-default-medium text-heading text-[18px] rounded-base
+              placeholder:text-foundation-gray-normal transition-all duration-200
+              focus:border-foundation-orange-normal focus:ring-1 focus:ring-foundation-orange-normal">
+                <option value="" disabled>{{ 'SELECT_CAR_BRAND' | translate }}</option>
+                <option value="toyota">Toyota</option>
+                <option value="honda">Honda</option>
+                <option value="bmw">BMW</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <div class="relative">
+              <i class="fas fa-list absolute left-4 top-1/2 -translate-y-1/2 text-foundation-gray-normal text-lg"></i>
+              <select class="w-full pl-12 pr-4 py-3 bg-neutral-secondary-medium border border-default-medium text-heading text-[18px] rounded-base
+              placeholder:text-foundation-gray-normal transition-all duration-200
+              focus:border-foundation-orange-normal focus:ring-1 focus:ring-foundation-orange-normal">
+                <option value="" disabled>{{ 'SELECT_CAR_MODEL' | translate }}</option>
+                <option value="camry">Camry</option>
+                <option value="civic">Civic</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

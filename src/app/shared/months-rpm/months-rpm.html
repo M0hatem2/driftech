@@ -1,0 +1,63 @@
+<!-- Gauge Container -->
+<div class="w-full flex flex-col items-center justify-center mt-6">
+  <div class="max-w-[300px] w-full mx-auto md:p-4 bg-white/80 backdrop-blur-md rounded-xl h-auto flex flex-col md:gap-4 items-center">
+
+    <!-- Gauge -->
+    <svg class="gauge  w-full h-[300px]" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <linearGradient id="progressGradient" gradientUnits="userSpaceOnUse"
+          [attr.x1]="gradX1" [attr.y1]="gradY1" [attr.x2]="gradX2" [attr.y2]="gradY2">
+          <stop offset="0%" stop-color="#33d17a" />
+          <stop offset="50%" stop-color="#ffd54f" />
+          <stop offset="100%" stop-color="#ff5b5b" />
+        </linearGradient>
+
+        <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="5" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+      </defs>
+
+      <!-- Arc Paths -->
+      <path class="arc-bg" [attr.d]="bgArcPath"
+        fill="none" stroke-width="12" stroke="#e5e7eb" stroke-linecap="round"></path>
+
+      <path class="arc-progress" [attr.d]="bgArcPath"
+        fill="none" stroke-width="12" stroke-linecap="round"
+        stroke="url(#progressGradient)" filter="url(#softGlow)"
+        [attr.stroke-dasharray]="progressDashArray"
+        style="transition: stroke-dasharray 300ms ease-in-out;"></path>
+
+      <!-- Ticks -->
+      <g class="ticks" stroke-linecap="round" stroke-width="2">
+        <ng-container *ngFor="let t of ticks">
+          <line [attr.x1]="t.x1" [attr.y1]="t.y1" [attr.x2]="t.x2" [attr.y2]="t.y2"
+            [attr.class]="t.major ? 'tick major' : 'tick minor'"></line>
+          <text *ngIf="t.label" class="tick-label text-xs" [attr.x]="t.tx" [attr.y]="t.ty"
+            text-anchor="middle" alignment-baseline="middle">{{ t.label }}</text>
+        </ng-container>
+      </g>
+
+      <!-- Needle -->
+      <g class="needle-group"
+        [style.transform]="'rotate(' + monthsToAngle(state.months || 0) + 'deg)'"
+        style="transform-origin:100px 100px; transition: transform 300ms;">
+        <line x1="100" y1="100" x2="100" y2="28" stroke="#111827" stroke-width="4" stroke-linecap="round"></line>
+        <circle cx="100" cy="100" r="6" fill="#111827"></circle>
+      </g>
+    </svg>
+
+    <!-- Info -->
+    <div class="text-center flex flex-col gap-1">
+      <div class="flex justify-between text-sm text-gray-600">
+        <span>Months</span>
+        <span class="font-semibold" [style.color]="valueColor">{{ state.months || '-' }}</span>
+      </div>
+
+      <div class="text-xs pt-2 border-t border-gray-200">
+        <span class="font-bold text-gray-700">Years:</span>
+        <span class="ml-1 font-semibold">{{ monthsToYears(state.months || 0) }}</span>
+      </div>
+    </div>
+  </div>
+</div>

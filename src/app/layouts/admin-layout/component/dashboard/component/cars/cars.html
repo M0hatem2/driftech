@@ -1,0 +1,96 @@
+<section class="cars-management">
+  <!-- Cars Management Header -->
+  <div class="cars-header">
+    <div class="cars-title">
+      <h1>Cars Management</h1>
+      <p class="cars-subtitle">Manage your vehicle inventory, specifications, and categories</p>
+    </div>
+    <div class="cars-actions">
+      <button class="btn-refresh" onclick="refreshCars()">
+        <i class="fas fa-sync-alt"></i>
+        <span>Refresh</span>
+      </button>
+      <button class="btn-primary" routerLink="/admin/cars/add-car">
+        <i class="fas fa-plus"></i>
+        <span>Add New Car</span>
+      </button>
+    </div>
+  </div>
+
+
+
+  <!-- Cars Quick Stats -->
+  <div class="cars-stats">
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-icon">
+          <i class="fas fa-car"></i>
+        </div>
+        <div class="stat-content">
+          <div class="stat-number">1,247</div>
+          <div class="stat-label">Total Cars</div>
+        </div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="stat-content">
+          <div class="stat-number">892</div>
+          <div class="stat-label">Available</div>
+        </div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-icon">
+          <i class="fas fa-handshake"></i>
+        </div>
+        <div class="stat-content">
+          <div class="stat-number">156</div>
+          <div class="stat-label">Sold</div>
+        </div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-icon">
+          <i class="fas fa-tools"></i>
+        </div>
+        <div class="stat-content">
+          <div class="stat-number">89</div>
+          <div class="stat-label">In Service</div>
+        </div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-icon">
+          <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <div class="stat-content">
+          <div class="stat-number">110</div>
+          <div class="stat-label">Pending</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="cars-content">
+    <router-outlet></router-outlet>
+  </div>
+</section>
+
+<!-- Car Management Functions -->
+<script>
+  function refreshCars() {
+    const refreshBtn = document.querySelector('.btn-refresh');
+    refreshBtn.classList.add('refreshing');
+    
+    setTimeout(() => {
+      refreshBtn.classList.remove('refreshing');
+      console.log('Cars data refreshed!');
+      // Here you would typically refresh the car data
+      window.location.reload();
+    }, 1000);
+  }
+</script>

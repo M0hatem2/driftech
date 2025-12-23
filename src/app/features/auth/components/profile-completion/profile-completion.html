@@ -1,0 +1,154 @@
+<!-- Profile Completion Page -->
+<div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <!-- Header -->
+    <div class="text-center">
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+        {{ 'COMPLETE_PROFILE' | translate }}
+      </h2>
+      <p class="mt-2 text-center text-sm text-gray-600">
+        {{ 'FILL_INFO_CONTINUE' | translate }}
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="space-y-6">
+        <!-- Name Field -->
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700">
+            {{ 'FULL_NAME' | translate }}
+          </label>
+          <div class="mt-1">
+            <input id="name" formControlName="name" type="text" required
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              placeholder="{{ 'ENTER_FULL_NAME' | translate }}">
+            <div *ngIf="profileForm.get('name')?.invalid && profileForm.get('name')?.touched"
+              class="text-red-500 text-sm mt-1">
+              {{ 'FULL_NAME' | translate }} is required
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone Number Field -->
+        <div>
+          <label for="phone_number" class="block text-sm font-medium text-gray-700">
+            {{ 'PHONE_NUMBER' | translate }}
+          </label>
+          <div class="mt-1">
+            <input id="phone_number" formControlName="phone_number" type="tel" required
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              placeholder="{{ 'ENTER_PHONE_NUMBER' | translate }}">
+            <div *ngIf="profileForm.get('phone_number')?.invalid && profileForm.get('phone_number')?.touched"
+              class="text-red-500 text-sm mt-1">
+              {{ 'PHONE_NUMBER' | translate }} is required
+            </div>
+          </div>
+        </div>
+
+        <!-- Email Field (Auto-filled and Read-only) -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">
+            {{ 'EMAIL_ADDRESS' | translate }}
+          </label>
+          <div class="mt-1">
+            <input id="email" formControlName="email" type="email" readonly
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-500 sm:text-sm">
+          </div>
+        </div>
+
+        <!-- Gender Field -->
+        <div>
+          <label for="gender" class="block text-sm font-medium text-gray-700">
+            {{ 'GENDER' | translate }}
+          </label>
+          <div class="mt-1">
+            <select id="gender" formControlName="gender" required
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+              <option value="">{{ 'SELECT_GENDER' | translate }}</option>
+              <option value="male">{{ 'MALE' | translate }}</option>
+              <option value="female">{{ 'FEMALE' | translate }}</option>
+              <option value="other">{{ 'OTHER' | translate }}</option>
+            </select>
+            <div *ngIf="profileForm.get('gender')?.invalid && profileForm.get('gender')?.touched"
+              class="text-red-500 text-sm mt-1">
+              {{ 'GENDER' | translate }} is required
+            </div>
+          </div>
+        </div>
+
+        <!-- Date of Birth Field -->
+        <div>
+          <label for="date_of_birth" class="block text-sm font-medium text-gray-700">
+            {{ 'DATE_OF_BIRTH' | translate }}
+          </label>
+          <div class="mt-1">
+            <input id="date_of_birth" formControlName="date_of_birth" type="date" required
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+            <div *ngIf="profileForm.get('date_of_birth')?.invalid && profileForm.get('date_of_birth')?.touched"
+              class="text-red-500 text-sm mt-1">
+              {{ 'DATE_OF_BIRTH' | translate }} is required
+            </div>
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">
+            {{ 'PASSWORD' | translate }}
+          </label>
+          <div class="mt-1">
+            <input id="password" formControlName="password" type="password" required
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              placeholder="{{ 'CREATE_PASSWORD' | translate }}">
+            <div *ngIf="profileForm.get('password')?.invalid && profileForm.get('password')?.touched"
+              class="text-red-500 text-sm mt-1">
+              <span *ngIf="profileForm.get('password')?.errors?.['required']">Password is required</span>
+              <span *ngIf="profileForm.get('password')?.errors?.['minlength']">Password must be at least 6
+                characters</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Password Confirmation Field -->
+        <div>
+          <label for="password_confirmation" class="block text-sm font-medium text-gray-700">
+            {{ 'CONFIRM_PASSWORD' | translate }}
+          </label>
+          <div class="mt-1">
+            <input id="password_confirmation" formControlName="password_confirmation" type="password" required
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              placeholder="{{ 'CONFIRM_YOUR_PASSWORD' | translate }}">
+            <div
+              *ngIf="profileForm.get('password_confirmation')?.invalid && profileForm.get('password_confirmation')?.touched"
+              class="text-red-500 text-sm mt-1">
+              <span *ngIf="profileForm.get('password_confirmation')?.errors?.['required']">Password confirmation is
+                required</span>
+              <span *ngIf="profileForm.get('password_confirmation')?.errors?.['passwordMismatch']">Passwords do not
+                match</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="text-red-500 text-sm text-center">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Success Message -->
+        <div *ngIf="successMessage" class="text-green-500 text-sm text-center">
+          {{ successMessage }}
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+          <button type="submit" [disabled]="isLoading || profileForm.invalid"
+            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-300 disabled:cursor-not-allowed">
+            {{ isLoading ? ('COMPLETING_PROFILE' | translate) : ('COMPLETE_PROFILE' | translate) }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

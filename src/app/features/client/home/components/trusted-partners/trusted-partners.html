@@ -1,0 +1,30 @@
+<section
+      class="bg-neutral-0 pt-[55px] pb-[80px] flex flex-col justify-center items-center  max-w-[1200px] mx-auto px-4 md:px-6 lg:px-0 "
+      (animateOnScroll)="onAnimate()" [@scrollFadeUp]="animationState">
+      <div class="container flex flex-wrap items-center justify-center gap-[32px]">
+            <div class="font-inter lg:w-[calc(50%-16px)]">
+                  <h4 class="flex w-fit items-center justify-start gap-[18px]"><i
+                              class="fa-regular fa-circle-check text-foundation-orange-normal"></i><span
+                              class="text-foundation-orange-normal text-[20px] leading-[24px] font-medium">{{
+                              'OUR_TRUSTED_PARTNERS' | translate }}</span></h4>
+                  <h2 class="text-foundation-brown-darker mt-[14px] text-[30px] leading-[36px] font-semibold">{{
+                        'TRUSTED_PARTNERS_TITLE' | translate }}</h2>
+                  <p class="text-foundation-gray-normal-hover mt-[14px] text-[18px] leading-[30px] font-normal">{{
+                        'TRUSTED_PARTNERS_DESC' | translate }}</p>
+                  <p class="text-foundation-orange-normal mt-[14px] text-[18px] leading-[30px] font-medium">{{
+                        'TRUSTED_PARTNERS_ACCESS_FINANCING' | translate }}</p>
+            </div>
+            <div class="flex gap-3 overflow-x-auto py-2 xl:hidden">
+
+                  <app-trusted-partners-cards [partners]="partners"
+                        [isDesktopLayout]="false"></app-trusted-partners-cards>
+
+            </div>
+            <div class="hidden xl:flex xl:h-[576px] xl:w-[calc(50%-32px)] xl:flex-col xl:gap-8 xl:overflow-y-auto xl:px-1 xl:pt-0 xl:pb-16"
+                  dir="ltr">
+                  <app-trusted-partners-cards [partners]="partners" [isDesktopLayout]="true">
+                  </app-trusted-partners-cards>
+            </div>
+
+      </div>
+</section>

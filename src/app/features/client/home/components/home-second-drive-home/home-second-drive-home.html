@@ -1,0 +1,95 @@
+<section class="font-inter  max-w-[1200px] mx-auto px-4 md:px-6  " (animateOnScroll)="onAnimate()"
+      [@scrollFadeUp]="animationState">
+      <div class="grid grid-cols-1 lg:grid-cols-2 items-center gap-16 lg:gap-24">
+
+            <!-- Right IMAGE — يظهر أول في الموبايل -->
+            <div class="relative group w-full order-1 lg:order-2">
+                  <img src="assets/img/DriveHome-second.webp" alt="Drive Home Image"
+                        class="w-full rounded-xl object-cover transition-all duration-500" />
+            </div>
+
+            <!-- Left CONTENT — يظهر تاني في الموبايل -->
+            <div class="flex flex-col gap-8 order-2 lg:order-1">
+
+                  <header>
+                        <h2 class="text-[28px] md:text-[34px] leading-snug font-semibold">
+                              <span class="text-foundation-brown-darker block">
+                                    {{ 'DRIVE_HOME_DREAM_CAR' | translate }}
+                              </span>
+                              <span class="text-foundation-orange-normal block">
+                                    {{ 'SMART_FLEXIBLE_FINANCING' | translate }}
+                              </span>
+                        </h2>
+
+                        <p [innerHTML]="('DRIVE_HOME_DREAM_CAR_DESC' | translate | newlineToBr)"
+                              class="mt-4 text-[18px] leading-[30px] text-foundation-gray-normal-hover">
+                        </p>
+
+                  </header>
+
+                  <!-- Bullet Points -->
+                  <ul class="flex flex-col gap-4">
+                        <li class="flex items-start gap-3">
+                              <i class="fa-regular fa-circle-check text-foundation-orange-normal text-[22px]"></i>
+                              <span class="text-[18px] leading-[26px] text-foundation-gray-normal-hover">
+                                    {{ 'INSTANT_PRE_APPROVAL' | translate }}
+                              </span>
+                        </li>
+
+                        <li class="flex items-start gap-3">
+                              <i class="fa-regular fa-clock text-foundation-orange-normal text-[22px]"></i>
+                              <span class="text-[18px] leading-[26px] text-foundation-gray-normal-hover">
+                                    {{ 'FLEXIBLE_PAYMENT_TERMS' | translate }}
+                              </span>
+                        </li>
+
+                        <li class="flex items-start gap-3">
+                              <i class="fa-solid fa-shield-halved text-foundation-orange-normal text-[22px]"></i>
+                              <span class="text-[18px] leading-[26px] text-foundation-gray-normal-hover">
+                                    {{ 'COMPETITIVE_RATES' | translate }}
+                              </span>
+                        </li>
+                  </ul>
+
+                  <!-- Download Buttons -->
+                  <div class="text-center">
+                        <!-- Title -->
+                        <p class="text-[20px] sm:text-[24px] font-semibold text-foundation-gray-normal-hover">
+                              {{ 'DOWNLOAD_AND_GET_MATCHED' | translate }}
+                        </p>
+
+                        <!-- Buttons -->
+                        <div class="mt-9 flex items-center justify-center gap-4 flex-wrap sm:gap-8">
+
+                              <!-- App Store -->
+                              <a href="https://apps.apple.com/app/driftech-eg/id6755965883" class="bg-foundation-brown-normal flex items-center px-5 py-3 h-[60px] w-[200px] gap-4 rounded-xl 
+                  transition-all duration-300 hover:scale-[1.05] hover:brightness-110 shadow-md hover:shadow-lg">
+
+                                    <i class="fa-brands fa-apple text-[28px] text-neutral-0"></i>
+
+                                    <div class="flex flex-col items-start leading-tight">
+                                          <p class="font-dm-sans text-neutral-0 text-[12px]">Download on the</p>
+                                          <p class="font-dm-sans text-neutral-0 font-bold text-[16px]">App Store</p>
+                                    </div>
+                              </a>
+
+                              <!-- Google Play -->
+                              <a href="https://play.google.com/store/apps/details?id=com.rif.tech" class="bg-foundation-brown-normal flex items-center px-5 py-3 h-[60px] w-[200px] gap-4 rounded-xl 
+                  transition-all duration-300 hover:scale-[1.05] hover:brightness-110 shadow-md hover:shadow-lg">
+
+                                    <i class="fa-brands fa-google-play text-[26px] text-neutral-0"></i>
+
+                                    <div class="flex flex-col items-start leading-tight">
+                                          <p class="font-dm-sans text-neutral-0 text-[12px]">Get it on</p>
+                                          <p class="font-dm-sans text-neutral-0 font-bold text-[16px]">Google Play</p>
+                                    </div>
+                              </a>
+
+                        </div>
+                  </div>
+
+
+            </div>
+
+      </div>
+</section>

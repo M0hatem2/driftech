@@ -1,0 +1,63 @@
+<!-- Blurred Background Overlay -->
+<div class="fixed inset-0  bg-opacity-50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+  (click)="onClosePopup()">
+  <!-- Modal Content -->
+  <div class="bg-white rounded-lg max-w-md w-full mx-auto relative modal-transition" (click)="$event.stopPropagation()">
+    <!-- Close Button -->
+    <button (click)="onClosePopup()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl">
+      ×
+    </button>
+
+    <!-- Modal Body -->
+    <div class="p-8">
+      <div class="space-y-6 text-center">
+        <!-- Header -->
+        <div class="space-y-4">
+          <h2 class="text-2xl font-semibold text-gray-800">
+            {{ 'CHECK_YOUR_EMAIL' | translate }}
+          </h2>
+          <p class="text-gray-600">
+            {{ 'ENTER_OTP_SENT' | translate }}
+          </p>
+          <div class="flex items-center justify-center gap-3 bg-gray-100 rounded-lg p-3">
+            <span class="text-lg font-medium text-gray-800">{{ email }}</span>
+          </div>
+        </div>
+
+        <!-- OTP Input -->
+        <div class="space-y-4">
+          <input type="text" [(ngModel)]="otpCode" (input)="onOtpInputChange($event)"
+            placeholder="{{ 'ENTER_OTP' | translate }}" inputmode="numeric" maxlength="6"
+            class="w-full h-14 text-center text-xl font-semibold border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            dir="ltr" />
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="text-red-500 text-sm">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Success Message -->
+        <div *ngIf="successMessage" class="text-green-500 text-sm">
+          {{ successMessage }}
+        </div>
+
+        <!-- Actions -->
+        <div class="space-y-4">
+          <button (click)="verifyOtp()" [disabled]="isLoading || otpCode.length !== 6"
+            class="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 text-white font-medium py-3 px-4 rounded-lg transition duration-200">
+            {{ isLoading ? ('VERIFYING' | translate) : ('VERIFY_OTP' | translate) }}
+          </button>
+
+          <div class="text-center">
+            <p class="text-gray-600 text-sm">{{ 'DIDNT_RECEIVE_CODE' | translate }}</p>
+            <button (click)="resendOtp()" [disabled]="isLoading"
+              class="text-blue-600 hover:text-blue-800 underline text-sm mt-1">
+              {{ 'RESEND_CODE' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

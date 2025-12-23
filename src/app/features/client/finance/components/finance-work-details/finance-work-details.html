@@ -1,0 +1,51 @@
+<form class="max-w-[850px] md:min-w-[550px]  mx-auto bg-white p-8 rounded-xl shadow-xl flex flex-col gap-6">
+  <!-- Section Header -->
+  <div class="text-center">
+    <h2 class="text-2xl font-bold pb-10 text-orange-500">{{ 'EMPLOYMENT_DETAILS' | translate }}</h2>
+  </div>
+  <!-- Occupation Type -->
+  <div class="relative z-0 w-full mb-5 group">
+    <select name="floating_occupation_type" id="floating_occupation_type" [(ngModel)]="occupationType"
+      (ngModelChange)="onOccupationTypeChange()"
+      class="block py-2.5 pl-4 pr-0 w-full text-sm text-black bg-white border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer"
+      required>
+      <option value="" disabled selected>{{ 'SELECT_OCCUPATION_TYPE' | translate }}</option>
+      <option value="employee">{{ 'EMPLOYEE' | translate }}</option>
+      <option value="freelancer">{{ 'FREELANCER' | translate }}</option>
+      <option value="business_owner">{{ 'BUSINESS_OWNER' | translate }}</option>
+      <option value="unemployed">{{ 'UNEMPLOYED' | translate }}</option>
+      <option value="student">{{ 'STUDENT' | translate }}</option>
+      <option value="other">{{ 'OTHER' | translate }}</option>
+    </select>
+    <label for="floating_occupation_type"
+      class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+      'OCCUPATION_TYPE' | translate }}</label>
+  </div>
+
+  <!-- Job Title & Company -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="relative z-0 w-full mb-5 group">
+      <input type="text" name="floating_job_title" id="floating_job_title" [(ngModel)]="jobTitle"
+        (ngModelChange)="onJobTitleChange()"
+        class="block py-2.5 pl-4 pr-0 w-full text-sm text-black bg-white border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer"
+        placeholder=" " required />
+      <label for="floating_job_title"
+        class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+        'JOB_TITLE' | translate }}</label>
+    </div>
+    <div class="relative z-0 w-full mb-5 group">
+      <input type="text" name="floating_monthly_income" id="floating_monthly_income" [(ngModel)]="monthlyIncome"
+        (ngModelChange)="onMonthlyIncomeChange()"
+        class="block py-2.5 pl-4 pr-0 w-full text-sm text-black bg-white border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer"
+        placeholder=" " required />
+      <label for="floating_monthly_income"
+        class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+        'MONTHLY_INCOME' | translate }}</label>
+    </div>
+
+  </div>
+
+
+
+
+</form>

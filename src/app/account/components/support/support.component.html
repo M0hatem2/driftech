@@ -1,0 +1,287 @@
+<section class="pt-[156px] pb-20 bg-gradient-to-b from-gray-50 to-white">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+      
+      <!-- Breadcrumb Navigation -->
+      <nav class="flex items-center space-x-2 text-sm text-gray-500 mb-8">
+        <a href="/" class="hover:text-foundation-orange-normal transition-colors duration-200 flex items-center gap-2">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+        <i class="fas fa-chevron-right text-gray-300"></i>
+        <span class="text-gray-700 font-medium">Need Help?</span>
+      </nav>
+      
+      <!-- Header Section -->
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 sm:p-12 text-center mb-8">
+        <div class="space-y-6">
+          <div class="flex justify-center">
+            <div class="w-20 h-20 bg-gradient-to-br from-foundation-orange-normal to-foundation-orange-normal/80 rounded-2xl flex items-center justify-center">
+              <i class="fas fa-life-ring text-white text-3xl"></i>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">Having an issue?</h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">Our support team is just a message away and ready to assist you with any questions or concerns.</p>
+          </div>
+          <div class="flex items-center justify-center gap-6 text-sm text-gray-500">
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              <span>24/7 Support Available</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="fas fa-clock text-foundation-orange-normal"></i>
+              <span>Quick Response</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Support Form Card -->
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+        
+        <!-- Contact Information Section -->
+        <div class="p-6 sm:p-8 border-b border-gray-100">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-12 h-12 bg-foundation-orange-normal/10 rounded-xl flex items-center justify-center">
+              <i class="fas fa-address-card text-foundation-orange-normal text-xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-gray-800">Contact Information</h3>
+              <p class="text-gray-500 text-sm mt-1">Please provide your contact details</p>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Email Input -->
+            <div class="space-y-2">
+              <label for="email" class="block text-sm font-medium text-gray-700">Email Address <span class="text-red-500">*</span></label>
+              <div class="relative">
+                <input placeholder="Enter your email address" id="email" type="email"
+                  class="w-full px-4 py-4 border border-gray-200 rounded-xl bg-gray-50 text-gray-700 
+                         focus:outline-none focus:ring-2 focus:ring-foundation-orange-normal/20 focus:border-foundation-orange-normal
+                         transition-all duration-200 placeholder-gray-400 text-lg">
+                <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                  <i class="fas fa-envelope text-gray-300"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Phone Input -->
+            <div class="space-y-2">
+              <label for="phone" class="block text-sm font-medium text-gray-700">Mobile Number <span class="text-red-500">*</span></label>
+              <div class="relative">
+                <input placeholder="Enter your mobile number" id="phone" type="tel"
+                  class="w-full px-4 py-4 border border-gray-200 rounded-xl bg-gray-50 text-gray-700 
+                         focus:outline-none focus:ring-2 focus:ring-foundation-orange-normal/20 focus:border-foundation-orange-normal
+                         transition-all duration-200 placeholder-gray-400 text-lg">
+                <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                  <i class="fas fa-phone text-gray-300"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Request Type Section -->
+        <div class="p-6 sm:p-8 border-b border-gray-100">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-12 h-12 bg-foundation-orange-normal/10 rounded-xl flex items-center justify-center">
+              <i class="fas fa-clipboard-list text-foundation-orange-normal text-xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-gray-800">Request Type</h3>
+              <p class="text-gray-500 text-sm mt-1">Select the type of assistance you need</p>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <!-- Support Option -->
+            <label class="group cursor-pointer">
+              <input type="radio" value="support" name="request-type" class="hidden">
+              <div class="p-6 border-2 border-gray-200 rounded-xl bg-white transition-all duration-300 
+                          group-hover:border-foundation-orange-normal/50 group-hover:shadow-md
+                          has-[:checked]:border-foundation-orange-normal has-[:checked]:bg-foundation-orange-normal/5">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-foundation-orange-normal/10 rounded-xl flex items-center justify-center group-has-[:checked]:bg-foundation-orange-normal/20">
+                      <i class="fas fa-headset text-foundation-orange-normal text-xl group-has-[:checked]:text-foundation-orange-normal"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-800">Technical Support</h4>
+                      <p class="text-sm text-gray-500">Get help with technical issues</p>
+                    </div>
+                  </div>
+                  <div class="w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center
+                              group-has-[:checked]:border-foundation-orange-normal">
+                    <div class="w-3 h-3 rounded-full bg-foundation-orange-normal opacity-0 group-has-[:checked]:opacity-100 transition-opacity"></div>
+                  </div>
+                </div>
+              </div>
+            </label>
+
+            <!-- Inquiry Option -->
+            <label class="group cursor-pointer">
+              <input type="radio" value="inquiry" name="request-type" class="hidden">
+              <div class="p-6 border-2 border-gray-200 rounded-xl bg-white transition-all duration-300 
+                          group-hover:border-foundation-orange-normal/50 group-hover:shadow-md
+                          has-[:checked]:border-foundation-orange-normal has-[:checked]:bg-foundation-orange-normal/5">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-foundation-orange-normal/10 rounded-xl flex items-center justify-center group-has-[:checked]:bg-foundation-orange-normal/20">
+                      <i class="fas fa-question-circle text-foundation-orange-normal text-xl group-has-[:checked]:text-foundation-orange-normal"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-800">General Inquiry</h4>
+                      <p class="text-sm text-gray-500">Ask questions about our services</p>
+                    </div>
+                  </div>
+                  <div class="w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center
+                              group-has-[:checked]:border-foundation-orange-normal">
+                    <div class="w-3 h-3 rounded-full bg-foundation-orange-normal opacity-0 group-has-[:checked]:opacity-100 transition-opacity"></div>
+                  </div>
+                </div>
+              </div>
+            </label>
+
+            <!-- Lost Account Option -->
+            <label class="group cursor-pointer">
+              <input type="radio" value="lost_account" name="request-type" class="hidden">
+              <div class="p-6 border-2 border-gray-200 rounded-xl bg-white transition-all duration-300 
+                          group-hover:border-foundation-orange-normal/50 group-hover:shadow-md
+                          has-[:checked]:border-foundation-orange-normal has-[:checked]:bg-foundation-orange-normal/5">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-foundation-orange-normal/10 rounded-xl flex items-center justify-center group-has-[:checked]:bg-foundation-orange-normal/20">
+                      <i class="fas fa-user-shield text-foundation-orange-normal text-xl group-has-[:checked]:text-foundation-orange-normal"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-800">Account Issues</h4>
+                      <p class="text-sm text-gray-500">Lost or compromised account</p>
+                    </div>
+                  </div>
+                  <div class="w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center
+                              group-has-[:checked]:border-foundation-orange-normal">
+                    <div class="w-3 h-3 rounded-full bg-foundation-orange-normal opacity-0 group-has-[:checked]:opacity-100 transition-opacity"></div>
+                  </div>
+                </div>
+              </div>
+            </label>
+
+            <!-- Lost Card Option -->
+            <label class="group cursor-pointer">
+              <input type="radio" value="lost_card" name="request-type" class="hidden">
+              <div class="p-6 border-2 border-gray-200 rounded-xl bg-white transition-all duration-300 
+                          group-hover:border-foundation-orange-normal/50 group-hover:shadow-md
+                          has-[:checked]:border-foundation-orange-normal has-[:checked]:bg-foundation-orange-normal/5">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-foundation-orange-normal/10 rounded-xl flex items-center justify-center group-has-[:checked]:bg-foundation-orange-normal/20">
+                      <i class="fas fa-credit-card text-foundation-orange-normal text-xl group-has-[:checked]:text-foundation-orange-normal"></i>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-800">Card Issues</h4>
+                      <p class="text-sm text-gray-500">Lost or stolen payment card</p>
+                    </div>
+                  </div>
+                  <div class="w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center
+                              group-has-[:checked]:border-foundation-orange-normal">
+                    <div class="w-3 h-3 rounded-full bg-foundation-orange-normal opacity-0 group-has-[:checked]:opacity-100 transition-opacity"></div>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Additional Details Section -->
+        <div class="p-6 sm:p-8 border-b border-gray-100">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-12 h-12 bg-foundation-orange-normal/10 rounded-xl flex items-center justify-center">
+              <i class="fas fa-edit text-foundation-orange-normal text-xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-gray-800">Additional Details</h3>
+              <p class="text-gray-500 text-sm mt-1">Tell us more about your issue (optional)</p>
+            </div>
+          </div>
+          
+          <div class="space-y-4">
+            <textarea placeholder="Please describe your issue or question in detail..." rows="5"
+              class="w-full px-4 py-4 border border-gray-200 rounded-xl bg-gray-50 text-gray-700 
+                     focus:outline-none focus:ring-2 focus:ring-foundation-orange-normal/20 focus:border-foundation-orange-normal
+                     transition-all duration-200 placeholder-gray-400 resize-none"></textarea>
+            <p class="text-sm text-gray-500">The more details you provide, the better we can assist you.</p>
+          </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="bg-gray-50 px-6 sm:px-8 py-6">
+          <div class="flex flex-col sm:flex-row gap-4 justify-end">
+            <button type="button"
+              class="px-6 py-3 rounded-xl border border-gray-200 text-gray-700 bg-white hover:bg-gray-50 
+                     transition-all duration-200 font-medium flex items-center justify-center gap-2">
+              <i class="fas fa-times"></i>
+              Cancel
+            </button>
+            <button type="submit"
+              class="px-8 py-3 rounded-xl bg-foundation-orange-normal text-white font-medium ant-btn-variant-solid 
+                     hover:bg-foundation-orange-normal/90 transition-all duration-200 shadow-lg shadow-foundation-orange-normal/30
+                     flex items-center justify-center gap-2">
+              <i class="fas fa-paper-plane"></i>
+              Submit Request
+            </button>
+          </div>
+        </div>
+        
+      </div>
+
+      <!-- Quick Contact Options -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+        
+        <!-- Phone Support -->
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 text-center hover:shadow-xl transition-all duration-300">
+          <div class="w-16 h-16 bg-foundation-orange-normal/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-phone text-foundation-orange-normal text-2xl"></i>
+          </div>
+          <h3 class="font-semibold text-gray-800 mb-2">Call Support</h3>
+          <p class="text-gray-600 text-sm mb-4">Speak directly with our support team</p>
+          <div class="space-y-2">
+            <p class="font-medium text-foundation-orange-normal">+20 123 456 789</p>
+            <p class="text-xs text-gray-500">Available 24/7</p>
+          </div>
+        </div>
+
+        <!-- Email Support -->
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 text-center hover:shadow-xl transition-all duration-300">
+          <div class="w-16 h-16 bg-foundation-orange-normal/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-envelope text-foundation-orange-normal text-2xl"></i>
+          </div>
+          <h3 class="font-semibold text-gray-800 mb-2">Email Support</h3>
+          <p class="text-gray-600 text-sm mb-4">Send us your questions via email</p>
+          <div class="space-y-2">
+            <p class="font-medium text-foundation-orange-normal">support@driftech.com</p>
+            <p class="text-xs text-gray-500">Response within 2 hours</p>
+          </div>
+        </div>
+
+        <!-- Live Chat -->
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 text-center hover:shadow-xl transition-all duration-300">
+          <div class="w-16 h-16 bg-foundation-orange-normal/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-comments text-foundation-orange-normal text-2xl"></i>
+          </div>
+          <h3 class="font-semibold text-gray-800 mb-2">Live Chat</h3>
+          <p class="text-gray-600 text-sm mb-4">Chat with us in real-time</p>
+          <div class="space-y-2">
+            <button class="w-full py-2 bg-foundation-orange-normal text-white rounded-lg hover:bg-foundation-orange-normal/90 transition-colors">
+              Start Chat
+            </button>
+            <p class="text-xs text-gray-500">Average wait: 2 minutes</p>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>

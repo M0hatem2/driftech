@@ -1,0 +1,97 @@
+<section class="w-full space-y-10 lg:basis-1/2 px-4 sm:px-6 lg:px-0">
+
+      <!-- Title -->
+      <div class="space-y-5">
+            <h4 class="text-foundation-brown-normal font-poppins text-[clamp(1rem,1vw+0.5rem,1.5rem)] font-medium">
+                  Choose Car Option
+            </h4>
+
+            <!-- Options Desktop & Tablet -->
+            <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full">
+
+                  <!-- New Car -->
+                  <label
+                        class="flex cursor-pointer items-center justify-between border-2 border-foundation-red-normal bg-white rounded-lg px-4 py-4 transition hover:shadow-md w-full">
+                        <span class="text-foundation-red-normal font-medium w-[calc(100%-35px)]">New</span>
+                        <span
+                              class="relative flex h-5 w-5 sm:h-8 sm:w-8 items-center justify-center rounded-full border-2 border-foundation-red-normal">
+                              <span class="bg-foundation-red-normal h-3 w-3 sm:h-5 sm:w-5 rounded-full"></span>
+                        </span>
+                        <input class="hidden" type="radio" value="new" checked name="custom-radio">
+                  </label>
+
+                  <!-- Pre-Owned -->
+                  <label
+                        class="flex cursor-pointer items-center justify-between border-2 border-foundation-gray-normal bg-white rounded-lg px-4 py-4 transition hover:shadow-md w-full">
+                        <span class="text-foundation-gray-normal font-medium w-[calc(100%-35px)]">Pre-owned car</span>
+                        <span
+                              class="relative flex h-5 w-5 sm:h-8 sm:w-8 items-center justify-center rounded-full border-2 border-foundation-gray-normal">
+                              <span class="bg-neutral-0 h-3 w-3 sm:h-5 sm:w-5 rounded-full"></span>
+                        </span>
+                        <input class="hidden" type="radio" value="used" name="custom-radio">
+                  </label>
+
+            </div>
+      </div>
+
+      <!-- Options Mobile -->
+      <div class="block lg:hidden mt-6 space-y-4">
+            <h4 class="text-foundation-brown-normal font-poppins text-[clamp(1rem,1vw+0.5rem,1.5rem)] font-medium">
+                  Choose Your Carر
+            </h4>
+
+            <div class="flex flex-col gap-6 w-full">
+
+                  <!-- Car Card 1 -->
+                  <label
+                        class="flex cursor-pointer items-center justify-between border-2 border-foundation-red-normal bg-white rounded-lg px-4 py-4 transition hover:shadow-md">
+                        <span class="w-[calc(100%-35px)]">
+                              <div class="flex gap-4 items-center">
+                                    <img src="/assets/car-image-not-available-DapqN1wL.jpg" alt="MG - 2014"
+                                          class="h-24 w-24 sm:h-36 sm:w-36 rounded-lg object-cover">
+                                    <div>
+                                          <h4 class="font-semibold text-black text-lg">MG - 2014</h4>
+                                          <div class="mt-2 flex flex-wrap gap-2 text-xs sm:text-sm">
+                                                <span class="bg-neutral-100 rounded px-2 py-1 font-medium">Automated
+                                                      Manual</span>
+                                                <span class="bg-neutral-100 rounded px-2 py-1 font-medium">65413</span>
+                                          </div>
+                                    </div>
+                              </div>
+                        </span>
+                        <span
+                              class="relative flex h-5 w-5 sm:h-8 sm:w-8 items-center justify-center rounded-full border-2 border-foundation-red-normal">
+                              <span class="bg-foundation-red-normal h-3 w-3 sm:h-5 sm:w-5 rounded-full"></span>
+                        </span>
+                        <input class="hidden" type="radio" value="3" checked name="custom-radio">
+                  </label>
+
+                  <!-- Car Card 2 -->
+                  <label
+                        class="flex cursor-pointer items-center justify-between border-2 border-foundation-gray-normal bg-white rounded-lg px-4 py-4 transition hover:shadow-md">
+                        <span class="w-[calc(100%-35px)]">
+                              <div class="flex gap-4 items-center">
+                                    <img src="/assets/car-image-not-available-DapqN1wL.jpg" alt="Kia - 1990"
+                                          class="h-24 w-24 sm:h-36 sm:w-36 rounded-lg object-cover">
+                                    <div>
+                                          <h4 class="font-semibold text-black text-lg">Kia - 1990</h4>
+                                          <div class="mt-2 flex flex-wrap gap-2 text-xs sm:text-sm">
+                                                <span class="bg-neutral-100 rounded px-2 py-1 font-medium">Wagon</span>
+                                                <span class="bg-neutral-100 rounded px-2 py-1 font-medium">CVT</span>
+                                                <span class="bg-neutral-100 rounded px-2 py-1 font-medium">117153</span>
+                                          </div>
+                                    </div>
+                              </div>
+                        </span>
+                        <span
+                              class="relative flex h-5 w-5 sm:h-8 sm:w-8 items-center justify-center rounded-full border-2 border-foundation-gray-normal">
+                              <span class="bg-neutral-0 h-3 w-3 sm:h-5 sm:w-5 rounded-full"></span>
+                        </span>
+                        <input class="hidden" type="radio" value="7" name="custom-radio">
+                  </label>
+
+            </div>
+      </div>
+      <app-finance-calculator></app-finance-calculator>
+
+</section>

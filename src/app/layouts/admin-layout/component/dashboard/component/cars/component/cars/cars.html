@@ -1,0 +1,232 @@
+<section class="cars-list">
+  <!-- Cars List Header -->
+  <div class="cars-list-header">
+    <h2>All Cars Inventory</h2>
+    <div class="list-actions">
+      <div class="search-filter">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search cars..." [(ngModel)]="searchTerm" (input)="onSearch()">
+        </div>
+        <select class="filter-select" [(ngModel)]="selectedStatus" (change)="onFilterChange()">
+          <option value="">All Status</option>
+          <option value="available">Available</option>
+          <option value="sold">Sold</option>
+          <option value="pending">Pending</option>
+          <option value="service">In Service</option>
+        </select>
+        <select class="filter-select" [(ngModel)]="selectedBrand" (change)="onFilterChange()">
+          <option value="">All Brands</option>
+          <option value="bmw">BMW</option>
+          <option value="mercedes">Mercedes-Benz</option>
+          <option value="audi">Audi</option>
+          <option value="toyota">Toyota</option>
+          <option value="honda">Honda</option>
+        </select>
+      </div>
+      <div class="view-controls">
+        <button class="view-btn" [class.active]="viewMode === 'grid'" (click)="setViewMode('grid')">
+          <i class="fas fa-th"></i>
+        </button>
+        <button class="view-btn" [class.active]="viewMode === 'list'" (click)="setViewMode('list')">
+          <i class="fas fa-list"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="loading-spinner">
+      <i class="fas fa-spinner fa-spin"></i>
+      <p>Loading cars...</p>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-state">
+    <div class="error-message">
+      <i class="fas fa-exclamation-triangle"></i>
+      <p>{{ error }}</p>
+      <button class="btn-primary" (click)="loadCars()">Try Again</button>
+    </div>
+  </div>
+
+  <!-- Cars Grid/List Display -->
+  <div *ngIf="!loading && !error" class="cars-container" [class.grid-view]="viewMode === 'grid'" [class.list-view]="viewMode === 'list'">
+    
+    <!-- Grid View -->
+    <div *ngIf="viewMode === 'grid'" class="cars-grid">
+      <div *ngFor="let car of filteredCars; trackBy: trackByCarId" class="car-card">
+        <div class="car-image">
+          <img [src]="car.image || '/assets/img/car-placeholder.jpg'" [alt]="car.make + ' ' + car.model">
+          <div class="car-status" [class]="'status-' + car.status">{{ car.status | titlecase }}</div>
+          <div class="car-actions">
+            <button class="action-btn edit" (click)="editCar(car)">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="action-btn delete" (click)="deleteCar(car)">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
+        <div class="car-info">
+          <h3 class="car-title">{{ car.make }} {{ car.model }}</h3>
+          <p class="car-year">{{ car.year }} • {{ car.bodyStyle }}</p>
+          <div class="car-specs">
+            <span class="spec">
+              <i class="fas fa-cog"></i>
+              {{ car.engine }}
+            </span>
+            <span class="spec">
+              <i class="fas fa-cogs"></i>
+              {{ car.transmission }}
+            </span>
+          </div>
+          <div class="car-price">{{ formatPrice(car.price) }}</div>
+          <div class="car-details">
+            <span class="detail">
+              <i class="fas fa-map-marker-alt"></i>
+              {{ car.location || 'Location not specified' }}
+            </span>
+            <span class="detail">
+              <i class="fas fa-tachometer-alt"></i>
+              {{ car.km_driven || 'KM not specified' }}
+            </span>
+            <span class="detail">
+              <i class="fas fa-palette"></i>
+              {{ car.color || 'Color not specified' }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- List View -->
+    <div *ngIf="viewMode === 'list'" class="cars-table-container">
+      <table class="cars-table">
+        <thead>
+          <tr>
+            <th>Car</th>
+            <th>Year</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Body Style</th>
+            <th>Engine</th>
+            <th>Transmission</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let car of filteredCars; trackBy: trackByCarId">
+            <td class="car-cell">
+              <img [src]="car.image || '/assets/img/car-placeholder.jpg'" [alt]="car.make + ' ' + car.model" class="car-thumb">
+              <div class="car-details">
+                <strong>{{ car.make }} {{ car.model }}</strong>
+                <small>{{ car.year }}</small>
+              </div>
+            </td>
+            <td>{{ car.year }}</td>
+            <td>{{ car.make }}</td>
+            <td>{{ car.model }}</td>
+            <td>{{ car.bodyStyle }}</td>
+            <td>{{ car.engine }}</td>
+            <td>{{ car.transmission }}</td>
+            <td class="price-cell">{{ formatPrice(car.price) }}</td>
+            <td>
+              <span class="status-badge" [class]="'status-' + car.status">{{ car.status | titlecase }}</span>
+            </td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn-sm btn-edit" (click)="editCar(car)">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn-sm btn-delete" (click)="deleteCar(car)">
+                  <i class="fas fa-trash"></i>
+                </button>
+                <button class="btn-sm btn-view" (click)="viewCar(car)">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="filteredCars.length === 0" class="empty-cars">
+      <div class="empty-icon">
+        <i class="fas fa-car"></i>
+      </div>
+      <h3>No cars found</h3>
+      <p>Try adjusting your search criteria or add new cars to your inventory.</p>
+      <button class="btn-primary" routerLink="/admin/cars/add-car">
+        <i class="fas fa-plus"></i>
+        Add First Car
+      </button>
+    </div>
+    </div>
+
+  <!-- Pagination -->
+  <div class="pagination" *ngIf="totalPages > 1 && !loading && !error">
+    <button class="page-btn" [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <span class="page-info">Page {{ currentPage }} of {{ totalPages }}</span>
+    <button class="page-btn" [disabled]="currentPage === totalPages" (click)="goToPage(currentPage + 1)">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+</section>
+
+<!-- Car Edit Modal -->
+<div class="modal-overlay" *ngIf="showEditModal" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3>Edit Car</h3>
+      <button class="modal-close" (click)="closeModal()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #editForm="ngForm" *ngIf="editingCar">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Make</label>
+            <input type="text" class="form-control" [(ngModel)]="editingCar!.make" name="make" required>
+          </div>
+          <div class="form-group">
+            <label>Model</label>
+            <input type="text" class="form-control" [(ngModel)]="editingCar!.model" name="model" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Year</label>
+            <input type="number" class="form-control" [(ngModel)]="editingCar!.year" name="year" required>
+          </div>
+          <div class="form-group">
+            <label>Price</label>
+            <input type="number" class="form-control" [(ngModel)]="editingCar!.price" name="price" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Status</label>
+          <select class="form-control" [(ngModel)]="editingCar!.status" name="status" required>
+            <option value="available">Available</option>
+            <option value="sold">Sold</option>
+            <option value="pending">Pending</option>
+            <option value="service">In Service</option>
+          </select>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" (click)="closeModal()">Cancel</button>
+      <button class="btn-primary" (click)="saveCar()">Save Changes</button>
+    </div>
+  </div>
+</div>

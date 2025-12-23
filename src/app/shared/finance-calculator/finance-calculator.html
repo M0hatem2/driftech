@@ -1,0 +1,123 @@
+<form id="auto-loan-calculator" (animateOnScroll)="onAnimate()" [@scrollFadeUp]="animationState"
+  class="bg-white shadow-xl shadow-black/5 flex flex-col md:gap-8 rounded-xl py-8  px-8lg:max-w-[500px] lg:basis-1/2 px-4">
+
+  <!-- Title -->
+  <div>
+    <h3
+      class="border-l-4 border-foundation-orange-normal font-poppins text-black-medium text-[26px] font-semibold capitalize pl-3 flex items-center gap-2">
+      <i class="fa-solid fa-calculator text-foundation-orange-normal text-[24px]"></i>
+      {{ 'AUTO_FINANCE_CALCULATOR' | translate }}
+    </h3>
+  </div>
+
+  <!-- Description -->
+  <p class="text-foundation-gray-normal font-inter text-[17px] leading-7 font-medium">
+    {{ 'CALCULATOR_DESCRIPTION' | translate }}
+  </p>
+
+  <!-- Loading Indicator -->
+  <div *ngIf="calculatorState.loading" class="flex items-center justify-center py-4">
+    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-foundation-orange-normal"></div>
+    <span class="ml-2 text-foundation-gray-normal font-medium">{{ 'CALCULATING' | translate }}</span>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="calculatorState.error" class="bg-red-50 border border-red-200 rounded-lg p-4">
+    <div class="flex items-center">
+      <i class="fa-solid fa-exclamation-triangle text-red-500 text-lg mr-2"></i>
+      <span class="text-red-700 font-medium">{{ calculatorState.error }}</span>
+    </div>
+  </div>
+
+  <!-- Inputs Wrapper -->
+  <div class="space-y-5 text-start ">
+
+    <!-- Car Price -->
+    <div class="flex flex-col gap-2 w-full">
+      <label for="carPrice" class="font-poppins text-base font-medium text-black capitalize">{{ 'CAR_PRICE' | translate
+        }}</label>
+      <div class="relative">
+        <i class="fa-solid fa-dollar-sign absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-base"></i>
+        <input id="carPrice" placeholder="{{ 'CAR_PRICE_PLACEHOLDER' | translate }}" required
+          class="w-full h-12 pl-10 pr-3 rounded-lg border border-gray-300 text-base text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-400 font-poppins transition-all duration-150"
+          type="number" min="1" [value]="calculatorState.car_price || ''" (input)="onCarPriceChange($event)">
+      </div>
+    </div>
+
+    <!-- Down Payment -->
+    <div class="flex flex-col gap-2 w-full">
+      <label for="downPayment" class="font-poppins text-base font-medium text-black capitalize">{{ 'DOWN_PAYMENT' |
+        translate }}</label>
+      <div class="relative">
+        <i class="fa-solid fa-coins absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-base"></i>
+        <input id="downPayment" placeholder="{{ 'DOWN_PAYMENT_PLACEHOLDER' | translate }}" required
+          class="w-full h-12 pl-10 pr-3 rounded-lg border border-gray-300 text-base text-black placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-400 font-poppins transition-all duration-150"
+          type="number" min="0" [value]="calculatorState.down_payment || ''" (input)="onDownPaymentChange($event)">
+      </div>
+    </div>
+
+    <!-- Choose Period -->
+    <div class="flex flex-col gap-2 w-full">
+      <label for="ChoosePeriod" class="font-poppins text-base font-medium text-black capitalize">{{ 'CHOOSE_PERIOD' |
+        translate }}</label>
+      <div class="relative">
+        <i class="fa-solid fa-clock absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-base"></i>
+        <select id="ChoosePeriod" required
+          class="w-full h-12 pl-10 pr-10 rounded-lg border border-gray-300 text-black text-base font-poppins cursor-pointer appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-orange-400 transition-all duration-150"
+          [value]="calculatorState.months || ''" (change)="onPeriodChange($event)">
+          <option value="" disabled [selected]="!calculatorState.months">{{ 'SELECT_PERIOD' | translate }}</option>
+          <option value="6">{{ 'MONTHS_6' | translate }}</option>
+          <option value="12">{{ 'MONTHS_12' | translate }}</option>
+          <option value="24">{{ 'MONTHS_24' | translate }}</option>
+          <option value="36">{{ 'MONTHS_36' | translate }}</option>
+          <option value="48">{{ 'MONTHS_48' | translate }}</option>
+          <option value="60">{{ 'MONTHS_60' | translate }}</option>
+          <option value="72">{{ 'MONTHS_72' | translate }}</option>
+          <option value="84">{{ 'MONTHS_84' | translate }}</option>
+        </select>
+        <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Months RPM Component -->
+  <app-months-rpm #monthsRpmComponent [state]="state"></app-months-rpm>
+
+  <!-- Calculation Results -->
+  <div *ngIf="calculatorState.result && !calculatorState.loading"
+    class="bg-foundation-gray-light rounded-lg p-6 space-y-4">
+    <h4 class="text-lg font-semibold text-black border-b border-gray-200 pb-2">{{ 'CALCULATION_RESULTS' | translate }}
+    </h4>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+
+      <!-- Monthly Installment -->
+      <div class="flex justify-between items-center py-2 border-b border-gray-100 sm:col-span-2">
+        <span class="text-foundation-orange-normal font-medium text-lg">{{ 'MONTHLY_INSTALLMENT' | translate }}</span>
+        <span class="text-foundation-orange-normal font-bold text-xl">{{
+          formatCurrency(calculatorState.result.monthly_installment) }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="flex flex-col sm:flex-row   items-center gap-4 mt-4 mx-auto">
+
+    <!-- Reset -->
+    <button type="button" (click)="reset()" class="w-full cursor-pointer sm:w-auto h-12 sm:h-14 px-10 flex items-center justify-center gap-2 rounded-lg font-poppins text-lg font-semibold
+                   border border-foundation-orange-normal text-foundation-orange-normal bg-transparent
+                   hover:text-foundation-red-medium hover:border-foundation-red-medium transition duration-200">
+      <i class="fa-solid fa-rotate-left"></i> {{ 'RESET' | translate }}
+    </button>
+
+    <!-- Apply -->
+    <a routerLink="/finance" class="w-full cursor-pointer sm:w-auto h-12 sm:h-14 px-10 flex items-center justify-center gap-2 rounded-lg font-poppins text-lg font-semibold
+                   ant-btn-variant-solid text-white shadow-md hover:bg-foundation-orange-500 transition duration-200
+                   disabled:opacity-50 disabled:cursor-not-allowed">
+      <i class="fa-solid fa-paper-plane"></i> {{ 'APPLY_NOW' | translate }}
+    </a>
+
+  </div>
+</form>

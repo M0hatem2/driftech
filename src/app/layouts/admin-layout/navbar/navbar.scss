@@ -1,0 +1,92 @@
+.navbar {
+  height: 60px;
+  background: #1f1f1f;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+
+  .toggle-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+
+    .notification-wrapper {
+      position: relative;
+
+      i {
+        cursor: pointer;
+        font-size: 20px;
+      }
+
+      .notification-box {
+        position: absolute;
+        right: 0;
+        margin-top: 10px;
+        width: 250px;
+        background: #2b2b2b;
+        padding: 10px;
+        border-radius: 8px;
+
+        .notif-item {
+          padding: 10px 0;
+          border-bottom: 1px solid #444;
+
+          p {
+            margin: 0;
+          }
+
+          span {
+            font-size: 12px;
+            color: #aaa;
+          }
+        }
+      }
+    }
+
+    .user-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      position: relative;
+
+      img {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .user-menu {
+        position: absolute;
+        right: 0;
+        margin-top: 10px;
+        background: #2b2b2b;
+        padding: 15px;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        a {
+          color: #fff;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}

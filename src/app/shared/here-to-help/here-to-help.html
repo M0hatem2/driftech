@@ -1,0 +1,38 @@
+<section class="text-neutral-0 font-poppins py-[5.625rem]
+      bg-gradient-to-br from-red-700 via-red-600 to-red-500 relative overflow-hidden">
+
+      <!-- Soft glowing shapes -->
+      <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-10 left-10 w-40 h-40 bg-red-400/20 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 right-10 w-48 h-48 bg-red-800/20 rounded-full blur-3xl"></div>
+      </div>
+
+      <div class="relative container flex flex-col items-center justify-center gap-8 text-center z-10 px-4 mx-auto">
+
+            <!-- Title & Paragraph -->
+            <div class="space-y-4 max-w-[700px]">
+                  <h2 class="font-semibold
+                        text-white text-5xl
+                        drop-shadow-md">
+                        {{ 'HERE_TO_HELP_TITLE' | translate }}
+                  </h2>
+
+                  <p class="text-lg text-neutral-100 opacity-90 leading-relaxed">
+                        {{ 'HERE_TO_HELP_DESCRIPTION' | translate }}
+                  </p>
+            </div>
+
+            <!-- Button -->
+            <a href="/contact-us" data-discover="true" class="w-[145px] lg:w-[180px] h-[53px] flex items-center justify-center
+                  bg-white text-red-700 font-semibold rounded-xl
+                  text-[clamp(0.875rem,0.5vw+0.75rem,1rem)]
+                  shadow-lg shadow-red-900/20
+                  border border-transparent
+                  transition-all duration-200 ease-linear
+                  hover:scale-105 hover:text-white
+                  hover:bg-red-600 hover:border-red-300
+                  hover:shadow-red-600/40">
+                  {{ 'CONTACT_US_BUTTON' | translate }}
+            </a>
+      </div>
+</section>

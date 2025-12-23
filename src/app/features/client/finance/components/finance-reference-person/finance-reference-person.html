@@ -1,0 +1,160 @@
+<form class="max-w-[950px] md:min-w-[550px] mx-auto bg-white p-8 rounded-xl shadow-xl flex flex-col gap-8">
+  <!-- Section Header -->
+  <div class="text-center">
+    <h2 class="text-2xl font-bold pb-10 text-orange-500">{{ 'CHOOSE_YOUR_CAR' | translate }}</h2>
+  </div>
+
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoadingCarModels" class="flex items-center justify-center py-4">
+    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
+    <span class="ml-2 text-gray-600">{{ 'LOADING_CAR_MODELS' | translate }}</span>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded relative">
+    <span class="block sm:inline">{{ errorMessage }}</span>
+    <button type="button" (click)="refreshCarModels()" class="absolute top-0 bottom-0 right-0 px-4 py-3">
+      <i class="fas fa-sync-alt"></i>
+    </button>
+  </div>
+
+  <!-- Price Inputs -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="relative z-0 w-full mb-5 group">
+      <input type="text" name="floating_total_price" id="floating_total_price" [(ngModel)]="totalPrice"
+        (ngModelChange)="onTotalPriceChange()"
+        class="block py-2.5 px-0 w-full text-sm text-black bg-white border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer"
+        placeholder=" " required />
+      <label for="floating_total_price"
+        class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+        'MAX_MONTHLY_INSTALLMENT' | translate }}
+      </label>
+    </div>
+    <div class="relative z-0 w-full mb-5 group">
+      <input type="text" name="floating_down_payment" id="floating_down_payment" [(ngModel)]="downPayment"
+        (ngModelChange)="onDownPaymentChange()"
+        class="block py-2.5 px-0 w-full text-sm text-black bg-white border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer"
+        placeholder=" " required />
+      <label for="floating_down_payment"
+        class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+        'DOWN_PAYMENT_APPROX' | translate }}</label>
+    </div>
+  </div>
+
+  <!-- Car Details Section -->
+  <div class="space-y-4" *ngIf="!isLoadingCarModels">
+    <h5 class="text-lg font-semibold text-black">{{ 'CAR_DETAILS' | translate }}</h5>
+
+    <!-- Main Question -->
+    <div class="space-y-3">
+      <p class="text-base font-medium text-black">{{ 'SPECIFIC_CAR_QUESTION' | translate }}</p>
+
+      <div class="flex gap-6">
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input type="radio" name="hasSpecificCar" value="yes" [(ngModel)]="hasSpecificCar"
+            (ngModelChange)="onCarSelectionChange()" class="w-4 h-4 text-orange-500">
+          <span class="text-black">{{ 'YES' | translate }}</span>
+        </label>
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input type="radio" name="hasSpecificCar" value="no" [(ngModel)]="hasSpecificCar"
+            (ngModelChange)="onCarSelectionChange()" class="w-4 h-4 text-orange-500">
+          <span class="text-black">{{ 'NO' | translate }}</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- If YES - Specific Car Details -->
+    <div *ngIf="hasSpecificCar === 'yes'" class="space-y-4">
+      <h6 class="text-base font-medium text-black">{{ 'SPECIFIC_CAR_DETAILS' | translate }}</h6>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Car Brand -->
+        <div class="relative z-0 w-full mb-5 group">
+          <input type="text" name="floating_specific_car_brand" id="floating_specific_car_brand"
+            [(ngModel)]="specificCarBrand" (ngModelChange)="onSpecificCarBrandChange()"
+            class="block py-2.5 px-0 w-full text-sm text-black bg-white border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer"
+            placeholder=" " required />
+          <label for="floating_specific_car_brand"
+            class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+            'SELECT_CAR_BRAND' | translate }}</label>
+        </div>
+
+        <!-- Car Model -->
+        <div class="relative z-0 w-full mb-5 group">
+          <input type="text" name="floating_specific_car_model" id="floating_specific_car_model"
+            [(ngModel)]="specificCarModel" (ngModelChange)="onSpecificCarModelChange()"
+            class="block py-2.5 px-0 w-full text-sm text-black bg-white border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer"
+            placeholder=" " required />
+          <label for="floating_specific_car_model"
+            class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+            'SELECT_CAR_MODEL' | translate }}</label>
+        </div>
+
+        <!-- Car Year -->
+        <div class="relative z-0 w-full mb-5 group">
+          <input type="text" name="floating_specific_car_year" id="floating_specific_car_year"
+            [(ngModel)]="specificCarYear" (ngModelChange)="onSpecificCarYearChange()"
+            class="block py-2.5 px-0 w-full text-sm text-black bg-white border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer"
+            placeholder=" " required />
+          <label for="floating_specific_car_year"
+            class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+            'CAR_MODEL_YEAR' | translate }}</label>
+        </div>
+
+        <!-- Car Price -->
+        <div class="relative z-0 w-full mb-5 group">
+          <input type="text" name="floating_specific_car_price" id="floating_specific_car_price"
+            [(ngModel)]="specificCarPrice" (ngModelChange)="onSpecificCarPriceChange()"
+            class="block py-2.5 px-0 w-full text-sm text-black bg-white border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer"
+            placeholder=" " required />
+          <label for="floating_specific_car_price"
+            class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+            'CAR_PRICE' | translate }}</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- If NO - Car Search Details -->
+    <div *ngIf="hasSpecificCar === 'no'" class="space-y-4">
+      <h6 class="text-base font-medium text-black">{{ 'TELL_US_CAR_TYPE' | translate }}</h6>
+
+      <div class="space-y-4">
+        <!-- Car Type Selection (Multiple) -->
+        <div>
+          <p class="text-sm text-gray-500 mb-2">{{ 'CAR_TYPES_MULTIPLE' | translate }}</p>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <label *ngFor="let carType of carTypes" class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" [value]="carType.value" [checked]="isCarTypeSelected(carType.value)"
+                (change)="onCarTypeChange(carType.value, $event.target.checked)" class="w-4 h-4 text-orange-500">
+              <span class="text-black text-sm">{{ carType.labelKey | translate }}</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Brand and Model Selection -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Search Car Brand -->
+          <div class="relative z-0 w-full mb-5 group">
+            <input type="text" name="floating_search_car_brand" id="floating_search_car_brand"
+              [(ngModel)]="searchCarBrand" (ngModelChange)="onSearchCarBrandChange()"
+              class="block py-2.5 px-0 w-full text-sm text-black bg-white border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer"
+              placeholder=" " required />
+            <label for="floating_search_car_brand"
+              class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+              'SELECT_CAR_BRAND' | translate }}</label>
+          </div>
+
+          <!-- Search Car Model -->
+          <div class="relative z-0 w-full mb-5 group">
+            <input type="text" name="floating_search_car_model" id="floating_search_car_model"
+              [(ngModel)]="searchCarModel" (ngModelChange)="onSearchCarModelChange()"
+              class="block py-2.5 px-0 w-full text-sm text-black bg-white border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer"
+              placeholder=" " required />
+            <label for="floating_search_car_model"
+              class="absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-orange-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">{{
+              'SELECT_CAR_MODEL' | translate }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

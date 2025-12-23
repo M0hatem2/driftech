@@ -1,0 +1,13 @@
+ <div *ngIf="isHttpLoading" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-[9999] flex items-center justify-center">
+      <div class="relative flex items-center justify-center w-32 h-32">
+             <span class="absolute w-32 h-32 rounded-full border-4 border-orange-200 animate-pulse opacity-40"></span>
+             <span
+                  class="absolute w-28 h-28 rounded-full border-4 border-orange-500 border-t-transparent animate-spin"></span>
+             <span
+                  class="absolute w-20 h-20 rounded-full bg-gradient-to-tr from-orange-300 via-orange-100 to-white opacity-40 blur-sm"></span>
+             <img src="Artboard 1 copy 3.png" alt="" class="relative w-16 h-16 object-contain drop-shadow-lg z-10">
+      </div>
+</div>
+
+ <router-outlet></router-outlet>
+<app-chat-bot></app-chat-bot>

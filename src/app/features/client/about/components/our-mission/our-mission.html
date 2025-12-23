@@ -1,0 +1,129 @@
+<section class="bg-neutral-0 py-20 max-w-[1200px] mx-auto px-4 md:px-6" (animateOnScroll)="onAnimate()"
+      [@scrollFadeUp]="animationState">
+      <div class="container space-y-20">
+
+            <!-- MISSION & VISION -->
+            <div class="flex flex-col items-center justify-center gap-10 lg:flex-row-reverse">
+
+                  <!-- Image -->
+                  <div class="rounded-3xl overflow-hidden shadow-lg lg:basis-1/2">
+                        <img src="logo.svg" alt="About us section"
+                              class="lg:w-full lg:h-auto object-contain p-6 w-100 h-60" />
+                  </div>
+
+                  <!-- Text -->
+                  <div class="font-inter space-y-5 text-center lg:basis-1/2 lg:text-start">
+                        <h2 class="text-foundation-brown-darker font-semibold
+           text-[clamp(1.75rem,1.3vw+1.3rem,2.25rem)]
+           leading-[clamp(2rem,1.5vw+1.6rem,2.7rem)]">
+                              {{ 'OUR_MISSION_VISION' | translate }}
+                        </h2>
+
+                        <p class="text-foundation-gray-normal-active text-[clamp(1.1rem,0.4vw+1rem,1.35rem)]
+           leading-[clamp(1.6rem,1vw+1.5rem,2.1rem)] text-pretty">
+                              {{ 'OUR_MISSION_VISION_DESC' | translate }}
+                        </p>
+                  </div>
+            </div>
+
+            <!-- WHY CHOOSE US -->
+            <div class="space-y-10">
+                  <div class="text-center space-y-4">
+                        <h2 class="text-foundation-brown-darker font-semibold
+           text-[clamp(1.75rem,1.3vw+1.3rem,2.25rem)]
+           leading-[clamp(2rem,1.5vw+1.6rem,2.7rem)]">
+                              {{ 'WHY_CHOOSE_PLATFORM' | translate }}
+                        </h2>
+
+                        <h4 class="text-foundation-gray-normal-hover
+           text-[clamp(1.05rem,0.4vw+1rem,1.25rem)]
+           leading-[clamp(1.45rem,1vw+1.4rem,1.9rem)]">
+                              {{ 'WHY_CHOOSE_DESC' | translate }}
+                        </h4>
+                  </div>
+
+                  <!-- GRID -->
+                  <div class="grid gap-12 lg:grid-cols-2 xl:grid-cols-4">
+
+                        <!-- Card 1 -->
+                        <div class="font-poppins flex flex-col items-center gap-6 text-center">
+                              <div class="w-20 h-20 rounded-full flex items-center justify-center 
+                  bg-gradient-to-br from-red-600/20 to-red-400/20
+                  shadow-md shadow-red-500/20 backdrop-blur-sm">
+                                    <i class="fa-solid fa-shield-halved text-red-600 text-4xl"></i>
+                              </div>
+
+                              <div class="space-y-2">
+                                    <h4 class="text-foundation-brown-normal font-semibold
+                                    text-[clamp(1.2rem,0.4vw+1.1rem,1.45rem)]">
+                                          {{ 'TRUSTED_SECURE' | translate }}
+                                    </h4>
+                                    <h5 class="text-foundation-gray-normal font-medium">
+                                          {{ 'TRUSTED_SECURE_DESC' | translate }}
+                                    </h5>
+                              </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="font-poppins flex flex-col items-center gap-6 text-center">
+                              <div class="w-20 h-20 rounded-full flex items-center justify-center 
+                  bg-gradient-to-br from-red-600/20 to-red-400/20
+                  shadow-md shadow-red-500/20 backdrop-blur-sm">
+                                    <i class="fa-solid fa-car text-red-600 text-4xl"></i>
+                              </div>
+
+                              <div class="space-y-2">
+                                    <h4 class="text-foundation-brown-normal font-semibold
+                                    text-[clamp(1.2rem,0.4vw+1.1rem,1.45rem)]">
+                                          {{ 'VAST_SELECTION' | translate }}
+                                    </h4>
+                                    <h5 class="text-foundation-gray-normal font-medium">
+                                          {{ 'VAST_SELECTION_DESC' | translate }}
+                                    </h5>
+                              </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="font-poppins flex flex-col items-center gap-6 text-center">
+                              <div class="w-20 h-20 rounded-full flex items-center justify-center 
+                  bg-gradient-to-br from-red-600/20 to-red-400/20
+                  shadow-md shadow-red-500/20 backdrop-blur-sm">
+                                    <i class="fa-solid fa-bolt text-red-600 text-4xl"></i>
+                              </div>
+
+                              <div class="space-y-2">
+                                    <h4 class="text-foundation-brown-normal font-semibold
+                                    text-[clamp(1.2rem,0.4vw+1.1rem,1.45rem)]">
+                                          {{ 'SIMPLE_PROCESS' | translate }}
+                                    </h4>
+                                    <h5 class="text-foundation-gray-normal font-medium">
+                                          {{ 'SIMPLE_PROCESS_DESC' | translate }}
+                                    </h5>
+                              </div>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div class="font-poppins flex flex-col items-center gap-6 text-center">
+                              <div class="w-20 h-20 rounded-full flex items-center justify-center 
+                  bg-gradient-to-br from-red-600/20 to-red-400/20
+                  shadow-md shadow-red-500/20 backdrop-blur-sm">
+                                    <i class="fa-solid fa-headset text-red-600 text-4xl"></i>
+                              </div>
+
+                              <div class="space-y-2">
+                                    <h4 class="text-foundation-brown-normal font-semibold
+                                    text-[clamp(1.2rem,0.4vw+1.1rem,1.45rem)]">
+                                          {{ 'SUPPORT_24_7' | translate }}
+                                    </h4>
+                                    <h5 class="text-foundation-gray-normal font-medium">
+                                          {{ 'SUPPORT_24_7_DESC' | translate }}
+                                    </h5>
+                              </div>
+                        </div>
+
+                  </div>
+
+            </div>
+
+      </div>
+</section>

@@ -1,0 +1,53 @@
+// Account Layout Styles
+.account-layout {
+      min-height: 100vh;
+      background-color: #f9fafb;
+}
+
+// Sidebar customizations
+.sidebar-nav {
+      .nav-item {
+            transition: all 0.2s ease-in-out;
+
+            &:hover {
+                  background-color: #f3f4f6;
+                  transform: translateX(2px);
+            }
+
+            &.active {
+                  background-color: #dbeafe;
+                  color: #1d4ed8;
+                  border-right: 2px solid #1d4ed8;
+            }
+      }
+}
+
+// Mobile responsive adjustments
+@media (max-width: 768px) {
+      .mobile-tabs {
+            .tab-item {
+                  padding: 0.75rem 0.5rem;
+
+                  &.active {
+                        color: #1d4ed8;
+                        border-bottom: 2px solid #1d4ed8;
+                  }
+            }
+      }
+}
+
+// RTL Support
+[dir="rtl"] {
+      .sidebar-nav {
+            .nav-item {
+                  &:hover {
+                        transform: translateX(-2px);
+                  }
+
+                  &.active {
+                        border-right: none;
+                        border-left: 2px solid #1d4ed8;
+                  }
+            }
+      }
+}

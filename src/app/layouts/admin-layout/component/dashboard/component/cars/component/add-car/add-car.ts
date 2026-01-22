@@ -164,8 +164,7 @@ export class AddCar implements OnInit, OnDestroy, AfterViewInit {
       initFlowbite();
       this.setupProfessionalAccordion();
     } catch (error) {
-      console.warn('Flowbite initialization failed, using manual setup:', error);
-      this.setupProfessionalAccordion();
+       this.setupProfessionalAccordion();
     }
   }
 
@@ -367,13 +366,11 @@ export class AddCar implements OnInit, OnDestroy, AfterViewInit {
   // Part2 Integration Methods
   public onPart2DataChange(data: CarPart2Data): void {
     this.part2Data = { ...data };
-    console.log('Part2 data changed:', this.part2Data);
-  }
+   }
 
   public onPart2ValidityChange(isValid: boolean): void {
     this.isPart2Valid = isValid;
-    console.log('Part2 validity changed:', isValid);
-  }
+   }
 
   public onPart2SaveAndContinue(): void {
     // Move to next accordion section
@@ -393,8 +390,7 @@ export class AddCar implements OnInit, OnDestroy, AfterViewInit {
         ...this.part2Data,
       };
 
-      console.log('Complete car data to be submitted:', completeCarData);
-
+ 
       // Simulate API call
       setTimeout(() => {
         this.isSubmitting = false;

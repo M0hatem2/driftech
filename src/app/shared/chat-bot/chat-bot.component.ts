@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { AuthService } from '../../features/auth/services/auth.service';
 import { ChatBotService, QuizQuestion, QuizAnswer } from './chat-bot.service';
 import { ChatVisibilityService } from '../../shared/services/chat-visibility.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../features/auth/services/auth.service';
 
 @Component({
   selector: 'app-chat-bot',
@@ -39,10 +39,15 @@ export class ChatBotComponent implements OnInit, OnDestroy {
   private readonly QUIZ_SUBMITTED_KEY = 'quiz_submitted';
   private autoCloseTimer: any = null;
 
+  // Initial greeting state
+  showInitialGreeting = false;
+  private delayTimer: any = null;
+  quizDataLoaded = false;
+
   constructor(
     private authService: AuthService,
     private chatBotService: ChatBotService,
-    private chatVisibilityService: ChatVisibilityService
+    private chatVisibilityService: ChatVisibilityService,
   ) {}
 
   ngOnInit() {
@@ -58,11 +63,11 @@ export class ChatBotComponent implements OnInit, OnDestroy {
         if (isOpen && this.isAuthenticated && !this.isQuizMode) {
           if (this.hasSubmittedQuiz) {
             this.showSubmittedMessage();
-          } else {
-            this.startQuiz();
+          } else if (!this.showInitialGreeting) {
+            this.initializeGreeting();
           }
         }
-      })
+      }),
     );
 
     // Check if quiz has been submitted
@@ -76,12 +81,19 @@ export class ChatBotComponent implements OnInit, OnDestroy {
     }
     // Clear auto-close timer
     this.clearAutoCloseTimer();
+    // Clear delay timer
+    this.clearDelayTimer();
   }
 
   toggleChat() {
     this.isChatOpen = !this.isChatOpen;
     if (this.isChatOpen) {
       this.chatVisibilityService.openChat();
+      // Load quiz data immediately when chat opens (only once)
+      if (!this.quizDataLoaded && !this.hasSubmittedQuiz) {
+        this.loadQuizData();
+        this.quizDataLoaded = true;
+      }
       // If quiz was submitted, start auto-close timer
       if (this.hasSubmittedQuiz) {
         this.startAutoCloseTimer();
@@ -92,28 +104,17 @@ export class ChatBotComponent implements OnInit, OnDestroy {
     }
   }
 
-  sendMessage() {
-    if (this.newMessage.trim()) {
-      this.messages.push({ text: this.newMessage, sender: 'me' });
-      this.newMessage = '';
-      // رد تلقائي بعد ثانية
-      setTimeout(() => {
-        this.messages.push({ text: 'Got it! We’ll reply soon.', sender: 'bot' });
-      }, 1000);
-    }
-  }
-
-  startQuiz() {
+  loadQuizData() {
     this.isLoading = true;
+    console.log('Starting to load quiz data...');
     this.chatBotService.getQuiz().subscribe({
       next: (response) => {
-        if (response.status && response.data.items) {
+        console.log('Quiz response received:', response);
+        if (response.status && response.data && response.data.items) {
           this.quizQuestions = Object.values(response.data.items);
-          this.isQuizMode = true;
-          this.currentQuestionIndex = 0;
-          this.currentAnswer = '';
-          this.answers = {};
-          this.messages = [{ text: "Let's start the quiz!", sender: 'bot' }];
+          console.log('Questions loaded successfully:', this.quizQuestions.length, 'questions');
+        } else {
+          console.warn('Invalid response structure:', response);
         }
         this.isLoading = false;
       },
@@ -128,8 +129,49 @@ export class ChatBotComponent implements OnInit, OnDestroy {
     });
   }
 
-  get currentQuestion(): QuizQuestion | null {
-    return this.quizQuestions[this.currentQuestionIndex] || null;
+  sendMessage() {
+    if (this.newMessage.trim()) {
+      this.messages.push({ text: this.newMessage, sender: 'me' });
+      this.newMessage = '';
+      // رد تلقائي بعد ثانية
+      setTimeout(() => {
+        this.messages.push({ text: 'Got it! We’ll reply soon.', sender: 'bot' });
+      }, 1000);
+    }
+  }
+  initializeGreeting() {
+    this.showInitialGreeting = true;
+    this.messages = [
+      {
+        text: "Hello, I'm Yahya, let me help you find your car.",
+        sender: 'bot',
+      },
+    ];
+  }
+  startQuiz() {
+    // Add "start" message to chat
+    this.messages.push({ text: 'start', sender: 'me' });
+    this.showInitialGreeting = false;
+
+    // Check if questions are loaded
+    console.log('Questions before delay:', this.quizQuestions.length);
+
+    // After 2 seconds, show questions (data should be loaded)
+    this.delayTimer = setTimeout(() => {
+      if (this.quizQuestions && this.quizQuestions.length > 0) {
+        this.isQuizMode = true;
+        this.currentQuestionIndex = 0;
+        this.currentAnswer = '';
+        this.answers = {};
+        console.log('Quiz mode activated with', this.quizQuestions.length, 'questions');
+      } else {
+        console.error('No questions loaded!');
+        this.messages.push({
+          text: 'Error: No questions available. Please refresh.',
+          sender: 'bot',
+        });
+      }
+    }, 2000);
   }
 
   selectOption(option: string) {
@@ -141,6 +183,10 @@ export class ChatBotComponent implements OnInit, OnDestroy {
     if (this.currentAnswer.trim()) {
       this.submitAnswer();
     }
+  }
+
+  get currentQuestion(): QuizQuestion | null {
+    return this.quizQuestions[this.currentQuestionIndex] || null;
   }
 
   submitAnswer() {
@@ -172,7 +218,6 @@ export class ChatBotComponent implements OnInit, OnDestroy {
         this.startAutoCloseTimer();
       },
       error: (error) => {
-        console.error('Error submitting quiz:', error);
         this.messages.push({
           text: 'There was an error submitting your answers. Please try again.',
           sender: 'bot',
@@ -228,6 +273,13 @@ export class ChatBotComponent implements OnInit, OnDestroy {
     if (this.autoCloseTimer) {
       clearTimeout(this.autoCloseTimer);
       this.autoCloseTimer = null;
+    }
+  }
+
+  private clearDelayTimer() {
+    if (this.delayTimer) {
+      clearTimeout(this.delayTimer);
+      this.delayTimer = null;
     }
   }
 }

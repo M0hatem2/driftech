@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   WhichDrifterCard,
@@ -19,12 +19,16 @@ import { AnimateOnScrollDirective } from '../../../../../shared/directives/anima
 })
 export class HomeWhichDrifter implements OnInit, OnDestroy {
   whichDrifterCards: WhichDrifterCardData[] = [];
-  showPopup = false;
-  selectedCard: WhichDrifterCardData | null = null;
   private langChangeSubscription: Subscription = new Subscription();
   animationState: 'hidden' | 'visible' = 'hidden';
 
-  constructor(private translate: TranslateService, private router: Router) {}
+  @Output() cardClicked = new EventEmitter<WhichDrifterCardData>();
+  @Output() cardButtonClicked = new EventEmitter<WhichDrifterCardData>();
+
+  constructor(
+    private translate: TranslateService,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.loadTranslatedCards();
@@ -102,32 +106,10 @@ export class HomeWhichDrifter implements OnInit, OnDestroy {
   }
 
   onCardClick(card: WhichDrifterCardData) {
-    this.selectedCard = card;
-    this.showPopup = true;
+    this.cardClicked.emit(card);
   }
 
   onCardButtonClick(card: WhichDrifterCardData) {
-    // Navigate to different routes based on card type
-    switch (card.kind) {
-      case 'drift_now':
-        this.router.navigate(['/finance'], { queryParams: { type: 'drift-now' } });
-        break;
-      case 'trade_in':
-        this.router.navigate(['/finance'], { queryParams: { type: 'trade-in' } });
-        break;
-      case 'drift_fleet':
-        this.router.navigate(['/finance'], { queryParams: { type: 'fleet' } });
-        break;
-      case 'drift_save':
-        this.router.navigate(['/finance'], { queryParams: { type: 'save' } });
-        break;
-      default:
-        this.router.navigate(['/finance']);
-    }
-  }
-
-  closePopup() {
-    this.showPopup = false;
-    this.selectedCard = null;
+    this.cardButtonClicked.emit(card);
   }
 }

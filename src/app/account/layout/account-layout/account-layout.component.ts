@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../../features/auth/services/auth.service';
-
+ 
 @Component({
   selector: 'app-account-layout',
   standalone: false,

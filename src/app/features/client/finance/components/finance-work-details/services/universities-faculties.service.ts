@@ -29,16 +29,13 @@ export class UniversitiesFacultiesService {
       return this.universities$;
     }
 
-    console.log('Loading universities from API...');
-    return this.http.get<University[]>(`${this.BASE_URL}/universities`).pipe(
+     return this.http.get<University[]>(`${this.BASE_URL}/universities`).pipe(
       tap(universities => {
-        console.log('Universities loaded:', universities);
-        this.universitiesSubject.next(universities);
+         this.universitiesSubject.next(universities);
         this.universitiesLoaded = true;
       }),
       catchError(error => {
-        console.error('Error loading universities:', error);
-        this.universitiesSubject.next([]);
+         this.universitiesSubject.next([]);
         return of([]);
       })
     );
@@ -52,16 +49,13 @@ export class UniversitiesFacultiesService {
       return this.faculties$;
     }
 
-    console.log('Loading faculties from API...');
-    return this.http.get<Faculty[]>(`${this.BASE_URL}/faculties`).pipe(
+     return this.http.get<Faculty[]>(`${this.BASE_URL}/faculties`).pipe(
       tap(faculties => {
-        console.log('Faculties loaded:', faculties);
-        this.facultiesSubject.next(faculties);
+         this.facultiesSubject.next(faculties);
         this.facultiesLoaded = true;
       }),
       catchError(error => {
-        console.error('Error loading faculties:', error);
-        this.facultiesSubject.next([]);
+         this.facultiesSubject.next([]);
         return of([]);
       })
     );

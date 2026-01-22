@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../features/auth/services/auth.service';
-
+ 
 @Component({
   selector: 'app-account-popup',
   standalone: true,

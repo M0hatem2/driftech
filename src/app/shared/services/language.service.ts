@@ -43,8 +43,7 @@ export class LanguageService {
           document.body.classList.remove('rtl');
         }
       } catch (error) {
-        console.warn('localStorage not available:', error);
-      }
+       }
     }
   }
 

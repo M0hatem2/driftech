@@ -56,8 +56,7 @@ export class Footer implements OnInit {
         this.loading = false;
       },
       error: (error: any) => {
-        console.error('Error loading contact info in footer:', error);
-        this.error = 'An error occurred while loading contact information';
+         this.error = 'An error occurred while loading contact information';
         this.loading = false;
       }
     });

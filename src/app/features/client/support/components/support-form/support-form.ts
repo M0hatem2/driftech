@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { AuthService } from '../../../../auth/services/auth.service';
-import { HelpRequestService, HelpRequestData } from '../../services/help-request.service';
+ import { HelpRequestService, HelpRequestData } from '../../services/help-request.service';
 import { LoginRequiredPopupComponent } from '../../../../auth/components/login-required-popup/login-required-popup.component';
+import { AuthService } from '../../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-support-form',
@@ -83,8 +83,7 @@ export class SupportForm implements OnInit {
       },
       error: (error) => {
         this.isSubmitting = false;
-        console.error('Error submitting help request:', error);
-        this.submitError = 'An error occurred while submitting your request. Please try again.';
+         this.submitError = 'An error occurred while submitting your request. Please try again.';
       },
     });
   }

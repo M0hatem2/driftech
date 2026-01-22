@@ -50,8 +50,7 @@ export class WorkDetailsStateService {
     const currentData = this.formDataSubject.value;
     const updatedData = { ...currentData, ...data };
     this.formDataSubject.next(updatedData);
-    console.log('Work details form data updated:', updatedData);
-  }
+   }
 
   /**
    * Update specific field
@@ -84,8 +83,7 @@ export class WorkDetailsStateService {
   clearFormData(): void {
     this.formDataSubject.next({ ...this.defaultData });
     this.clearStorage();
-    console.log('Work details form data cleared');
-  }
+   }
 
   /**
    * Reset to default state
@@ -101,8 +99,7 @@ export class WorkDetailsStateService {
     try {
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
     } catch (error) {
-      console.warn('Could not save to localStorage:', error);
-    }
+     }
   }
 
   /**
@@ -113,12 +110,10 @@ export class WorkDetailsStateService {
       const stored = localStorage.getItem(this.STORAGE_KEY);
       if (stored) {
         const parsedData = JSON.parse(stored);
-        console.log('Loaded work details form data from storage:', parsedData);
-        return { ...this.defaultData, ...parsedData };
+         return { ...this.defaultData, ...parsedData };
       }
     } catch (error) {
-      console.warn('Could not load from localStorage:', error);
-    }
+     }
     return { ...this.defaultData };
   }
 
@@ -129,8 +124,7 @@ export class WorkDetailsStateService {
     try {
       localStorage.removeItem(this.STORAGE_KEY);
     } catch (error) {
-      console.warn('Could not clear localStorage:', error);
-    }
+     }
   }
 
   /**

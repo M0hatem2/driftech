@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ProfileService } from './services/profile.service';
 import { User } from './models/profile.interface';
 import { AuthService } from '../../../features/auth/services/auth.service';
-
+ 
 @Component({
   selector: 'app-profile',
   standalone: true,

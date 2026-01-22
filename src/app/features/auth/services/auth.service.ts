@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError, BehaviorSubject } from 'rxjs';
+import { Observable, throwError, BehaviorSubject, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
+import { Router } from '@angular/router';
 
 export interface User {
   id: number;
@@ -26,23 +27,26 @@ export interface AuthResponse {
 })
 export class AuthService {
   private apiUrl = environment.apiUrl;
-  private readonly token = 'auth_token';
-  private readonly REFRESH_token = 'refresh_token';
+
+  private readonly TOKEN_KEY = 'auth_token';
+  private readonly REFRESH_TOKEN_KEY = 'refresh_token';
   private readonly USER_KEY = 'user_data';
 
-  // Authentication state observable
+  // 🔑 Single source of truth for auth state
   private authStateSubject = new BehaviorSubject<boolean>(this.isAuthenticated());
-  public authState$ = this.authStateSubject.asObservable();
+  authState$ = this.authStateSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,  private router: Router) {}
 
-  login(email: string, password: string): Observable<any> {
-    // Send both email and phone fields for API compatibility
-    // The API might use either field for authentication
-    return this.http.post(`${this.apiUrl}auth/login`, {
-      email: email,
-      phone: null, // Explicitly set phone to null since we're using email
-      password: password,
+  /* =========================
+     AUTH API CALLS
+  ========================== */
+
+  login(email: string, password: string): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.apiUrl}auth/login`, {
+      email,
+      phone: null,
+      password,
     });
   }
 
@@ -54,147 +58,175 @@ export class AuthService {
     if (!this.isBrowser()) {
       return throwError(() => new Error('Not running in browser'));
     }
-    const refreshToken = localStorage.getItem(this.REFRESH_token);
+
+    const refreshToken = localStorage.getItem(this.REFRESH_TOKEN_KEY);
+    if (!refreshToken) {
+      this.logout();
+      return throwError(() => new Error('No refresh token'));
+    }
+
     return this.http
       .post<{ token: string }>(`${this.apiUrl}auth/refresh`, {
         refresh_token: refreshToken,
       })
       .pipe(
         map((response) => {
-          const newToken = response.token;
-          localStorage.setItem(this.token, newToken);
-          return newToken;
+          localStorage.setItem(this.TOKEN_KEY, response.token);
+          this.authStateSubject.next(true);
+          return response.token;
         })
       );
   }
 
-  sendOtp(phone: string, isForgotPass: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}auth/send-otp`, {
-      phone: phone,
-      isForgotPass: isForgotPass,
-    });
+  /* =========================
+     TOKEN HANDLING
+  ========================== */
+
+  getToken(): string | null {
+    if (!this.isBrowser()) return null;
+    return localStorage.getItem(this.TOKEN_KEY);
   }
 
-  verifyOtp(email: string, otp: number): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}auth/verifyOtp`, {
-      email: email,
-      otp: otp,
-    });
+  private decodeToken(token: string): any | null {
+    try {
+      const payload = token.split('.')[1];
+      const decoded = atob(payload);
+      return JSON.parse(decoded);
+    } catch {
+      return null;
+    }
   }
 
-  completeProfile(profileData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}complete-profile`, profileData);
+  isTokenExpired(token: string): boolean {
+    const decoded = this.decodeToken(token);
+    if (!decoded || !decoded.exp) return true;
+
+    const now = Math.floor(Date.now() / 1000);
+    return decoded.exp < now;
   }
 
-  updatePhone(newPhone: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}auth/update-phone`, {
-      new_phone: newPhone,
-      password: password,
-    });
+  /* =========================
+     AUTH STATE
+  ========================== */
+
+  isAuthenticated(): boolean {
+    const token = this.getToken();
+    if (!token) return false;
+
+    if (this.isTokenExpired(token)) {
+      this.logout();
+      return false;
+    }
+
+    return true;
   }
 
-  // Store user data separately (for profile updates)
+  checkTokenOnStartup(): void {
+    const isAuth = this.isAuthenticated();
+    this.authStateSubject.next(isAuth);
+  }
+
+  /* =========================
+     STORAGE
+  ========================== */
+
+  storeAuthData(authResponse: AuthResponse): void {
+    if (!this.isBrowser()) return;
+
+    localStorage.setItem(this.TOKEN_KEY, authResponse.token);
+    localStorage.setItem(this.REFRESH_TOKEN_KEY, authResponse.refresh_token);
+    localStorage.setItem(this.USER_KEY, JSON.stringify(authResponse.user));
+
+    this.authStateSubject.next(true);
+  }
+
   storeUserData(user: User): void {
     if (!this.isBrowser()) return;
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
   }
 
-  // Store authentication data in localStorage
-  storeAuthData(authResponse: AuthResponse): void {
-    if (!this.isBrowser()) return;
-
-   
-
-    localStorage.setItem(this.token, authResponse.token);
-    localStorage.setItem(this.REFRESH_token, authResponse.refresh_token);
-    localStorage.setItem(this.USER_KEY, JSON.stringify(authResponse.user));
-
-    
-    // Emit authentication state change
-    this.authStateSubject.next(true);
-  }
-
-  // Check if running in browser environment
-  private isBrowser(): boolean {
-    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
-  }
-
-  // Get stored token
-  getToken(): string | null {
-    if (!this.isBrowser()) return null;
-    return localStorage.getItem(this.token);
-  }
-
-  // Get stored user data
   getUser(): User | null {
     if (!this.isBrowser()) return null;
     const userData = localStorage.getItem(this.USER_KEY);
     return userData ? JSON.parse(userData) : null;
   }
 
-  // Check if user is authenticated
-  isAuthenticated(): boolean {
-    const token = this.getToken();
-    const isAuth = !!token;
+  /* =========================
+     LOGOUT
+  ========================== */
 
-    // Debug logging - remove this in production
-
-    return isAuth;
-  }
-
-  // Clear authentication data
   logout(): void {
     if (!this.isBrowser()) return;
-    localStorage.removeItem(this.token);
-    localStorage.removeItem(this.REFRESH_token);
-    localStorage.removeItem(this.USER_KEY);
 
- 
-    // Emit authentication state change
+    localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(this.REFRESH_TOKEN_KEY);
+    localStorage.removeItem(this.USER_KEY);
+    this.router.navigate(['/']);  
     this.authStateSubject.next(false);
   }
 
-  // Wait for authentication to be properly set (useful for timing issues)
-  waitForAuth(timeout: number = 5000): Promise<boolean> {
-    return new Promise((resolve) => {
-      const startTime = Date.now();
+  /* =========================
+     UTILITIES
+  ========================== */
 
-      const checkAuth = () => {
-        const isAuth = this.isAuthenticated();
-
-        if (isAuth || Date.now() - startTime > timeout) {
-           resolve(isAuth);
-          return;
-        }
-
-        setTimeout(checkAuth, 100);
-      };
-
-      checkAuth();
-    });
+  private isBrowser(): boolean {
+    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
   }
 
-  // Clear potentially stale authentication data
   clearStaleAuthData(): void {
     if (!this.isBrowser()) return;
 
-    const token = localStorage.getItem(this.token);
+    const token = localStorage.getItem(this.TOKEN_KEY);
     const userData = localStorage.getItem(this.USER_KEY);
 
-    // Check if data exists but might be corrupted
     if (token && (token === 'null' || token === 'undefined' || token.length < 10)) {
-       localStorage.removeItem(this.token);
+      localStorage.removeItem(this.TOKEN_KEY);
     }
 
     if (userData && (userData === 'null' || userData === 'undefined')) {
-       localStorage.removeItem(this.USER_KEY);
-      localStorage.removeItem(this.REFRESH_token);
+      localStorage.removeItem(this.USER_KEY);
+      localStorage.removeItem(this.REFRESH_TOKEN_KEY);
     }
   }
 
-  // Force recheck authentication with cleanup
   forceAuthCheck(): boolean {
     this.clearStaleAuthData();
-    return this.isAuthenticated();
+    const isAuth = this.isAuthenticated();
+    this.authStateSubject.next(isAuth);
+    return isAuth;
   }
+updatePhone(newPhone: string, password: string): Observable<any> {
+  return this.http.post(`${this.apiUrl}auth/update-phone`, {
+    new_phone: newPhone,
+    password: password,
+  });
+}
+
+completeProfile(profileData: any): Observable<any> {
+  return this.http.post(`${this.apiUrl}complete-profile`, profileData);
+}
+
+verifyOtp(email: string, otp: number): Observable<AuthResponse> {
+  return this.http.post<AuthResponse>(`${this.apiUrl}auth/verifyOtp`, {
+    email: email,
+    otp: otp,
+  });
+}
+
+waitForAuth(timeout: number = 5000): Promise<boolean> {
+  return new Promise((resolve) => {
+    const startTime = Date.now();
+
+    const checkAuth = () => {
+      const isAuth = this.isAuthenticated();
+      if (isAuth || Date.now() - startTime > timeout) {
+        resolve(isAuth);
+        return;
+      }
+      setTimeout(checkAuth, 100);
+    };
+
+    checkAuth();
+  });
+}
 }

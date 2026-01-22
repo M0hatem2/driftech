@@ -55,8 +55,7 @@ export class ContactUsCards implements OnInit {
         this.loading = false;
       },
       error: (error: any) => {
-        console.error('Error fetching contact info:', error);
-        this.error = 'An error occurred while fetching contact information';
+         this.error = 'An error occurred while fetching contact information';
         this.loading = false;
       }
     });

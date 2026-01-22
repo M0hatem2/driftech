@@ -38,8 +38,7 @@ export class SupportContent implements OnInit {
         this.loading = false;
       },
       error: (error) => {
-        console.error('Error loading contact info:', error);
-        this.error = 'An error occurred while loading contact information';
+         this.error = 'An error occurred while loading contact information';
         this.loading = false;
       },
     });

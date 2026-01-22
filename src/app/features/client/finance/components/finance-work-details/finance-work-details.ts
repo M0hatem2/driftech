@@ -47,8 +47,7 @@ export class FinanceWorkDetails implements OnInit, OnDestroy {
     this.workExperience = savedData.workExperience || '';
     this.workAddress = savedData.workAddress || '';
     this.workPhone = savedData.workPhone || '';
-    console.log('Loaded saved work details form data:', savedData);
-  }
+   }
 
   /**
    * Subscribe to form data changes from state service
@@ -57,8 +56,7 @@ export class FinanceWorkDetails implements OnInit, OnDestroy {
     this.stateService.formData$
       .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
-        console.log('Work details form data changed from state service:', data);
-        this.occupationType = data.occupationType || '';
+         this.occupationType = data.occupationType || '';
         this.jobTitle = data.jobTitle || '';
         this.monthlyIncome = data.monthlyIncome || '';
         this.workExperience = data.workExperience || '';
@@ -121,12 +119,10 @@ export class FinanceWorkDetails implements OnInit, OnDestroy {
    */
   onSubmit(): void {
     if (this.isFormValid()) {
-      console.log('Form submitted successfully:', this.getFormData());
-      // Add navigation logic here or emit event to parent component
+       // Add navigation logic here or emit event to parent component
       // this.stateService.submitForm();
     } else {
-      console.warn('Form validation failed');
-      // You could add visual feedback for invalid form here
+       // You could add visual feedback for invalid form here
     }
   }
 
@@ -134,8 +130,7 @@ export class FinanceWorkDetails implements OnInit, OnDestroy {
    * Handle navigation to previous step
    */
   onPrevious(): void {
-    console.log('Navigating to previous step');
-    // Add navigation logic here or emit event to parent component
+     // Add navigation logic here or emit event to parent component
     // this.stateService.navigateToPrevious();
   }
 

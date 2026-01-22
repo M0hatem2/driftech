@@ -193,8 +193,7 @@ export class DriftechVlogsCards implements OnInit, OnDestroy, AfterViewInit {
             // Clean up canvas
             canvas.remove();
           } catch (error) {
-            console.warn('Canvas export failed (likely CORS), trying fallback thumbnail:', error);
-            this.tryFallbackThumbnail(vlog, videoSrc || '');
+             this.tryFallbackThumbnail(vlog, videoSrc || '');
           }
         },
         { once: true }
@@ -203,13 +202,11 @@ export class DriftechVlogsCards implements OnInit, OnDestroy, AfterViewInit {
       // Add timeout in case seeking takes too long
       setTimeout(() => {
         if (vlog.isLoading) {
-          console.warn('Thumbnail extraction timeout for video:', vlog.title);
-          this.onVideoError(vlog);
+           this.onVideoError(vlog);
         }
       }, 5000);
     } catch (error) {
-      console.error('Error setting up thumbnail extraction:', error);
-      this.onVideoError(vlog);
+       this.onVideoError(vlog);
     }
   }
 
@@ -295,8 +292,7 @@ export class DriftechVlogsCards implements OnInit, OnDestroy, AfterViewInit {
       // For other sources, return null to use default thumbnail
       return null;
     } catch (error) {
-      console.warn('Error parsing video URL for thumbnail fallback:', error);
-      return null;
+       return null;
     }
   }
 

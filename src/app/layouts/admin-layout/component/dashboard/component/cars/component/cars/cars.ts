@@ -94,8 +94,7 @@ export class Cars implements OnInit {
       error: (error) => {
         this.error = 'Failed to load cars. Please try again.';
         this.loading = false;
-        console.error('Error loading cars:', error);
-      }
+       }
     });
   }
 
@@ -184,16 +183,14 @@ export class Cars implements OnInit {
         },
         error: (error) => {
           alert('Failed to delete car. Please try again.');
-          console.error('Error deleting car:', error);
-        }
+         }
       });
     }
   }
   
   viewCar(car: CarDisplay) {
     // Implement view functionality
-    console.log('Viewing car:', car);
-  }
+   }
   
   // Modal functions
   closeModal() {
@@ -237,8 +234,7 @@ export class Cars implements OnInit {
         },
         error: (error) => {
           alert('Failed to update car. Please try again.');
-          console.error('Error updating car:', error);
-        }
+         }
       });
     }
   }

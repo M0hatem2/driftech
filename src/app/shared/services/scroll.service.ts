@@ -43,8 +43,7 @@ export class ScrollService {
         this.scrollToTopInstant();
       }
     } catch (error) {
-      console.warn('Smooth scrolling failed, falling back to instant scroll:', error);
-      this.scrollToTopInstant();
+       this.scrollToTopInstant();
     }
   }
 
@@ -82,8 +81,7 @@ export class ScrollService {
           window.scrollTo(0, targetPosition);
         }
       } catch (error) {
-        console.warn('Smooth scrolling to element failed:', error);
-        window.scrollTo(0, targetPosition);
+         window.scrollTo(0, targetPosition);
       }
     }
   }

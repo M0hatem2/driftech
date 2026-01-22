@@ -14,8 +14,8 @@ import { FinanceVerificationDocuments } from '../finance-verification-documents/
 import { FinanceFinalResult } from '../finance-final-result/finance-final-result';
 import { FinanceDataCollectionService } from '../../../../../shared/services/finance-data-collection.service';
 import { FinancingRequestService } from '../../../../../shared/services/financing-request.service';
-import { AuthService } from '../../../../../features/auth/services/auth.service';
-import { LoginRequiredPopup } from '../../../../../shared/login-required-popup/login-required-popup';
+ import { LoginRequiredPopup } from '../../../../../shared/login-required-popup/login-required-popup';
+import { AuthService } from '../../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-finance-content',

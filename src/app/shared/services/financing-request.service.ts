@@ -120,31 +120,13 @@ export class FinancingRequestService {
       formDataToSubmit.append('card_back', formData.card_back, formData.card_back.name);
     }
 
-    console.log('Submitting financing request with files:', {
-      card_front: formData.card_front
-        ? {
-            name: formData.card_front.name,
-            type: formData.card_front.type,
-            size: formData.card_front.size,
-          }
-        : null,
-      card_back: formData.card_back
-        ? {
-            name: formData.card_back.name,
-            type: formData.card_back.type,
-            size: formData.card_back.size,
-          }
-        : null,
-    });
+   
 
     // Debug: Log FormData entries
-    console.log('FormData entries being sent:');
-    for (let [key, value] of formDataToSubmit.entries()) {
+     for (let [key, value] of formDataToSubmit.entries()) {
       if (value instanceof File) {
-        console.log(`${key}: File(${value.name}, ${value.size} bytes, ${value.type})`);
-      } else {
-        console.log(`${key}: ${value}`);
-      }
+       } else {
+       }
     }
 
     // Don't set Content-Type header manually - let browser set it for FormData
@@ -152,8 +134,7 @@ export class FinancingRequestService {
       .post<FinancingRequestResponse>(`${this.BASE_URL}/auth/financing-requests`, formDataToSubmit)
       .pipe(
         map((response) => {
-          console.log('Financing request response:', response);
-          return response;
+           return response;
         }),
         catchError(this.handleError)
       );
@@ -244,8 +225,7 @@ export class FinancingRequestService {
       }
     }
 
-    console.error('Financing request error:', error);
-    return throwError(() => new Error(errorMessage));
+     return throwError(() => new Error(errorMessage));
   }
 
   /**

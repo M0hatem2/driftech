@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+ import { NotificationService, Notification } from './notification.service';
 import { AuthService } from '../../features/auth/services/auth.service';
-import { NotificationService, Notification } from './notification.service';
 
 @Component({
   selector: 'app-notification-icon',
@@ -38,8 +38,7 @@ export class NotificationIcon implements OnInit {
         }
       },
       error: (error) => {
-        console.error('Error loading notifications:', error);
-      },
+       },
     });
   }
 
@@ -56,8 +55,7 @@ export class NotificationIcon implements OnInit {
         this.unreadCount = Math.max(0, this.unreadCount - 1);
       },
       error: (error) => {
-        console.error('Error marking notification as read:', error);
-      },
+       },
     });
   }
 
@@ -71,8 +69,7 @@ export class NotificationIcon implements OnInit {
         this.unreadCount = 0;
       },
       error: (error) => {
-        console.error('Error marking all notifications as read:', error);
-      },
+       },
     });
   }
 

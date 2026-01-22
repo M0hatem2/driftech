@@ -47,12 +47,9 @@ export class VlogDetailPage implements OnInit {
           // Initialize with placeholder immediately
           this.thumbnailUrl = 'assets/img/noImg.webp';
           this.showThumbnail = true;
-          console.log('Vlog loaded:', this.vlog);
-          console.log('Video URL:', this.vlog.video_url || this.vlog.videoUrl);
         }
       },
       error: (error) => {
-        console.error('Error fetching video data:', error);
         this.isLoading = false;
         this.router.navigate(['/home']);
       },
@@ -78,9 +75,7 @@ export class VlogDetailPage implements OnInit {
       } else {
         navigator.clipboard
           .writeText(`${shareText} - ${window.location.href}`)
-          .then(() => {
-            console.log('Link copied to clipboard');
-          })
+          .then(() => {})
           .catch((error) => console.log('Error copying to clipboard:', error));
       }
     }
@@ -88,30 +83,22 @@ export class VlogDetailPage implements OnInit {
 
   addToFavorites(): void {
     if (this.vlog) {
-      console.log(`Added ${this.vlog.title} to favorites`);
     }
   }
 
   generateThumbnail(video: HTMLVideoElement): void {
-    console.log('Generating thumbnail for video:', video.src);
-    console.log('Video duration:', video.duration);
-
     // Set a fallback timeout in case the video doesn't load
     const fallbackTimeout = setTimeout(() => {
-      console.log('Using fallback thumbnail due to timeout');
       this.thumbnailUrl = 'assets/img/noImg.webp';
       this.showThumbnail = true;
     }, 3000);
 
     if (video.duration && video.duration >= 1) {
-      console.log('Video has duration, seeking to 1 second');
-
       // Set video time to 1 second
       video.currentTime = 1;
 
       const handleSeeked = () => {
         clearTimeout(fallbackTimeout);
-        console.log('Video seeked to 1 second');
 
         try {
           const canvas = document.createElement('canvas');
@@ -127,12 +114,10 @@ export class VlogDetailPage implements OnInit {
             // Convert canvas to data URL
             this.thumbnailUrl = canvas.toDataURL('image/jpeg', 0.8);
             this.showThumbnail = true;
-            console.log('Thumbnail generated successfully');
           } else {
             throw new Error('Canvas context or video dimensions not available');
           }
         } catch (error) {
-          console.error('Error generating thumbnail:', error);
           // Fallback to placeholder
           this.thumbnailUrl = 'assets/img/noImg.webp';
           this.showThumbnail = true;
@@ -144,12 +129,9 @@ export class VlogDetailPage implements OnInit {
       video.addEventListener('seeked', handleSeeked);
 
       // Also listen for loadeddata to ensure video is loaded
-      video.addEventListener('loadeddata', () => {
-        console.log('Video data loaded');
-      });
+      video.addEventListener('loadeddata', () => {});
     } else {
       clearTimeout(fallbackTimeout);
-      console.log('Video too short or no duration, using fallback');
       this.thumbnailUrl = 'assets/img/noImg.webp';
       this.showThumbnail = true;
     }
@@ -193,7 +175,6 @@ export class VlogDetailPage implements OnInit {
         });
       }
     } catch (error) {
-      console.log('Canvas thumbnail failed due to CORS restrictions for external videos');
       // This will fail for external videos due to browser security restrictions
     }
   }

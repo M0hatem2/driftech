@@ -1,8 +1,9 @@
-<div class="">
+<div class="relative">
     <app-home-header></app-home-header>
     <app-home-auto-finance id="home-auto-finance"></app-home-auto-finance>
     <app-drive-home></app-drive-home>
-    <app-home-which-drifter></app-home-which-drifter>
+    <app-home-which-drifter (cardClicked)="onCardClick($event)"
+        (cardButtonClicked)="onCardButtonClick($event)"></app-home-which-drifter>
     <app-trusted-partners></app-trusted-partners>
     <app-home-second-drive-home></app-home-second-drive-home>
     <!--<app-cars-by-down-payments></app-cars-by-down-payments>-->
@@ -10,4 +11,9 @@
     <app-vehicle-financing></app-vehicle-financing>
     <app-driftech-vlogs></app-driftech-vlogs>
     <app-contact-us></app-contact-us>
+
+    <!-- Drifter Details Popup - Positioned at the top to appear above everything -->
+    <app-drifter-details-popup [showPopup]="showPopup" [selectedCard]="selectedCard" (closePopupEvent)="closePopup()"
+        (buttonClickedEvent)="onCardButtonClick($event)">
+    </app-drifter-details-popup>
 </div>

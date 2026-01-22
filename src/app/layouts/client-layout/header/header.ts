@@ -3,9 +3,9 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { LanToggle } from '../../../shared/lan-toggle/lan-toggle';
-import { AuthService } from '../../../features/auth/services/auth.service';
-import { NotificationIcon } from '../../../shared/notification-icon/notification-icon';
+ import { NotificationIcon } from '../../../shared/notification-icon/notification-icon';
 import path from 'node:path';
+import { AuthService } from '../../../features/auth/services/auth.service';
 
 @Component({
   selector: 'app-header',

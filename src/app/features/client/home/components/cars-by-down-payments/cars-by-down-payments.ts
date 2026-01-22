@@ -56,12 +56,9 @@ export class CarsByDownPayments implements AfterViewInit, OnInit {
           this.cars = response.data.items;
           // Always show all cars by default
           this.filteredCars = [...this.cars];
-          console.log('Loaded cars:', this.cars.length);
-        }
+         }
       },
-      error: (error) => {
-        console.error('Error loading cars:', error);
-      },
+     
     });
   }
 
@@ -85,8 +82,7 @@ export class CarsByDownPayments implements AfterViewInit, OnInit {
 
     if (this.selectedPriceRange === 'All') {
       this.filteredCars = carsToFilter;
-      console.log('Showing all cars:', this.filteredCars.length);
-    } else if (this.selectedPriceRange.startsWith('More than')) {
+     } else if (this.selectedPriceRange.startsWith('More than')) {
       const minStr = this.selectedPriceRange.replace('More than ', '');
       const min = parseInt(minStr.replace(/,/g, ''));
       this.filteredCars = carsToFilter.filter((car) => {
@@ -94,8 +90,7 @@ export class CarsByDownPayments implements AfterViewInit, OnInit {
         const price = parseInt(priceStr.replace(/,/g, '')) || 0;
         return price > min;
       });
-      console.log('Showing cars >', min, ':', this.filteredCars.length);
-    } else {
+     } else {
       const [minStr, maxStr] = this.selectedPriceRange.split(' - ');
       const min = parseInt(minStr.replace(/,/g, '')) || 0;
       const max = parseInt(maxStr.replace(/,/g, '')) || 0;
@@ -104,8 +99,7 @@ export class CarsByDownPayments implements AfterViewInit, OnInit {
         const price = parseInt(priceStr.replace(/,/g, '')) || 0;
         return price >= min && price <= max;
       });
-      console.log('Showing cars', min, '-', max, ':', this.filteredCars.length);
-    }
+     }
   }
 
   ngAfterViewInit(): void {

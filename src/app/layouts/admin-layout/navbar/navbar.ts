@@ -34,7 +34,6 @@ export class Navbar {
   }
 
   logout() {
-    console.log("User logged out...");
-    // اعمل هنا redirect للـ login
+     // اعمل هنا redirect للـ login
   }
 }

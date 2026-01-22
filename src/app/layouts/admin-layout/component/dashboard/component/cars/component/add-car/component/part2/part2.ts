@@ -693,10 +693,8 @@ export class Part2 implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
     try {
       localStorage.setItem('part2_autosave', JSON.stringify(dataToSave));
-      console.log('Auto-saved part2 data');
-    } catch (error) {
-      console.warn('Auto-save failed:', error);
-    }
+     } catch (error) {
+     }
   }, 2000);
 
   // Call auto-save when data changes
@@ -714,12 +712,10 @@ export class Part2 implements OnInit, OnDestroy, OnChanges, AfterViewInit {
         // Load data if it's less than 24 hours old
         if (age < 24 * 60 * 60 * 1000) {
           this.setData(parsed);
-          console.log('Loaded auto-saved part2 data');
-        }
+         }
       }
     } catch (error) {
-      console.warn('Failed to load auto-saved data:', error);
-    }
+     }
   }
 
   // Progress tracking methods

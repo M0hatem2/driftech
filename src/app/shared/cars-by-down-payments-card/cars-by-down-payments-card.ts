@@ -62,8 +62,8 @@ export class CarsByDownPaymentsCard {
     }
 
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
     });
 
     const url = `${environment.apiUrl}auth/favourites/toggle/${this.car.id}`;
@@ -74,15 +74,17 @@ export class CarsByDownPaymentsCard {
         this.car.is_fav = !this.car.is_fav;
       },
       error: (error) => {
-        console.error('Error toggling favorite:', error);
-        // Handle error, maybe show toast
-      }
+       },
     });
   }
 
   get carImage(): string {
     // Check if image_url exists and is not empty
-    if (this.car?.image_url && typeof this.car.image_url === 'string' && this.car.image_url.trim()) {
+    if (
+      this.car?.image_url &&
+      typeof this.car.image_url === 'string' &&
+      this.car.image_url.trim()
+    ) {
       return this.car.image_url;
     }
 

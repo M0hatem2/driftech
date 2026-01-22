@@ -712,10 +712,8 @@ export class Part4 implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
     try {
       localStorage.setItem('part4_autosave', JSON.stringify(dataToSave));
-      console.log('Auto-saved part4 data');
-    } catch (error) {
-      console.warn('Auto-save failed:', error);
-    }
+     } catch (error) {
+     }
   }, 2000);
 
   public triggerAutoSave(): void {
@@ -733,12 +731,10 @@ export class Part4 implements OnInit, OnDestroy, OnChanges, AfterViewInit {
         const age = Date.now() - parsed.timestamp;
         if (age < 24 * 60 * 60 * 1000) {
           this.setData(parsed);
-          console.log('Loaded auto-saved part4 data');
-        }
+         }
       }
     } catch (error) {
-      console.warn('Failed to load auto-saved data:', error);
-    }
+     }
   }
 
   // Public methods for parent component interaction

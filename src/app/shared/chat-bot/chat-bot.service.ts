@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../features/auth/services/auth.service';
-
+ 
 export interface QuizQuestion {
   id: number;
   question: string;

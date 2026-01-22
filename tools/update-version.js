@@ -12,4 +12,4 @@ prodContent = prodContent.replace(/version: '.*'/, `version: '${version}'`);
 
 fs.writeFileSync(prodPath, prodContent);
 
-console.log('Environment version updated:', version);
+ 

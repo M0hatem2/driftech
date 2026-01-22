@@ -8,8 +8,8 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
+ import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../../services/auth.service';
-import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile-completion',
